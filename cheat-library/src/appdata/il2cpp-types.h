@@ -11426,6 +11426,74 @@ namespace app {
         struct CriwareMediaPlayer__Fields fields;
     };
 
+#if defined(_CPLUSPLUS_)
+    enum class NLCKIGIJKBI__Enum : int32_t {
+        CKJHJOLIMGK = 0x00000000,
+        FJNCBFEIAMD = 0x00000001,
+        ODBNALDFBHB = 0x00000002,
+        PAIBLDPBFPJ = 0x00000003,
+    };
+#else
+    enum NLCKIGIJKBI__Enum {
+        NLCKIGIJKBI__Enum_CKJHJOLIMGK = 0x00000000,
+        NLCKIGIJKBI__Enum_FJNCBFEIAMD = 0x00000001,
+        NLCKIGIJKBI__Enum_ODBNALDFBHB = 0x00000002,
+        NLCKIGIJKBI__Enum_PAIBLDPBFPJ = 0x00000003,
+    };
+#endif
+
+    struct Proto_PlayerLuaShellNotify__Fields {
+        struct MessageBase_1__Fields _;
+        uint32_t useType;
+        struct Google_Protobuf_ByteString* luaShell;
+#if defined(_CPLUSPLUS_)
+        NLCKIGIJKBI__Enum NILPEIDJGFE;
+#else
+        int32_t NILPEIDJGFE;
+#endif
+        uint32_t id;
+    };
+
+
+    struct Proto_PlayerLuaShellNotify {
+        struct Proto_PlayerLuaShellNotify__Class* klass;
+        MonitorData* monitor;
+        struct Proto_PlayerLuaShellNotify__Fields fields;
+    };
+
+#if defined(_CPLUSPLUS_)
+    enum class Proto_WindSeedClientNotify_NotifyOneofCase : int32_t {
+        None = 0x00000000,
+        RefreshNotify = 0x00000009,
+        AddWindBulletNotify = 0x00000001,
+        AreaNotify = 0x0000000f,
+    };
+#else
+    enum Proto_WindSeedClientNotify_NotifyOneofCase {
+        Proto_WindSeedClientNotify_NotifyOneofCase_None = 0x00000000,
+        Proto_WindSeedClientNotify_NotifyOneofCase_RefreshNotify = 0x00000009,
+        Proto_WindSeedClientNotify_NotifyOneofCase_AddWindBulletNotify = 0x00000001,
+        Proto_WindSeedClientNotify_NotifyOneofCase_AreaNotify = 0x0000000f,
+    };
+
+#endif
+
+    struct Proto_WindSeedClientNotify__Fields {
+        struct MessageBase_1__Fields _;
+        struct Object* notify;
+#if defined(_CPLUSPLUS_)
+        Proto_WindSeedClientNotify_NotifyOneofCase notifyCase;
+#else
+        int32_t notifyCase;
+#endif
+    };
+
+    struct Proto_WindSeedClientNotify {
+        struct Proto_WindSeedClientNotify__Class* klass;
+        MonitorData* monitor;
+        struct Proto_WindSeedClientNotify__Fields fields;
+    };
+
     struct Sprite__Fields {
         struct Object_1__Fields _;
     };
