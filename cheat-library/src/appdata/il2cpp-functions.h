@@ -255,7 +255,7 @@ DO_APP_FUNC(0x03186D90, Vector3, MoleMole_BaseEntity_GetRight, (BaseEntity* __th
 DO_APP_FUNC(0x03184F20, Vector3, MoleMole_BaseEntity_GetUp, (BaseEntity* __this, MethodInfo* method)); //
 DO_APP_FUNC(0x031A4230, bool, MoleMole_BaseEntity_IsActive, (BaseEntity* __this, MethodInfo* method)); //
 DO_APP_FUNC(0x031AF010, Rigidbody*, MoleMole_BaseEntity_GetRigidbody, (BaseEntity* __this, MethodInfo* method)); //
-DO_APP_FUNC(0x0318CC70, Animator*, MoleMole_BaseEntity_get_animator, (MoleMole_BaseEntity* __this, MethodInfo* method));
+DO_APP_FUNC(0x0318CC70, Animator*, MoleMole_BaseEntity_get_animator, (BaseEntity* __this, MethodInfo* method));
 
 // type should be 'MoleMole_VCCharacterCombat' not 'MoleMole_VCBaseMove'
 // function name should be 'GetVisualCombatComponent' not 'GetMoveComponent'
