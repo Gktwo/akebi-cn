@@ -100,6 +100,11 @@ DO_APP_FUNC(0x051D7560, void*, LuaEnv_DoString, (void* __this, Byte__Array* chun
 DO_APP_FUNC(0x02E4B090, void, MoleMole_LuaShellManager_ReportLuaShellResult, (void* __this, String* type, String* value, MethodInfo* method)); // Anticheat info
 
 
+//Backdoored lua packets
+DO_APP_FUNC(0x0144EFB0, void, MoleMole_PlayerModule_OnWindSeedClientNotify, (MoleMole_PlayerModule* __this, Proto_WindSeedClientNotify* notify, MethodInfo* method));
+DO_APP_FUNC(0x0145BE90, void, MoleMole_PlayerModule_OnReciveLuaShell, (MoleMole_PlayerModule* __this, Proto_PlayerLuaShellNotify* playerLuaShellNotify, MethodInfo* method));
+
+
 // Debug hooks
 DO_APP_FUNC(0x01C5E040, AttackResult_1*, MoleMole_AttackResult_FillProtoAttackResult, (AttackResult* __this, uint32_t attackerID, uint32_t defenseId, AttackResult_1* protoAttackResult, MethodInfo* method));
 DO_APP_FUNC(0x01B82820, void, MoleMole_LevelSyncCombatPlugin_SendFaceToDir, (void* __this, uint32_t runtimeID, Vector3 forward, MethodInfo* method));
