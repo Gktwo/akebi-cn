@@ -261,6 +261,7 @@ DO_APP_FUNC(0x02135250, Vector3, MoleMole_BaseEntity_GetRight, (BaseEntity* __th
 DO_APP_FUNC(0x02133A70, Vector3, MoleMole_BaseEntity_GetUp, (BaseEntity* __this, MethodInfo* method));
 DO_APP_FUNC(0x02122D40, bool, MoleMole_BaseEntity_IsActive, (BaseEntity* __this, MethodInfo* method));
 DO_APP_FUNC(0x0210E9B0, Rigidbody*, MoleMole_BaseEntity_GetRigidbody, (BaseEntity* __this, MethodInfo* method));
+DO_APP_FUNC(0x0318DB20, Animator*, MoleMole_BaseEntity_get_animator, (BaseEntity* __this, MethodInfo* method));
 
 // type should be 'MoleMole_VCCharacterCombat' not 'MoleMole_VCBaseMove'
 // function name should be 'GetVisualCombatComponent_3' not 'GetMoveComponent_1'
@@ -324,6 +325,9 @@ DO_APP_FUNC(0x05B79C20, void, Cursor_set_visible, (bool value, MethodInfo* metho
 DO_APP_FUNC(0x05B79C10, void, Cursor_set_lockState, (CursorLockMode__Enum value, MethodInfo* method));
 DO_APP_FUNC(0x05B79C00, bool, Cursor_get_visible, (MethodInfo* method));
 
+DO_APP_FUNC(0x0571E7C0, RigidbodyConstraints__Enum, Rigidbody_get_constraints, (Rigidbody* __this, MethodInfo* method));
+DO_APP_FUNC(0x0571E990, void, Rigidbody_set_constraints, (Rigidbody* __this, RigidbodyConstraints__Enum value, MethodInfo* method));
+DO_APP_FUNC(0x0571E980, void, Rigidbody_set_collisionDetectionMode, (Rigidbody* __this, CollisionDetectionMode__Enum value, MethodInfo* method));
 DO_APP_FUNC(0x05AAEAC0, void, Rigidbody_set_detectCollisions, (Rigidbody* __this, bool value, MethodInfo* method));
 DO_APP_FUNC(0x05AAEB10, void, Rigidbody_set_isKinematic, (Rigidbody* __this, bool value, MethodInfo* method));
 DO_APP_FUNC(0x05AAEA00, Vector3, Rigidbody_get_velocity, (Rigidbody* __this, MethodInfo* method));
@@ -340,6 +344,8 @@ DO_APP_FUNC(0x05B7F6C0, int32_t, Camera_get_pixelHeight, (Camera* __this, Method
 
 DO_APP_FUNC(0x05B37620, int32_t, Screen_get_width, (MethodInfo* method));
 DO_APP_FUNC(0x05B375B0, int32_t, Screen_get_height, (MethodInfo* method));
+
+DO_APP_FUNC(0x058236F0, void, Animator_set_speed, (Animator* __this, float value, MethodInfo* method));
 
 DO_APP_FUNC(0x05C3F1E0, bool, Behaviour_get_isActiveAndEnabled, (Behaviour* __this, MethodInfo* method));
 
