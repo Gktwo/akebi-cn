@@ -145,7 +145,7 @@ bool IsStaticCheckSumValid()
 
 		if (!scanner.IsValidModuleHash(moduleName, checksumData))
 		{
-			LOG_WARNING("Seems like assembly checksum don't match with version %s. It's normal only if you using Chinese version of genshin impact.", version.c_str());
+			LOG_WARNING("Seems like assembly checksum don't match with version %s. It's normal only if you are using Chinese version of genshin impact or you are using the wrong version.", version.c_str());
 			return false;
 		}
 
