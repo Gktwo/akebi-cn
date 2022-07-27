@@ -39,22 +39,22 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& NoClip::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "No-Clip", "Player", true };
+		static const FeatureGUIInfo info{ u8"夫列子御风而行", "Player", true };
 		return info;
 	}
 
 	void NoClip::DrawMain()
 	{
-		ConfigWidget("Enabled", f_Enabled, "Enables no-clip (fast speed + no collision).\n" \
-			"To move, use WASD, Space (go up), and Shift (go down), or customize your own keys.");
+		ConfigWidget(u8"开/关", f_Enabled, "Enables no-clip (fast speed + no collision).\n" \
+			u8"用wasd 左ctrl空格控制,可以自己设置.");
 
-		ConfigWidget("No Animation", f_NoAnimation, "Disables player animations.");
+		ConfigWidget(u8"锁定动作", f_NoAnimation, "Disables player animations.");
 
-		ConfigWidget("Speed", f_Speed, 0.1f, 2.0f, 100.0f,
+		ConfigWidget(u8"速度", f_Speed, 0.1f, 2.0f, 100.0f,
 			"No-clip move speed.\n" \
 			"Not recommended setting above 5.0.");
 
-		ConfigWidget("Camera-relative movement", f_CameraRelative,
+		ConfigWidget(u8"相机移动", f_CameraRelative,
 			"Move relative to camera view instead of avatar view/direction.");
 
 		ConfigWidget("Alternate No-clip", f_AltSpeedEnabled,
@@ -90,7 +90,7 @@ namespace cheat::feature
 
 	void NoClip::DrawStatus()
 	{
-		ImGui::Text("NoClip%s[%.01f%s%|%s]",
+		ImGui::Text(u8"坐标控制%s[%.01f%s%|%s]",
 			f_AltSpeedEnabled ? "+Alt " : " ",
 			f_Speed.value(),
 			f_AltSpeedEnabled ? fmt::format("|{:.1f}", f_AltSpeed.value()).c_str() : "",
