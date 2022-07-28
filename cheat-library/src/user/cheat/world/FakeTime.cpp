@@ -23,14 +23,14 @@ namespace cheat::feature
 	}
 	const FeatureGUIInfo& FakeTime::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "FakeTime", "World", true };
+		static const FeatureGUIInfo info{ u8"虚假时间", "World", true };
 		return info;
 	}
 	void FakeTime::DrawMain()
 	{
-		ConfigWidget("Enabled", f_Enabled, "Keep game time the same");
-		ConfigWidget("TimeHour", f_TimeHour, 1, 0, 24);
-		ConfigWidget("TimeMinute", f_TimeMinute, 1, 0, 60);
+		ConfigWidget(u8"开/关", f_Enabled, u8"固定游戏时间");
+		ConfigWidget(u8"时", f_TimeHour, 1, 0, 24);
+		ConfigWidget(u8"分", f_TimeMinute, 1, 0, 60);
 	}
 	bool FakeTime::NeedStatusDraw() const
 	{
@@ -38,7 +38,7 @@ namespace cheat::feature
 	}
 	void FakeTime::DrawStatus()
 	{
-		ImGui::Text("FakeTime|%d:%d", f_TimeHour.value(), f_TimeMinute.value());
+		ImGui::Text(u8"虚假时间|%d:%d", f_TimeHour.value(), f_TimeMinute.value());
 	}
 	float FakeTime::ConversionTime() {
 

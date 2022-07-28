@@ -10,11 +10,11 @@ namespace cheat::feature
 {
     MobVacuum::MobVacuum() : Feature(),
         NF(f_Enabled,        "Mob vacuum", "MobVacuum", false),
-        NF(f_IncludeMonsters, "Include Monsters", "MobVacuum", true),
+        NF(f_IncludeMonsters, u8"包括怪物", "MobVacuum", true),
         NF(f_MonsterCommon, "Common", "MobVacuum", true),
         NF(f_MonsterElites, "Elite", "MobVacuum", true),
         NF(f_MonsterBosses, "Boss", "MobVacuum", true),
-        NF(f_IncludeAnimals, "Include Animals", "MobVacuum", true),
+        NF(f_IncludeAnimals, u8"包括动物", "MobVacuum", true),
         NF(f_AnimalDrop, "Droppers", "MobVacuum", true),
         NF(f_AnimalPickUp, "Pick-ups", "MobVacuum", true),
         NF(f_AnimalNPC, "NPCs", "MobVacuum", true),
@@ -30,28 +30,28 @@ namespace cheat::feature
 
     const FeatureGUIInfo& MobVacuum::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Mob Vacuum", "World", true };
+        static const FeatureGUIInfo info{ u8"遍历吸怪类", "World", true };
         return info;
     }
 
     void MobVacuum::DrawMain()
     {
-        ConfigWidget("Enabled", f_Enabled, "Enables mob vacuum.\n" \
+        ConfigWidget(u8"开/关", f_Enabled, "Enables mob vacuum.\n" \
             "Mobs within the specified radius will move\nto a specified distance in front of the player.");
 
         bool filtersChanged = false;
-        ImGui::BeginGroupPanel("Monsters");
+        ImGui::BeginGroupPanel(u8"怪物");
         {
-            filtersChanged |= ConfigWidget(f_IncludeMonsters, "Include monsters in vacuum.");
+            filtersChanged |= ConfigWidget(f_IncludeMonsters, u8"包括怪物.");
             filtersChanged |= ConfigWidget(f_MonsterCommon, "Common enemies."); ImGui::SameLine();
             filtersChanged |= ConfigWidget(f_MonsterElites, "Elite enemies."); ImGui::SameLine();
             filtersChanged |= ConfigWidget(f_MonsterBosses, "World and Trounce boss enemies.");
         }
         ImGui::EndGroupPanel();
         
-        ImGui::BeginGroupPanel("Animals");
+        ImGui::BeginGroupPanel(u8"动物");
         {
-            filtersChanged |= ConfigWidget(f_IncludeAnimals, "Include animals in vacuum.");
+            filtersChanged |= ConfigWidget(f_IncludeAnimals, u8"包括动物.");
             filtersChanged |= ConfigWidget(f_AnimalDrop, "Animals you need to kill before collecting."); ImGui::SameLine();
             filtersChanged |= ConfigWidget(f_AnimalPickUp, "Animals you can immediately collect."); ImGui::SameLine();
             filtersChanged |= ConfigWidget(f_AnimalNPC, "Animals without mechanics.");
@@ -61,11 +61,11 @@ namespace cheat::feature
         if (filtersChanged)
             UpdateFilters();
 
-    	ConfigWidget("Instant Vacuum", f_Instantly, "Vacuum entities instantly.");
-        ConfigWidget("Only Hostile/Aggro", f_OnlyTarget, "If enabled, vacuum will only affect monsters targeting you. Will not affect animals.");
-        ConfigWidget("Speed", f_Speed, 0.1f, 1.0f, 15.0f, "If 'Instant Vacuum' is not checked, mob will be vacuumed at the specified speed.");
-        ConfigWidget("Radius (m)", f_Radius, 0.1f, 5.0f, 150.0f, "Radius of vacuum.");
-        ConfigWidget("Distance (m)", f_Distance, 0.1f, 0.5f, 10.0f, "Distance between the player and the monster.");
+    	ConfigWidget(u8"瞬间作用", f_Instantly, "Vacuum entities instantly.");
+        ConfigWidget(u8"只作用被注意的目标", f_OnlyTarget, u8"如果开启,指挥作用于对你攻击的怪物，不影响动物.");
+        ConfigWidget(u8"速度", f_Speed, 0.1f, 1.0f, 15.0f, u8"如果没有开启立即作用，那么这是移动速度.");
+        ConfigWidget(u8"半径 (m)", f_Radius, 0.1f, 5.0f, 150.0f, u8"作用半径.");
+        ConfigWidget(u8"围绕距离 (m)", f_Distance, 0.1f, 0.5f, 10.0f, u8"目标围绕在你周围.");
     }
 
     bool MobVacuum::NeedStatusDraw() const
@@ -75,7 +75,7 @@ namespace cheat::feature
 
     void MobVacuum::DrawStatus() 
     { 
-        ImGui::Text("Vacuum [%s]\n[%s|%.01fm|%.01fm|%s]", 
+        ImGui::Text(u8"吸怪 [%s]\n[%s|%.01fm|%.01fm|%s]", 
             f_IncludeMonsters && f_IncludeAnimals ? "All" : f_IncludeMonsters ? "Monsters" : f_IncludeAnimals ? "Animals" : "None",
             f_Instantly ? "Instant" : fmt::format("Normal|{:.1f}", f_Speed.value()).c_str(),
             f_Radius.value(),

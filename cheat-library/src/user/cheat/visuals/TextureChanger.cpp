@@ -13,10 +13,10 @@ namespace cheat::feature
     }
  
     TextureChanger::TextureChanger() : Feature(),
-        NF(f_Enabled, "Texture Changer", "Visuals::TextureChanger", false),
-        NF(f_HeadPath, "Head", "Visuals::TextureChanger", false),
-        NF(f_BodyPath, "Body", "Visuals::TextureChanger", false),
-        NF(f_DressPath, "Dress", "Visuals::TextureChanger", false),
+        NF(f_Enabled, u8"ÌùÍ¼Ìæ»»", "Visuals::TextureChanger", false),
+        NF(f_HeadPath, u8"Í·", "Visuals::TextureChanger", false),
+        NF(f_BodyPath, u8"Ìå", "Visuals::TextureChanger", false),
+        NF(f_DressPath, u8"È¹×Ó", "Visuals::TextureChanger", false),
         toBeUpdate(), nextUpdate(0)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(TextureChanger::OnGameUpdate);
@@ -24,7 +24,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& TextureChanger::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "TextureChanger", "Visuals", true };
+        static const FeatureGUIInfo info{ u8"ÎÆÀíÌæ»»", "Visuals", true };
         return info;
     }
 
@@ -53,7 +53,7 @@ namespace cheat::feature
 
     void TextureChanger::DrawStatus()
     {
-        ImGui::Text("Texture Changer");
+        ImGui::Text(u8"ÌùÍ¼Ìæ»»");
     }
 
     TextureChanger& TextureChanger::GetInstance()

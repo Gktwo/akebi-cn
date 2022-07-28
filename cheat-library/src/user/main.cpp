@@ -37,7 +37,7 @@ void Run(HMODULE* phModule)
 
 	while (GetModuleHandle("UserAssembly.dll") == nullptr)
 	{
-		LOG_DEBUG(u8"UserAssembly.dll 正在初始化请等待.");
+		LOG_DEBUG("UserAssembly.dll 正在初始化请等待.");
 		Sleep(2000);
 	}
 
@@ -45,7 +45,7 @@ void Run(HMODULE* phModule)
 	LOG_DEBUG("Waiting 10sec for loading game library.");
 	Sleep(15000);
 #else
-	LOG_DEBUG(u8"游戏正在初始化.");
+	LOG_DEBUG("游戏正在初始化.");
     Sleep(15000);
 #endif
 	
@@ -55,5 +55,5 @@ void Run(HMODULE* phModule)
 
 	cheat::Init();
 
-    LOG_DEBUG("Config path is at %s", (util::GetCurrentPath() / "cfg.json").string().c_str());
+    LOG_DEBUG("配置目录在 %s", (util::GetCurrentPath() / "cfg.json").string().c_str());
 }
