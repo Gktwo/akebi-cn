@@ -1,6 +1,7 @@
-name: Publish
+name: 2.8cn汉化
 
 on:
+   workflow_dispatch: ~
    push:
     branches: [ chinese-2.8 ]
 
