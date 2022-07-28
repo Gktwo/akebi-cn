@@ -1,4 +1,4 @@
-name: Publish
+name: 2.8.5Xcn汉化
 
 on:
    workflow_dispatch: ~
