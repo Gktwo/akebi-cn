@@ -21,8 +21,8 @@ namespace cheat::feature
 
     void DumbEnemies::DrawMain()
     {
-        ConfigWidget(f_Enabled, "Enemies don't attack or use abilities against player. \n"
-            "May not work with some enemies or enemy abilites.");
+        ConfigWidget(u8"敌人不会攻击",f_Enabled, u8"怪物变傻不会攻击你. \n"
+            u8"对于某些单位可能无效.");
     }
 
     bool DumbEnemies::NeedStatusDraw() const
@@ -32,7 +32,7 @@ namespace cheat::feature
 
     void DumbEnemies::DrawStatus() 
     { 
-        ImGui::Text("Dumb Enemies");
+        ImGui::Text(u8"敌人不会攻击");
     }
 
     DumbEnemies& DumbEnemies::GetInstance()

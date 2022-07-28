@@ -22,19 +22,19 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& VacuumLoot::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Vacuum Loot", "World", true };
+		static const FeatureGUIInfo info{ u8"战利品吸取", "World", true };
 		return info;
 	}
 
 	void VacuumLoot::DrawMain()
 	{
 
-			ConfigWidget("Enabled", f_Enabled, "Vacuum Loot drops"); ImGui::SameLine(); ImGui::SetNextItemWidth(100.0f);
-			ConfigWidget("Delay Time (ms)", f_DelayTime, 1, 0, 1000, "Delay (in ms) between loot vacuum.");
-			ConfigWidget("Radius (m)", f_Radius, 0.1f, 5.0f, 100.0f, "Radius of common loot vacuum.");
-			ConfigWidget("Mob Drop Radius (m)", f_MobDropRadius, 0.1f, 5.0f, 100.0f, "Radius of mob drop vacuum.\n"
+			ConfigWidget(u8"开/关", f_Enabled, "Vacuum Loot drops"); ImGui::SameLine(); ImGui::SetNextItemWidth(100.0f);
+			ConfigWidget(u8"延迟 (ms)", f_DelayTime, 1, 0, 1000, "Delay (in ms) between loot vacuum.");
+			ConfigWidget(u8"作用半径 (m)", f_Radius, 0.1f, 5.0f, 100.0f, "Radius of common loot vacuum.");
+			ConfigWidget(u8"遍历半径 (m)", f_MobDropRadius, 0.1f, 5.0f, 100.0f, "Radius of mob drop vacuum.\n"
 			"(Item Drops and Equipments)");
-			ConfigWidget("Distance (m)", f_Distance, 0.1f, 1.0f, 10.0f, "Distance between the player and the loot.\n"
+			ConfigWidget(u8"位置距离 (m)", f_Distance, 0.1f, 1.0f, 10.0f, "Distance between the player and the loot.\n"
 				"Values under 1.5 may be too intruding.");
 			if (ImGui::TreeNode("Loot Types"))
 			{
@@ -55,7 +55,7 @@ namespace cheat::feature
 
 	void VacuumLoot::DrawStatus()
 	{
-		ImGui::Text("VacuumLoot\n[%dms|%.01fm|%.01fm|%.01fm]",
+		ImGui::Text(u8"战利品吸取\n[%dms|%.01fm|%.01fm|%.01fm]",
 			f_DelayTime.value(),
 			f_Radius.value(),
 			f_MobDropRadius.value(),

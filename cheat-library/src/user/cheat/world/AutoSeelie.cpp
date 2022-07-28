@@ -23,7 +23,7 @@ namespace cheat::feature
 
 	void AutoSeelie::DrawMain()
 	{
-		ConfigWidget("Auto seelie", f_Enabled, "Auto follow seelie to its home");
+		ConfigWidget(u8"自动仙灵", f_Enabled, "Auto follow seelie to its home");
 
 		if (f_Enabled)
 		{
@@ -44,7 +44,7 @@ namespace cheat::feature
 
 	void AutoSeelie::DrawStatus()
 	{
-		ImGui::Text("AutoSeelie %s", f_ElectroSeelie ? "+ Electro" : "");
+		ImGui::Text(u8"自动仙灵 %s", f_ElectroSeelie ? "+ Electro" : "");
 	}
 
 	AutoSeelie& AutoSeelie::GetInstance()

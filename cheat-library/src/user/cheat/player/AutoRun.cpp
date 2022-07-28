@@ -19,14 +19,14 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& AutoRun::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Auto Run", "Player", true };
+		static const FeatureGUIInfo info{ u8"自动行走（废物功能）", "Player", true };
 		return info;
 	}
 
 	void AutoRun::DrawMain()
 	{
-		ConfigWidget("Enable", f_Enabled);
-		ConfigWidget("Auto Run speed", f_Speed, 0.01f, 0.01f, 1000.0f, "Speed of character \n Not recommended going above 5");
+		ConfigWidget(u8"开/关", f_Enabled);
+		ConfigWidget(u8"速度", f_Speed, 0.01f, 0.01f, 1000.0f, "Speed of character \n Not recommended going above 5");
 	}
 
 	bool AutoRun::NeedStatusDraw() const
@@ -36,7 +36,7 @@ namespace cheat::feature
 
 	void AutoRun::DrawStatus()
 	{
-		ImGui::Text("Auto Run[%.01f]",f_Speed.value());
+		ImGui::Text(u8"自动行走[%.01f]",f_Speed.value());
 	}
 
 	AutoRun& AutoRun::GetInstance()

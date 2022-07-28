@@ -51,8 +51,8 @@ namespace cheat::feature
 
 	void FreeCamera::DrawMain()
 	{
-		ConfigWidget("Enable", f_Enabled);
-		ConfigWidget("Freeze Character Animation", f_FreezeAnimation, "Freezes the active character's animation.\nAfter disabling, jump to un-freeze your character.");
+		ConfigWidget(u8"开/关", f_Enabled);
+		ConfigWidget(u8"冻结角色动画", f_FreezeAnimation, "Freezes the active character's animation.\nAfter disabling, jump to un-freeze your character.");
 		if (ImGui::BeginTable("FreeCameraDrawTable", 1, ImGuiTableFlags_NoBordersInBody))
 		{
 			ImGui::TableNextRow();
@@ -95,7 +95,7 @@ namespace cheat::feature
 
 	void FreeCamera::DrawStatus()
 	{
-		ImGui::Text("Free Camera");
+		ImGui::Text(u8"自由相机");
 	}
 
 	FreeCamera& FreeCamera::GetInstance()
