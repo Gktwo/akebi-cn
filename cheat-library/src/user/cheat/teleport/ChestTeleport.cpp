@@ -10,7 +10,7 @@
 namespace cheat::feature 
 {
 
-    ChestTeleport::ChestTeleport() : ItemTeleportBase("ChestTeleport", "Chest"),
+    ChestTeleport::ChestTeleport() : ItemTeleportBase(u8"±¦Ïä´«ËÍ", "Chest"),
         NF(f_FilterChestLocked    , "Locked",       "ChestTeleport", true),
 		NF(f_FilterChestInRock    , "In rock",      "ChestTeleport", true),
 		NF(f_FilterChestFrozen    , "Frozen",       "ChestTeleport", true),
@@ -110,7 +110,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& ChestTeleport::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Chest Teleport", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"±¦Ïä´«ËÍ", "Teleport", true };
 		return info;
 	}
 

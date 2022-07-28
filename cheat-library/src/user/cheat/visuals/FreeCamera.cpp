@@ -45,14 +45,14 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& FreeCamera::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Free Camera", "Visuals", true };
+		static const FeatureGUIInfo info{ u8"自由相机", "Visuals", true };
 		return info;
 	}
 
 	void FreeCamera::DrawMain()
 	{
-		ConfigWidget("Enable", f_Enabled);
-		ConfigWidget("Freeze Character Animation", f_FreezeAnimation, "Freezes the active character's animation.\nAfter disabling, jump to un-freeze your character.");
+		ConfigWidget(u8"开/关", f_Enabled);
+		ConfigWidget(u8"冻结角色动画", f_FreezeAnimation, "Freezes the active character's animation.\nAfter disabling, jump to un-freeze your character.");
 		if (ImGui::BeginTable("FreeCameraDrawTable", 1, ImGuiTableFlags_NoBordersInBody))
 		{
 			ImGui::TableNextRow();
@@ -60,10 +60,10 @@ namespace cheat::feature
 
 			ImGui::BeginGroupPanel("Settings");
 			{
-				ConfigWidget("Movement Speed", f_Speed, 0.01f, 0.01f, 1000.0f);
-				ConfigWidget("Look Sensitivity", f_LookSens, 0.01f, 0.01f, 100.0f);
-				ConfigWidget("Roll Speed", f_RollSpeed, 0.01f, 0.01f, 100.0f);
-				ConfigWidget("FOV Speed", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"移动速度", f_Speed, 0.01f, 0.01f, 1000.0f);
+				ConfigWidget(u8"灵敏度", f_LookSens, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"旋转速度", f_RollSpeed, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"视野速度", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
 				ConfigWidget("Field of View", f_FOV, 0.1f, 0.01f, 200.0f);
 				ConfigWidget("Smoothing", f_Smoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
 			}
@@ -95,7 +95,7 @@ namespace cheat::feature
 
 	void FreeCamera::DrawStatus()
 	{
-		ImGui::Text("Free Camera");
+		ImGui::Text(u8"自由相机");
 	}
 
 	FreeCamera& FreeCamera::GetInstance()

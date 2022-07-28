@@ -12,7 +12,7 @@ namespace cheat::feature
     static std::string f_URL;
 
     Browser::Browser() : Feature(),
-        NFEX(f_Enabled, "Browser", "Browser", "Visuals", false, false),
+        NFEX(f_Enabled, u8"ä¯ÀÀÆ÷", u8"ä¯ÀÀÆ÷", "Visuals", false, false),
         toBeUpdate(), nextUpdate(0)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(Browser::OnGameUpdate);
@@ -20,7 +20,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& Browser::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Browser", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"ä¯ÀÀÆ÷", "Visuals", false };
         return info;
     }
 
@@ -37,7 +37,7 @@ namespace cheat::feature
 
     void Browser::DrawStatus()
     {
-        ImGui::Text("Browser");
+        ImGui::Text(u8"ä¯ÀÀÆ÷");
     }
 
     Browser& Browser::GetInstance()

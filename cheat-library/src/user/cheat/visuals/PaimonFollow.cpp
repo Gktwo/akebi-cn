@@ -12,7 +12,7 @@ namespace cheat::feature
     }
 
     PaimonFollow::PaimonFollow() : Feature(),
-        NFEX(f_Enabled, "Paimon Follow", "PaimonFollow", "Visuals", false, false),
+        NFEX(f_Enabled, u8"≈…√Œ∏˙ÀÊ", u8"≈…√Œ∏˙ÀÊ", "Visuals", false, false),
         toBeUpdate(), nextUpdate(0)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(PaimonFollow::OnGameUpdate);
@@ -20,7 +20,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& PaimonFollow::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "PaimonFollow", "Visuals", true };
+        static const FeatureGUIInfo info{ u8"≈…√Œ∏˙ÀÊ", "Visuals", true };
         return info;
     }
 
@@ -37,7 +37,7 @@ namespace cheat::feature
 
     void PaimonFollow::DrawStatus()
     {
-        ImGui::Text("Paimon Follow");
+        ImGui::Text(u8"≈…√Œ∏˙ÀÊ");
     }
 
     PaimonFollow& PaimonFollow::GetInstance()

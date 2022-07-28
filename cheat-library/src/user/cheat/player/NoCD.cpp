@@ -17,11 +17,11 @@ namespace cheat::feature
 	static std::list<std::string> abilityLog;
 
     NoCD::NoCD() : Feature(),
-        NF(f_AbilityReduce,      "Reduce Skill/Burst Cooldown",  "NoCD", false),
-		NF(f_TimerReduce, "Reduce Timer",        "NoCD", 1.f),
-		NF(f_UtimateMaxEnergy,   "Burst max energy",             "NoCD", false),
-        NF(f_Sprint,             "No Sprint Cooldown",           "NoCD", false),
-		NF(f_InstantBow,         "Instant bow",                  "NoCD", false)
+        NF(f_AbilityReduce,      u8"减少技能冷却",  "NoCD", false),
+		NF(f_TimerReduce, u8"减少cd时间",        "NoCD", 1.f),
+		NF(f_UtimateMaxEnergy,   u8"q无需充能",             "NoCD", false),
+        NF(f_Sprint,             u8"取消攻击后摇",           "NoCD", false),
+		NF(f_InstantBow,         u8"弓箭立即蓄力",                  "NoCD", false)
     {
 		HookManager::install(app::MoleMole_LCAvatarCombat_IsEnergyMax, LCAvatarCombat_IsEnergyMax_Hook);
 		HookManager::install(app::MoleMole_LCAvatarCombat_IsSkillInCD_1, LCAvatarCombat_IsSkillInCD_1);
@@ -32,25 +32,25 @@ namespace cheat::feature
 
     const FeatureGUIInfo& NoCD::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Cooldown Effects", "Player", true };
+        static const FeatureGUIInfo info{ u8"技能冷却", "Player", true };
         return info;
     }
 
     void NoCD::DrawMain()
     {
 
-		ConfigWidget("Max Burst Energy", f_UtimateMaxEnergy,
+		ConfigWidget(u8"q无需充能", f_UtimateMaxEnergy,
 			"Removes energy requirement for elemental bursts.\n" \
 			"(Energy bubble may appear incomplete but still usable.)");
 
 		ConfigWidget("## AbilityReduce", f_AbilityReduce); ImGui::SameLine();
-		ConfigWidget("Reduce Skill/Burst Cooldown", f_TimerReduce, 1.f, 1.f, 6.0f,
-			"Reduce cooldowns of elemental skills and bursts.\n"\
-			"1.0 - no CD, 2.0 and higher - increases the timer value.");
+		ConfigWidget(u8"减少技能冷却", f_TimerReduce, 1.f, 1.f, 6.0f,
+			u8"减少qe的冷却.\n"\
+			u8"1.0为没有cd, 2.0 和更高是减少的值.");
 
-    	ConfigWidget(f_Sprint, "Removes delay in-between sprints.");
+    	ConfigWidget(f_Sprint, u8"取消攻击后摇.");
 
-    	ConfigWidget("Instant Bow Charge", f_InstantBow, "Disable cooldown of bow charge.\n" \
+    	ConfigWidget(u8"弓箭立即蓄力", f_InstantBow, "Disable cooldown of bow charge.\n" \
 			"Known issues with Fischl.");
 
     	if (f_InstantBow) {
@@ -85,10 +85,10 @@ namespace cheat::feature
 
     void NoCD::DrawStatus() 
     {
-		  ImGui::Text("Cooldown\n[%s%s%s%s%s]",
-			f_AbilityReduce ? fmt::format("Reduce x{:.1f}", f_TimerReduce.value()).c_str() : "",
+		  ImGui::Text(u8"技能冷却\n[%s%s%s%s%s]",
+			f_AbilityReduce ? fmt::format(u8"减少 x{:.1f}", f_TimerReduce.value()).c_str() : "",
 			f_AbilityReduce && (f_InstantBow || f_Sprint) ? "|" : "",
-			f_InstantBow ? "Bow" : "",
+			f_InstantBow ? u8"弓箭" : "",
 			f_InstantBow && f_Sprint ? "|" : "",
 			f_Sprint ? "Sprint" : "");
     }

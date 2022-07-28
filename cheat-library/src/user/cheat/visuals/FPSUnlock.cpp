@@ -7,7 +7,7 @@
 namespace cheat::feature
 {
     FPSUnlock::FPSUnlock() : Feature(),
-		NF(f_Enabled, "Fps unlock", "Visuals::FPSUnlocker", false),
+		NF(f_Enabled, u8"解锁帧率", "Visuals::FPSUnlocker", false),
         NF(f_Fps, "FPS", "Visuals::FPSUnlocker", 240)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(FPSUnlock::OnGameUpdate);
@@ -15,7 +15,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& FPSUnlock::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "FPSUnlock", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"解锁帧率", "Visuals", false };
         return info;
     }
 
@@ -32,7 +32,7 @@ namespace cheat::feature
 
     void FPSUnlock::DrawStatus()
     {
-        ImGui::Text("FPSUnlock [%d]", f_Fps.value());
+        ImGui::Text(u8"解锁帧率 [%d]", f_Fps.value());
     }
 
     FPSUnlock& FPSUnlock::GetInstance()
