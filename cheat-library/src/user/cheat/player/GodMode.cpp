@@ -24,7 +24,7 @@ namespace cheat::feature
 
     void GodMode::DrawMain()
     {
-        ConfigWidget(u8"无敌模式/软件免费开源倒狗密麻麻石蜡", f_Enabled, 
+        ConfigWidget(u8"现在的我可是无敌的（软件免费开源倒狗密麻麻石蜡）", f_Enabled, 
                      u8"免疫受到的伤害.\n" \
                      u8"对于有些伤害可能无效.");
         ImGui::Indent();

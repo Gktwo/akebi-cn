@@ -28,7 +28,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& KillAura::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"杀戮地域", "World", true };
+        static const FeatureGUIInfo info{ u8"杀戮空间", "World", true };
         return info;
     }
 
@@ -41,11 +41,11 @@ namespace cheat::feature
 		ConfigWidget(u8"破坏伤害模式", f_DamageMode, u8"对周围目标造成大量伤害.");
 		ConfigWidget(u8"秒杀模式", f_InstantDeathMode, u8"尝试作用于周围所有目标.");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Can get buggy with bosses like PMA and Hydro Hypo.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"攻击机关阵列和无相水时可能遇到bug.");
 		ConfigWidget(u8"作用范围", f_Range, 0.1f, 5.0f, 100.0f);
-		ConfigWidget("Only Hostile/Aggro", f_OnlyTargeted, "If enabled, kill aura will only affect monsters targeting/aggro towards you.");
-		ConfigWidget(u8"伤害延迟 (ms)", f_AttackDelay, 1, 0, 1000, "Delay in ms before next crash damage.");
-		ConfigWidget(u8"个体延迟 (ms)", f_RepeatDelay, 1, 100, 2000, "Delay in ms before crash damaging same monster.");
+		ConfigWidget(u8"敌不犯我，我不犯人", f_OnlyTargeted, u8"只会作用于被吸引的目标.");
+		ConfigWidget(u8"伤害延迟 (ms)", f_AttackDelay, 1, 0, 1000, u8"下一个目标的延迟.");
+		ConfigWidget(u8"个体延迟 (ms)", f_RepeatDelay, 1, 100, 2000, u8"单个目标的延迟.");
     }
 
     bool KillAura::NeedStatusDraw() const
@@ -55,7 +55,7 @@ namespace cheat::feature
 
     void KillAura::DrawStatus() 
     { 
-        ImGui::Text(u8"杀戮地域 [%s]\n[%.01fm|%s|%dms|%dms]", 
+        ImGui::Text(u8"杀戮空间 [%s]\n[%.01fm|%s|%dms|%dms]", 
 			f_DamageMode && f_InstantDeathMode ? "Extreme" : f_DamageMode ? "Crash" : f_InstantDeathMode ? "Instant" : "None",
 			f_Range.value(),
 			f_OnlyTargeted ? "Aggro" : "All",

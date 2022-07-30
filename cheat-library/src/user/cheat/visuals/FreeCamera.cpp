@@ -58,30 +58,30 @@ namespace cheat::feature
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(0);
 
-			ImGui::BeginGroupPanel("Settings");
+			ImGui::BeginGroupPanel(u8"设置");
 			{
 				ConfigWidget(u8"移动速度", f_Speed, 0.01f, 0.01f, 1000.0f);
 				ConfigWidget(u8"灵敏度", f_LookSens, 0.01f, 0.01f, 100.0f);
 				ConfigWidget(u8"旋转速度", f_RollSpeed, 0.01f, 0.01f, 100.0f);
 				ConfigWidget(u8"视野速度", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
-				ConfigWidget("Field of View", f_FOV, 0.1f, 0.01f, 200.0f);
+				ConfigWidget(u8"视野", f_FOV, 0.1f, 0.01f, 200.0f);
 				ConfigWidget("Smoothing", f_Smoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
 			}
 			ImGui::EndGroupPanel();
 
-			ImGui::BeginGroupPanel("Hotkeys");
+			ImGui::BeginGroupPanel(u8"热键");
 			{
-				ConfigWidget("Forward", f_Forward, true);
-				ConfigWidget("Backward", f_Backward, true);
-				ConfigWidget("Left", f_Left, true);
-				ConfigWidget("Right", f_Right, true);
-				ConfigWidget("Up", f_Up, true);
-				ConfigWidget("Down", f_Down, true);
-				ConfigWidget("Roll Left", f_LeftRoll, true);
-				ConfigWidget("Roll Right", f_RightRoll, true);
-				ConfigWidget("Reset Roll", f_ResetRoll, true);
-				ConfigWidget("Increase FOV", f_IncFOV, true);
-				ConfigWidget("Decrease FOV", f_DecFOV, true);
+				ConfigWidget(u8"前", f_Forward, true);
+				ConfigWidget(u8"后", f_Backward, true);
+				ConfigWidget(u8"左", f_Left, true);
+				ConfigWidget(u8"右", f_Right, true);
+				ConfigWidget(u8"上", f_Up, true);
+				ConfigWidget(u8"下", f_Down, true);
+				ConfigWidget(u8"左旋", f_LeftRoll, true);
+				ConfigWidget(u8"右旋", f_RightRoll, true);
+				ConfigWidget(u8"恢复旋转", f_ResetRoll, true);
+				ConfigWidget(u8"增加fov", f_IncFOV, true);
+				ConfigWidget(u8"减少fov", f_DecFOV, true);
 			}
 			ImGui::EndGroupPanel();
 			ImGui::EndTable();

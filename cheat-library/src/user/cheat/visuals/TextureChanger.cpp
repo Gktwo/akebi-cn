@@ -42,7 +42,7 @@ namespace cheat::feature
         ConfigWidget(f_DressPath, "Dress Texture.\n" \
             "Example path: C:\\Dress.png");
 
-        if (ImGui::Button("Apply"))
+        if (ImGui::Button(u8"”¶”√"))
             ApplyTexture = true;
     }
 

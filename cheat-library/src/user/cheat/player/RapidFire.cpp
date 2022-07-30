@@ -35,7 +35,7 @@ namespace cheat::feature
     {
 		ConfigWidget(u8"开/关", f_Enabled, "Enables attack multipliers. Need to choose a mode to work.");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Choose any or both modes below.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"请选择其中一个模式.");
 
 		ConfigWidget(u8"多倍攻击模式", f_MultiHit, "Enables multi-hit.\n" \
             "Multiplies your attack count.\n" \
@@ -45,13 +45,13 @@ namespace cheat::feature
 
 		ImGui::Indent();
 
-		ConfigWidget(u8"一拳模式", f_OnePunch, "Calculate how many attacks needed to kill an enemy based on their HP\n" \
+		ConfigWidget(u8"一拳超人", f_OnePunch, "Calculate how many attacks needed to kill an enemy based on their HP\n" \
 			"and uses that to set the multiplier accordingly.\n" \
 			"May be safer, but multiplier calculation may not be on-point.");
 
 		ConfigWidget(u8"概率模式", f_Randomize, "Randomize multiplier between min and max multiplier.");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "This will override One-Punch Mode!");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"这个和一拳模式是冲突的!");
 
 		if (!f_OnePunch) {
 			if (!f_Randomize)
@@ -67,15 +67,15 @@ namespace cheat::feature
 
 		ImGui::Unindent();
 
-		ConfigWidget(u8"范围伤害", f_MultiTarget, "Enables multi-target attacks within specified radius of target.\n" \
-			"All valid targets around initial target will be hit based on setting.\n" \
-			"Damage numbers will only appear on initial target but all valid targets are damaged.\n" \
-			"If multi-hit is off and there are still multiple numbers on a single target, check the Entity Manager in the Debug section to see if there are invisible entities.\n" \
-			"This can cause EXTREME lag and quick bans if used with multi-hit. You are warned."
+		ConfigWidget(u8"范围伤害", f_MultiTarget, u8"在指定的目标半径内启用多目标攻击.\n" \
+			u8"根据设置，将命中初始目标周围的所有有效目标.\n" \
+			u8"伤害数字只会出现在初始目标上，但所有有效目标都会被损坏.\n" \
+			u8"如果禁用了“多倍攻击”，并且单个目标上仍有多个数字，请检查调试部分中的实体管理器，以查看是否存在不可见的实体.\n" \
+			u8"如果你玩的太逆天封号是不可避免的."
 		);
 	
 		ImGui::Indent();
-		ConfigWidget(u8"半径 (m)", f_MultiTargetRadius, 0.1f, 5.0f, 50.0f, "Radius to check for valid targets.");
+		ConfigWidget(u8"半径 (m)", f_MultiTargetRadius, 0.1f, 5.0f, 50.0f, u8"这决定了你手里刀的长度.");
 		ImGui::Unindent();
     }
 
@@ -96,7 +96,7 @@ namespace cheat::feature
 				ImGui::Text(u8"多倍攻击 [%d]", f_Multiplier.value());
 		}
 		if (f_MultiTarget)
-			ImGui::Text(u8"范围伤害 [%.01fm]", f_MultiTargetRadius.value());
+			ImGui::Text(u8"我的[%.01fm]大刀 ", f_MultiTargetRadius.value());
     }
 
     RapidFire& RapidFire::GetInstance()

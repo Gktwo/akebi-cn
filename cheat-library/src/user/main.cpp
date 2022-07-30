@@ -42,7 +42,7 @@ void Run(HMODULE* phModule)
 	}
 
 #ifdef _DEBUG
-	LOG_DEBUG("Waiting 10sec for loading game library.");
+	LOG_DEBUG("等待10秒加载游戏库.");
 	Sleep(15000);
 #else
 	LOG_DEBUG("游戏正在初始化.");

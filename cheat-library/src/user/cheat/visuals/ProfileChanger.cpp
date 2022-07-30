@@ -56,7 +56,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& ProfileChanger::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "CustomProfile", "Visuals", true };
+        static const FeatureGUIInfo info{ u8"自定义信息", "Visuals", true };
         return info;
     }
 
@@ -65,27 +65,27 @@ namespace cheat::feature
         ConfigWidget(f_Enabled, u8"自定义信开/关.");
         ConfigWidget(f_UID, u8"改变uid.");
         ConfigWidget(u8"uid以水印显示", f_UIDWaterMarkPrefix);
-        ConfigWidget("UID size", f_UIDsize, 0.1, 1, 500.0, "Set UID size");
-        ConfigWidget("UID Pos X", f_UIDpos_x, 1.f, 1.f, static_cast<float>(app::Screen_get_width(nullptr)), "Set UID position X");
-        ConfigWidget("UID Pos y", f_UIDpos_y, 1.f, 0, static_cast<float>(app::Screen_get_height(nullptr)), "Set UID position y");
-        ConfigWidget(f_NickName, "Changes the nickname visually.");
-        ConfigWidget(f_Level, "Changes the level visually.");
-        ConfigWidget(f_Exp, "Changes the exp visually.");
+        ConfigWidget(u8"UID 大小", f_UIDsize, 0.1, 1, 500.0, u8"设置uid大小");
+        ConfigWidget(u8"UID X坐标", f_UIDpos_x, 1.f, 1.f, static_cast<float>(app::Screen_get_width(nullptr)), u8"uid位置的x坐标");
+        ConfigWidget(u8"UID Y坐标", f_UIDpos_y, 1.f, 0, static_cast<float>(app::Screen_get_height(nullptr)), u8"uid位置的y坐标");
+        ConfigWidget(f_NickName, u8"改变角色昵称.");
+        ConfigWidget(f_Level, u8"改变冒险等阶.");
+        ConfigWidget(f_Exp, u8"改变经验值.");
         if (f_Exp) {
-            ConfigWidget("CurExp", f_CurExp, 1, 2, 100000, "Changes the ExpBar visually.");
-            ConfigWidget("MaxExp", f_MaxExp, 1, 2, 100000, "Changes the ExpBar visually.");
+            ConfigWidget(u8"当前的经验值", f_CurExp, 1, 2, 100000, u8"改变当前的经验值.");
+            ConfigWidget(u8"最大经验值", f_MaxExp, 1, 2, 100000, u8"改变最大经验值.");
             ConfigWidget(f_ExpBar, "Changes the ExpBar visually.");
             if (f_ExpBar)
                 ConfigWidget("ExpBarValue", f_ExpBarValue, 1, 2, 100, "Changes the ExpBar visually.");
         }   
-        ConfigWidget(f_WorldLevel, "Changes the world-level visually.");
-        ConfigWidget(f_Avatar, "Changes the Avatar Image visually.\n" \
-            "Note the size of the picture must be: 256x256.\n" \
-            "Example path: C:\\Avatars.png");
+        ConfigWidget(f_WorldLevel, u8"改变世界等级.");
+        ConfigWidget(f_Avatar, u8"改变角色头像.\n" \
+            u8"必须是一个256*256的图像.\n" \
+            u8"目录比如: C:\\Avatars.png");
 
-        ConfigWidget(f_Card, "Changes the Card visually.\n" \
-            "Note the size of the picture must be: 840x400.\n" \
-            "Example path: C:\\Avatars.png");
+        ConfigWidget(f_Card, u8"改变菜单名片\n" \
+            u8"图片大小必须是: 840x400.\n" \
+            u8"目录比如: C:\\Avatars.png");
     }
 
     bool ProfileChanger::NeedStatusDraw() const

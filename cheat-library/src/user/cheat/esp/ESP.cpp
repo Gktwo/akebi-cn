@@ -130,9 +130,9 @@ namespace cheat::feature
 
 	void ESP::DrawStatus()
 	{
-		ImGui::Text(u8"透视 [%.01fm|%s|%s%s%s%s]",
+		ImGui::Text(u8"千里眼 [%.01fm|%s|%s%s%s%s]",
 			f_Range.value(),
-			f_DrawBoxMode.value() == DrawMode::Box ? "方框" : f_DrawBoxMode.value() == DrawMode::Rectangle ? "追踪" : "无",
+			f_DrawBoxMode.value() == DrawMode::Box ? u8"方框" : f_DrawBoxMode.value() == DrawMode::Rectangle ? u8"追踪" : u8"无",
 			f_Fill ? u8"填充" : "",
 			f_DrawTracerMode.value() == DrawTracerMode::Line ? u8"线条" : f_DrawTracerMode.value() == DrawTracerMode::OffscreenArrows ? u8"箭头" : "",
 			f_DrawName ? u8"名称" : "",
