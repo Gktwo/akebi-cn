@@ -29,11 +29,11 @@ namespace cheat::feature
 	void VacuumLoot::DrawMain()
 	{
 
-			ConfigWidget(u8"开/关", f_Enabled, "Vacuum Loot drops"); ImGui::SameLine(); ImGui::SetNextItemWidth(100.0f);
-			ConfigWidget(u8"延迟 (ms)", f_DelayTime, 1, 0, 1000, "Delay (in ms) between loot vacuum.");
-			ConfigWidget(u8"作用半径 (m)", f_Radius, 0.1f, 5.0f, 100.0f, "Radius of common loot vacuum.");
-			ConfigWidget(u8"遍历半径 (m)", f_MobDropRadius, 0.1f, 5.0f, 100.0f, "Radius of mob drop vacuum.\n"
-			"(Item Drops and Equipments)");
+			ConfigWidget(u8"开/关", f_Enabled, u8"总开关"); ImGui::SameLine(); ImGui::SetNextItemWidth(100.0f);
+			ConfigWidget(u8"作用延迟 (ms)", f_DelayTime, 1, 0, 1000, u8"每次触发作用的延迟.");
+			ConfigWidget(u8"作用半径 (m)", f_Radius, 0.1f, 5.0f, 100.0f, "一般物品的作用距离.");
+			ConfigWidget(u8"作用半径2 (m)", f_MobDropRadius, 0.1f, 5.0f, 100.0f, u8"掉落物的作用距离.\n"
+			u8"(比如掉落物和装备类)");
 			ConfigWidget(u8"位置距离 (m)", f_Distance, 0.1f, 1.0f, 10.0f, "Distance between the player and the loot.\n"
 				"Values under 1.5 may be too intruding.");
 			if (ImGui::TreeNode("Loot Types"))

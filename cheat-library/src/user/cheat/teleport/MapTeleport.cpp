@@ -33,32 +33,32 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& MapTeleport::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Map Teleport", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"大地图传送", "Teleport", true };
 		return info;
 	}
 
 	void MapTeleport::DrawMain()
 	{
-		ConfigWidget("Enabled",
+		ConfigWidget(u8"开/关",
 			f_Enabled,
-			"Enable teleport-to-mark functionality.\n" \
+			u8"地图标点传送.\n" \
 			"Usage: \n" \
-			"\t1. Open map.\n" \
-			"\t2. Hold [Teleport Key] and click with the LMB anywhere in the map.\n" \
-			"\tDone. You have been teleported to selected location.\n" \
-			"Teleport might glitch if teleporting to an extremely high location. \n" \
-			"Adjust Override Height accordingly to help avoid."
+			u8"\t1. 打开地图.\n" \
+			u8"\t2. 按住按键，点击你需要的位置.\n" \
+			u8"\t现在你的位置已经改变.\n" \
+			u8"如果传送到极高的位置，传送可能会出现故障. \n" \
+			u8"相应地调整高度，以避免意外."
 		);
 
 		if (!f_Enabled)
 			ImGui::BeginDisabled();
 
-		ConfigWidget("Override Height (m)", f_DefaultHeight, 1.0F, 200.0F, 800.0F,
-			"If teleport cannot get ground height of target location,\nit will teleport you to the height specified here.\n" \
-			"It is recommended to have this value to be at least as high as a mountain.\nOtherwise, you may fall through the ground.");
+		ConfigWidget(u8"传送高度 (m)", f_DefaultHeight, 1.0F, 200.0F, 800.0F,
+			u8"这决定了你传送之后的高度.\n" \
+			u8"建议该值至少与山一样高.\n否则，你可能会从地上掉下来.");
 
-		ConfigWidget("Teleport Key", f_Key, true,
-			"Key to hold down before clicking on target location.");
+		ConfigWidget(u8"传送按键", f_Key, true,
+			u8"在单击目标位置之前按住的键.");
 
 		if (!f_Enabled)
 			ImGui::EndDisabled();

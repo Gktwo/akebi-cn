@@ -17,10 +17,10 @@
 namespace cheat::feature
 {
 	CustomTeleports::CustomTeleports() : Feature(),
-		NF(f_DebugMode, "Debug Mode", "CustomTeleports", false), // Soon to be added
-		NF(f_Enabled, "Custom Teleport", "CustomTeleports", false),
-		NF(f_Next, "Teleport Next", "CustomTeleports", Hotkey(VK_OEM_6)),
-		NF(f_Previous, "Teleport Previous", "CustomTeleports", Hotkey(VK_OEM_4)),
+		NF(f_DebugMode, u8"调试模式", "CustomTeleports", false), // Soon to be added
+		NF(f_Enabled, u8"自定义传送", "CustomTeleports", false),
+		NF(f_Next, u8"传送下一个", "CustomTeleports", Hotkey(VK_OEM_6)),
+		NF(f_Previous, u8"传送上一个", "CustomTeleports", Hotkey(VK_OEM_4)),
 		dir(util::GetCurrentPath() / "teleports")
 	{
 		f_Next.value().PressedEvent += MY_METHOD_HANDLER(CustomTeleports::OnNext);
@@ -29,7 +29,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& CustomTeleports::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Custom Teleports", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"自定义传送", "Teleport", true };
 		return info;
 	}
 
@@ -202,9 +202,9 @@ namespace cheat::feature
 		static std::string JSONBuffer_;
 		static std::string descriptionBuffer_;
 
-		ImGui::InputText("Name", &nameBuffer_);
-		ImGui::InputText("Description", &descriptionBuffer_);
-		if (ImGui::Button("Add Teleport"))
+		ImGui::InputText(u8"名字", &nameBuffer_);
+		ImGui::InputText(u8"描述", &descriptionBuffer_);
+		if (ImGui::Button(u8"添加传送"))
 		{
 			selectedIndex = -1;
 			UpdateIndexName();
@@ -214,7 +214,7 @@ namespace cheat::feature
 		}
 		ImGui::SameLine();
 
-		if (ImGui::Button("Reload"))
+		if (ImGui::Button(u8"重载"))
 		{
 			selectedIndex = -1;
 			UpdateIndexName();
@@ -223,14 +223,14 @@ namespace cheat::feature
 		}
 
 		ImGui::SameLine();
-		if (ImGui::Button("Open Folder"))
+		if (ImGui::Button(u8"打开文件夹"))
 		{
 			CheckFolder();
 			ShellExecuteA(NULL, "open", dir.string().c_str(), NULL, NULL, SW_SHOW);
 		}
 
 		ImGui::SameLine();
-		if (ImGui::Button("Load from JSON"))
+		if (ImGui::Button(u8"加载从JSON"))
 		{
 			selectedIndex = -1;
 			UpdateIndexName();

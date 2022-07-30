@@ -88,12 +88,12 @@ namespace cheat::feature
 				ConfigWidget(u8"开关", f_AutoTreasure, "Automatically opens chests and other treasures.\n" \
 					"Note: Using this with custom range and low delay times is extremely risky.\n" \
 					"Abuse will definitely merit a ban.\n\n" \
-					"如果与自定义范围一起使用，请确保先启用该选项v.");
+					u8"如果与自定义范围一起使用，请确保先启用该选项v.");
 				ImGui::SameLine();
 				ImGui::TextColored(ImColor(255, 165, 0, 255), "Read the note!");
 				ImGui::Indent();
 				ConfigWidget(u8"宝箱", f_Chest, "Common, precious, luxurious, etc.");
-				ConfigWidget("Leyline", f_Leyline, "Mora/XP, overworld/Trounce bosses, etc.");
+				ConfigWidget(u8"地脉", f_Leyline, "Mora/XP, overworld/Trounce bosses, etc.");
 				ConfigWidget(u8"调查点", f_Investigate, "Marked as Investigate/Search, etc.");
 				ConfigWidget(u8"任务交互", f_QuestInteract, "Valid quest interact points.");
 				ConfigWidget(u8"其他", f_Others, "Book Pages, Spincrystals, etc.");

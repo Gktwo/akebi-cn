@@ -18,14 +18,14 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& WindSeedBypass::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Block WindSeed", "Settings", true };
+		static const FeatureGUIInfo info{ u8"阻断风种子", "Settings", true };
 		return info;
 	}
 
 	void WindSeedBypass::DrawMain()
 	{
 		ConfigWidget(f_Enabled,
-			"Blocks the WindSeed Packet which can cause RCE from malicious servers.");
+			u8"阻止可能导致来自恶意服务器的风种子数据包.");
 	}
 
 	bool WindSeedBypass::NeedStatusDraw() const
@@ -35,7 +35,7 @@ namespace cheat::feature
 
 	void WindSeedBypass::DrawStatus()
 	{
-		ImGui::Text("Block WindSeed");
+		ImGui::Text(u8"阻断风种子");
 	}
 
 	WindSeedBypass& WindSeedBypass::GetInstance()

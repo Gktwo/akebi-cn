@@ -36,7 +36,7 @@ namespace cheat::feature
         if (f_AutoSelectDialog)
         {
             ImGui::Indent();
-            ConfigWidget("Exclude Katheryne/Tubby/Wagner", f_ExcludeImportant, "Exclude Kath/Tubby/Wagner from auto-select.");
+            ConfigWidget(u8"不包括 Katheryne/Tubby/Wagner", f_ExcludeImportant, "Exclude Kath/Tubby/Wagner from auto-select.");
             ImGui::Unindent();
         }
         ConfigWidget(u8"快速对话", f_FastDialog, "Speeds up Time");
