@@ -27,11 +27,8 @@ namespace cheat::feature
 	{
 		ConfigWidget(u8"¿ª/¹Ø", f_Enabled, "Auto collect time challenge item");
 		ImGui::SameLine();
-<<<<<<< Updated upstream
+
 		ConfigWidget(u8"Ïú»ÙÕ¨Ò©Í°", f_BombDestroy, u8"Ïú»ÙÕ¨Ò©Í°");
-=======
-		ConfigWidget(u8"Ïú»ÙÕ¨Ò©Í°", f_BombDestroy, "Auto destroy bombbarrel");
->>>>>>> Stashed changes
 		ImGui::SameLine();
 		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"·çÏÕÎ´Öª");
 		ImGui::SetNextItemWidth(200.f);

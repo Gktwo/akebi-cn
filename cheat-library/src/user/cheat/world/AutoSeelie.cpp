@@ -28,11 +28,8 @@ namespace cheat::feature
 		if (f_Enabled)
 		{
 			ImGui::Indent();
-<<<<<<< Updated upstream
-			ConfigWidget(u8"自动雷灵", f_ElectroSeelie, u8"Since you don't need to manually start electroseelie, \n"
-=======
+
 			ConfigWidget(u8"自动雷灵", f_ElectroSeelie, "Since you don't need to manually start electroseelie, \n"
->>>>>>> Stashed changes
 				"they start moving automatically with this option within 100m radius.");
 			ImGui::SameLine();
 			ImGui::TextColored(ImColor(255, 165, 0, 255), "Read the note!");
