@@ -34,7 +34,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& CustomTeleports::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Custom Teleports", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"自定义传送", "Teleport", true };
 		return info;
 	}
 
@@ -264,9 +264,9 @@ namespace cheat::feature
 		static std::string JSONBuffer_;
 		static std::string descriptionBuffer_;
 
-		ImGui::InputText("Name", &nameBuffer_);
-		ImGui::InputText("Description", &descriptionBuffer_);
-		if (ImGui::Button("Add Teleport"))
+		ImGui::InputText(u8"名字", &nameBuffer_);
+		ImGui::InputText(u8"描述", &descriptionBuffer_);
+		if (ImGui::Button(u8"添加传送"))
 		{
 			selectedIndex = -1;
 			UpdateIndexName();
@@ -276,7 +276,7 @@ namespace cheat::feature
 		}
 		ImGui::SameLine();
 
-		if (ImGui::Button("Reload"))
+		if (ImGui::Button(u8"重载"))
 		{
 			selectedIndex = -1;
 			UpdateIndexName();
@@ -285,14 +285,14 @@ namespace cheat::feature
 		}
 
 		ImGui::SameLine();
-		if (ImGui::Button("Open Folder"))
+		if (ImGui::Button(u8"打开文件夹"))
 		{
 			CheckFolder();
 			ShellExecuteA(NULL, "open", dir.string().c_str(), NULL, NULL, SW_SHOW);
 		}
 
 		ImGui::SameLine();
-		if (ImGui::Button("Load from JSON"))
+		if (ImGui::Button(u8"加载从JSON"))
 		{
 			if (!JSONBuffer_.empty()) {
 				auto t = SerializeFromJson(JSONBuffer_, false);
@@ -305,11 +305,11 @@ namespace cheat::feature
 			}
 
 		}
-		ImGui::InputTextMultiline("JSON input", &JSONBuffer_, ImVec2(0, 50), ImGuiInputTextFlags_AllowTabInput);
+		ImGui::InputTextMultiline(u8"JSON输入", &JSONBuffer_, ImVec2(0, 50), ImGuiInputTextFlags_AllowTabInput);
 
-		ConfigWidget("Teleport Next", f_Next, true, "Press to teleport next of selected.");
-		ConfigWidget("Teleport Previous", f_Previous, true, "Press to teleport previous of selected.");
-		ConfigWidget("Enable", f_Enabled,
+		ConfigWidget(u8"传送下一个", f_Next, true, "Press to teleport next of selected.");
+		ConfigWidget(u8"传送上一个", f_Previous, true, "Press to teleport previous of selected.");
+		ConfigWidget(u8"开/关", f_Enabled,
 					 "Enable teleport-through-list functionality.\n"
 					 "Usage:\n"
 					 "1. Put Checkmark to the teleports you want to teleport using hotkey\n"
@@ -318,10 +318,10 @@ namespace cheat::feature
 					 "Initially it will teleport the player to the selection made\n"
 					 "Note: Double click or click the arrow to open teleport details");
 		ConfigWidget("Enable Interpolation", f_Interpolate, "Enable interpolation between teleports when using keybinds."); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
-		ConfigWidget("Interpolation Speed", f_Speed, 0.1f, 0.1f, 99.0f,
+		ConfigWidget(u8"插补速度", f_Speed, 0.1f, 0.1f, 99.0f,
 					 "Interpolation speed.\n recommended setting below or equal to 0.1.");
-		ConfigWidget("Auto Teleport", f_Auto, "Enable automatic forward teleporation between teleports"); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
-		ConfigWidget("Delay Time (s)", f_DelayTime, 1, 0, 60, "Delay (in s) between teleport.\n"
+		ConfigWidget(u8"自动传送", f_Auto, "Enable automatic forward teleporation between teleports"); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
+		ConfigWidget(u8"延迟 (s)", f_DelayTime, 1, 0, 60, "Delay (in s) between teleport.\n"
 			"Note: This is not fully tested detection-wise.\nNot recommended with low values.");
 
 		if (ImGui::Button("Delete Checked"))

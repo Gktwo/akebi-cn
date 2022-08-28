@@ -45,7 +45,7 @@ namespace cheat
 
 		ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
 
-		if (!ImGui::Begin("Akebi-GC"))
+		if (!ImGui::Begin(u8"Akebi-GC 3.0.0 cn 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
 		{
 			ImGui::End();
 			return;
@@ -53,7 +53,7 @@ namespace cheat
 
 		ImGui::BeginGroup();
 
-		if (ImGui::Checkbox("Block key/mouse", &m_IsBlockingInput))
+		if (ImGui::Checkbox(u8"锁定鼠标/键盘", &m_IsBlockingInput))
 		{
 			renderer::SetInputLock(this, m_IsBlockingInput);
 		}
@@ -287,7 +287,7 @@ namespace cheat
 
 		if (ImGui::BeginTable("activesTable", 1, tabFlags))
 		{
-			ImGui::TableSetupColumn("Active features");
+			ImGui::TableSetupColumn(u8"已激活功能");
 			ImGui::TableHeadersRow();
 
 			int row = 0;
