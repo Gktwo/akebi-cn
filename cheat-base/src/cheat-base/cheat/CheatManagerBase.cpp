@@ -45,7 +45,11 @@ namespace cheat
 
 		ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
 
+<<<<<<< Updated upstream
 		if (!ImGui::Begin(u8"Akebi-GC 3.0.0 cn 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
+=======
+		if (!ImGui::Begin(u8"Akebi-GC 3.0.0 CN 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
+>>>>>>> Stashed changes
 		{
 			ImGui::End();
 			return;
@@ -53,7 +57,11 @@ namespace cheat
 
 		ImGui::BeginGroup();
 
+<<<<<<< Updated upstream
 		if (ImGui::Checkbox(u8"锁定鼠标/键盘", &m_IsBlockingInput))
+=======
+		if (ImGui::Checkbox(u8"冻结鼠标/键盘", &m_IsBlockingInput))
+>>>>>>> Stashed changes
 		{
 			renderer::SetInputLock(this, m_IsBlockingInput);
 		}
@@ -287,7 +295,11 @@ namespace cheat
 
 		if (ImGui::BeginTable("activesTable", 1, tabFlags))
 		{
+<<<<<<< Updated upstream
 			ImGui::TableSetupColumn(u8"已激活功能");
+=======
+			ImGui::TableSetupColumn(u8"激活的功能");
+>>>>>>> Stashed changes
 			ImGui::TableHeadersRow();
 
 			int row = 0;

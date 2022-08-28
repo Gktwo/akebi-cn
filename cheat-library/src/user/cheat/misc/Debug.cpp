@@ -256,7 +256,7 @@ namespace cheat::feature
     {
         auto& manager = game::EntityManager::instance();
 
-        if (ImGui::SmallButton("T"))
+        if (ImGui::SmallButton(u8"传送"))
         {
             auto& mapTeleport = MapTeleport::GetInstance();
             mapTeleport.TeleportTo(entity->absolutePosition());
@@ -265,19 +265,19 @@ namespace cheat::feature
             ImGui::SetTooltip("Teleport");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton("S"))
+        if (ImGui::SmallButton(u8"召集"))
             entity->setRelativePosition(manager.avatar()->relativePosition());
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Summon");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton("B"))
+        if (ImGui::SmallButton(u8"驱逐"))
             entity->setRelativePosition({ 0, 0, 0 });
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Banish");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton("C"))
+        if (ImGui::SmallButton(u8"复制"))
             CopyEntityDetailsToClipboard(entity);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Copy Details");
@@ -385,23 +385,23 @@ namespace cheat::feature
     {
         auto& manager = game::EntityManager::instance();
 
-        if (ImGui::Button("Teleport: Closest"))
+        if (ImGui::Button(u8"传送到最近"))
             TeleportByCondition(entities, Debug::TeleportCondition::Closest);
 
         ImGui::SameLine();
-        if (ImGui::Button("Teleport: Farthest"))
+        if (ImGui::Button(u8"传送到最远"))
             TeleportByCondition(entities, Debug::TeleportCondition::Farthest);
 
         ImGui::SameLine();
-        if (ImGui::Button("Summon All"))
+        if (ImGui::Button(u8"召集所有"))
             SummonEntities(entities);
 
         ImGui::SameLine();
-        if (ImGui::Button("Banish All"))
+        if (ImGui::Button(u8"驱逐所有"))
             BanishEntities(entities);
 
         ImGui::SameLine();
-        if (ImGui::Button("Copy All Details"))
+        if (ImGui::Button(u8"复制所有详细信息"))
             CopyEntityDetailsToClipboard(entities);
 
         ImGui::SameLine();
@@ -411,7 +411,7 @@ namespace cheat::feature
 
         if (csvFriendly) {
             ImGui::SameLine();
-            ImGui::Checkbox("Include Headers", &includeHeaders);
+            ImGui::Checkbox(u8"包括标题", &includeHeaders);
             if (ImGui::IsItemHovered())
                 ImGui::SetTooltip("Includes headers when copying.");
         }
@@ -428,14 +428,14 @@ namespace cheat::feature
             | ImGuiTableFlags_ScrollY;
         if (ImGui::BeginTable("EntityTable", 8, flags, ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * clipSize), 0.0f))
         {
-            ImGui::TableSetupColumn("Commands", ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 0.0, 0);
+            ImGui::TableSetupColumn(u8"命令", ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 0.0, 0);
             ImGui::TableSetupColumn("ID", ImGuiTableColumnFlags_WidthFixed, 0.0f, 1);
-            ImGui::TableSetupColumn("RuntimeID", ImGuiTableColumnFlags_WidthFixed, 0.0f, 2);
-            ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthFixed, 0.0f, 3);
-            ImGui::TableSetupColumn("Distance", ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_PreferSortAscending | ImGuiTableColumnFlags_WidthFixed, 0.0, 4);
-            ImGui::TableSetupColumn("Pos.x", ImGuiTableColumnFlags_WidthFixed, 0.0, 5);
-            ImGui::TableSetupColumn("Pos.y", ImGuiTableColumnFlags_WidthFixed, 0.0, 6);
-            ImGui::TableSetupColumn("Pos.z", ImGuiTableColumnFlags_WidthFixed, 0.0, 7);
+            ImGui::TableSetupColumn(u8"gadgetID", ImGuiTableColumnFlags_WidthFixed, 0.0f, 2);
+            ImGui::TableSetupColumn(u8"名称", ImGuiTableColumnFlags_WidthFixed, 0.0f, 3);
+            ImGui::TableSetupColumn(u8"距离", ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_PreferSortAscending | ImGuiTableColumnFlags_WidthFixed, 0.0, 4);
+            ImGui::TableSetupColumn(u8"坐标.x", ImGuiTableColumnFlags_WidthFixed, 0.0, 5);
+            ImGui::TableSetupColumn(u8"坐标.y", ImGuiTableColumnFlags_WidthFixed, 0.0, 6);
+            ImGui::TableSetupColumn(u8"坐标.z", ImGuiTableColumnFlags_WidthFixed, 0.0, 7);
             ImGui::TableSetupScrollFreeze(0, 1);
             ImGui::TableHeadersRow();
 
@@ -518,41 +518,41 @@ namespace cheat::feature
         ImGuiContext& g = *GImGui;
         ImGuiIO& io = g.IO;
 
-        ImGui::Text("Entity Count %d", entities.size());
+        ImGui::Text(u8"实体计数 %d", entities.size());
 
         ImGui::Checkbox("## Enable Object Name Filter", &useObjectNameFilter); ImGui::SameLine();
         if (!useObjectNameFilter)
             ImGui::BeginDisabled();
-        ImGui::InputText("Entity Name Filter", objectNameFilter, 128);
+        ImGui::InputText(u8"实体名称筛选器", objectNameFilter, 128);
         if (!useObjectNameFilter)
             ImGui::EndDisabled();
 
 
-        ImGui::Checkbox("Filter by Radius", &useRadius);
+        ImGui::Checkbox(u8"按半径过滤", &useRadius);
         if (!useRadius)
             ImGui::BeginDisabled();
 
         ImGui::SameLine();
         ImGui::PushItemWidth(200.0);
-        ImGui::SliderFloat("Radius", &radius, 0.0f, 100.0f);
+        ImGui::SliderFloat(u8"半径", &radius, 0.0f, 100.0f);
         ImGui::PopItemWidth();
         if (!useRadius)
             ImGui::EndDisabled();
 
         if (ImGui::BeginTabBar("EntityManagerTabBar", tab_bar_flags))
         {
-            if (ImGui::BeginTabItem("Type Filter"))
+            if (ImGui::BeginTabItem(u8"类型过滤器"))
             {
-                if (ImGui::Button("Select All"))
+                if (ImGui::Button(u8"选择所有"))
                     std::fill_n(typeFilters, 0x63, true);
                 ImGui::SameLine();
 
-                if (ImGui::Button("Deselect All"))
+                if (ImGui::Button(u8"取消所有"))
                     std::fill_n(typeFilters, 0x63, false);
                 ImGui::SameLine();
 
                 ImGui::PushItemWidth(100.0);
-                ImGui::SliderInt("No. of Columns", &typeFiltersColCount, 2, 5);
+                ImGui::SliderInt(u8"栏数", &typeFiltersColCount, 2, 5);
                 ImGui::PopItemWidth();
 
                 if (ImGui::BeginTable("Type Filter Table", typeFiltersColCount, ImGuiTableFlags_NoBordersInBody))
@@ -567,21 +567,21 @@ namespace cheat::feature
                 ImGui::EndTabItem();
             }
 
-            if (ImGui::BeginTabItem("Entity List"))
+            if (ImGui::BeginTabItem(u8"实体列表"))
             {
                 // Checkbox: Group by Type.
-                ImGui::Checkbox("Group by Type", &groupByType);
+                ImGui::Checkbox(u8"按类型分组", &groupByType);
                 ImGui::SameLine();
 
                 if (groupByType) {
-                    ImGui::Checkbox("Show Empty Types", &showEmptyTypes);
+                    ImGui::Checkbox(u8"显示空类型", &showEmptyTypes);
                     ImGui::SameLine();
                 }
 
-                ImGui::Checkbox("Show Only Oculi", &checkOnlyShells);
+                ImGui::Checkbox(u8"仅显示神瞳", &checkOnlyShells);
                 ImGui::SameLine();
 
-                bool sortConditionChanged = ComboEnum("Sort Mode", &sortCondition);
+                bool sortConditionChanged = ComboEnum(u8"排序模式", &sortCondition);
 
                 if (entities.size() > 0) {
                     if (groupByType) {
@@ -1235,10 +1235,10 @@ namespace cheat::feature
 
     void Debug::DrawMain()
     {
-        if (ImGui::CollapsingHeader("Entity Manager", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"实体管理器", ImGuiTreeNodeFlags_None))
             DrawEntitiesData();
 
-        if (ImGui::CollapsingHeader("Position", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"位置", ImGuiTreeNodeFlags_None))
         {
             DrawMapManager();
             DrawPositionInfo();
@@ -1253,9 +1253,9 @@ namespace cheat::feature
         //if (ImGui::CollapsingHeader("Interaction manager", ImGuiTreeNodeFlags_None))
         //	DrawInteractionManagerInfo();
 
-        if (ImGui::CollapsingHeader("Map Manager", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"地图管理器", ImGuiTreeNodeFlags_None))
             DrawManagerData();
-        if (ImGui::CollapsingHeader("FPS Graph", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"FPS 可视化", ImGuiTreeNodeFlags_None))
             DrawFPSGraph();
     }
 
