@@ -27,19 +27,19 @@ namespace cheat::feature
 
     const FeatureGUIInfo& AutoFish::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Fishing", "World", true };
+        static const FeatureGUIInfo info{ u8"自动钓鱼", "World", true };
         return info;
     }
 
     void AutoFish::DrawMain()
     {
-        ConfigWidget("Enabled", f_Enabled, "Automatically catch fish.");
-        ConfigWidget("Catch Delay (ms)", f_DelayBeforeCatch, 100, 500, 4000, "Fish will be caught after this delay (in ms).");
+        ConfigWidget(u8"开关", f_Enabled, u8"自动钓鱼.");
+        ConfigWidget(u8"抓取延迟 (ms)", f_DelayBeforeCatch, 100, 500, 4000, u8"提杆的的延迟 (in ms).");
 
         ImGui::Spacing();
 
-        ConfigWidget(f_AutoRecastRod, "If enabled, rod will recasted. Without visualization.");
-        ConfigWidget("Recast Delay (ms)", f_DelayBeforeRecast, 10, 100, 4000, "Rod will be recast after this delay (in ms).");
+        ConfigWidget(f_AutoRecastRod, u8"自动抛竿.");
+        ConfigWidget(u8"抛竿延迟 (ms)", f_DelayBeforeRecast, 10, 100, 4000, u8"抛竿延迟 (in ms).");
     }
 
     bool AutoFish::NeedStatusDraw() const
@@ -49,7 +49,7 @@ namespace cheat::feature
 
     void AutoFish::DrawStatus()
     {
-        ImGui::Text("Auto Fish");
+        ImGui::Text(u8"钓鱼佬");
     }
 
     AutoFish& AutoFish::GetInstance()

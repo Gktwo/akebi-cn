@@ -13,17 +13,17 @@
 namespace cheat::feature
 {
 	Settings::Settings() : Feature(),
-		NF(f_MenuKey, "Show Cheat Menu Key", "General", Hotkey(VK_F1)),
-		NF(f_HotkeysEnabled, "Hotkeys Enabled", "General", true),
+		NF(f_MenuKey, u8"显示作弊菜单按键", "General", Hotkey(VK_F1)),
+		NF(f_HotkeysEnabled, u8"使用热键", "General", true),
 		
-		NF(f_StatusMove, "Move Status Window", "General::StatusWindow", true),
-		NF(f_StatusShow, "Show Status Window", "General::StatusWindow", true),
+		NF(f_StatusMove, u8"移动功能窗口", "General::StatusWindow", true),
+		NF(f_StatusShow, u8"显示功能窗口", "General::StatusWindow", true),
 
-		NF(f_InfoMove, "Move Info Window", "General::InfoWindow", true),
-		NF(f_InfoShow, "Show Info Window", "General::InfoWindow", true),
+		NF(f_InfoMove, u8"移动info窗口", "General::InfoWindow", true),
+		NF(f_InfoShow, u8"显示info窗口", "General::InfoWindow", true),
 
-		NF(f_FpsMove, "Move FPS Indicator", "General::FPS", false),
-		NF(f_FpsShow, "Show FPS Indicator", "General::FPS", true),
+		NF(f_FpsMove, u8"移动fps窗口", "General::FPS", false),
+		NF(f_FpsShow, u8"显示fps窗口", "General::FPS", true),
 
 		NF(f_NotificationsShow, "Show Notifications", "General::Notify", true),
 		NF(f_NotificationsDelay, "Notifications Delay", "General::Notify", 500),
@@ -106,7 +106,7 @@ namespace cheat::feature
 					}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("Logging");
+		ImGui::BeginGroupPanel(u8"控制台日志");
 		{
 			bool consoleChanged = ConfigWidget(f_ConsoleLogging,
 				"Enable console for logging information (changes will take effect after relaunch)");
@@ -125,44 +125,44 @@ namespace cheat::feature
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("Status Window");
+		ImGui::BeginGroupPanel(u8"激活功能窗口");
 		{
 			ConfigWidget(f_StatusShow);
 			ConfigWidget(f_StatusMove, "Allow moving of 'Status' window.");
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("Info Window");
+		ImGui::BeginGroupPanel(u8"Info窗口");
 		{
 			ConfigWidget(f_InfoShow);
 			ConfigWidget(f_InfoMove, "Allow moving of 'Info' window.");
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("FPS indicator");
+		ImGui::BeginGroupPanel(u8"FPS窗口");
 		{
 			ConfigWidget(f_FpsShow);
 			ConfigWidget(f_FpsMove, "Allow moving of 'FPS Indicator' window.");
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("Show Notifications");
+		ImGui::BeginGroupPanel(u8"显示通知");
 		{
 			ConfigWidget(f_NotificationsShow, "Notifications on the bottom-right corner of the window will be displayed.");
 			ConfigWidget(f_NotificationsDelay, 1, 1, 10000, "Delay in milliseconds between notifications.");
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("Fast Exit");
+		ImGui::BeginGroupPanel(u8"快速退出");
 		{
-			ConfigWidget("Enabled",
+			ConfigWidget(u8"开/关",
 				f_FastExitEnable,
 				"Enable Fast Exit.\n"
 			);
 			if (!f_FastExitEnable)
 				ImGui::BeginDisabled();
 
-			ConfigWidget("Key", f_HotkeyExit, true,
+			ConfigWidget(u8"键", f_HotkeyExit, true,
 				"Key to exit the game.");
 
 			if (!f_FastExitEnable)

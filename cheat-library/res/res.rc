@@ -50,9 +50,9 @@ END
 // RCDATA
 //
 
-IMGUI_FONT              RCDATA                  "Ruda-Bold.ttf"
+IMGUI_FONT              RCDATA                  "45.ttf"
 
-IMGUI_FONT_BOLD         RCDATA                  "Ruda-ExtraBold.ttf"
+IMGUI_FONT_BOLD         RCDATA                  "85.ttf"
 
 SIGNATURES              RCDATA                  "signatures.json"
 

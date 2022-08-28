@@ -18,7 +18,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& WindSeedBypass::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Block WindSeed", "Settings", true };
+        static const FeatureGUIInfo info{ u8"阻断风种子", "Settings", true };
         return info;
     }
 
@@ -35,7 +35,7 @@ namespace cheat::feature
 
     void WindSeedBypass::DrawStatus()
     {
-        ImGui::Text("Block WindSeed");
+        ImGui::Text(u8"阻断风种子");
     }
 
     WindSeedBypass& WindSeedBypass::GetInstance()

@@ -49,18 +49,18 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& FreeCamera::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Free Camera", "Visuals", true };
+		static const FeatureGUIInfo info{ u8"自由相机", "Visuals", true };
 		return info;
 	}
 
 	void FreeCamera::DrawMain()
 	{
-		ConfigWidget("Enable", f_Enabled);
-		ConfigWidget("Freeze Character Animation", f_FreezeAnimation, "Freezes the active character's animation.");
+		ConfigWidget(u8"开/关", f_Enabled);
+		ConfigWidget(u8"冻结角色动作", f_FreezeAnimation, u8"冻结角色动作.");
 		if (f_Enabled)
 		{
-			ConfigWidget("Toggle Damage Overlay", f_DamageOverlay, "Remove damage output overlay");
-			ConfigWidget("Toggle Enemy HP Overlay", f_HpOverlay, "Remove enemy HP overlay");
+			ConfigWidget(u8"切换伤害覆盖", f_DamageOverlay, "Remove damage output overlay");
+			ConfigWidget(u8"切换敌人的HP覆盖", f_HpOverlay, "Remove enemy HP overlay");
 		}
 
 		if (ImGui::BeginTable("FreeCameraDrawTable", 1, ImGuiTableFlags_NoBordersInBody))
@@ -68,30 +68,30 @@ namespace cheat::feature
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(0);
 
-			ImGui::BeginGroupPanel("Settings");
+			ImGui::BeginGroupPanel(u8"设置");
 			{
-				ConfigWidget("Movement Speed", f_Speed, 0.01f, 0.01f, 1000.0f);
-				ConfigWidget("Look Sensitivity", f_LookSens, 0.01f, 0.01f, 100.0f);
-				ConfigWidget("Roll Speed", f_RollSpeed, 0.01f, 0.01f, 100.0f);
-				ConfigWidget("FOV Speed", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
-				ConfigWidget("Field of View", f_FOV, 0.1f, 0.01f, 200.0f);
-				ConfigWidget("Smoothing", f_Smoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
+				ConfigWidget(u8"移动速度", f_Speed, 0.01f, 0.01f, 1000.0f);
+				ConfigWidget(u8"Look Sensitivity", f_LookSens, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"旋转速度", f_RollSpeed, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"视野速度", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"视野范围", f_FOV, 0.1f, 0.01f, 200.0f);
+				ConfigWidget(u8"Smoothing", f_Smoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
 			}
 			ImGui::EndGroupPanel();
 
-			ImGui::BeginGroupPanel("Hotkeys");
+			ImGui::BeginGroupPanel(u8"热键");
 			{
-				ConfigWidget("Forward", f_Forward, true);
-				ConfigWidget("Backward", f_Backward, true);
-				ConfigWidget("Left", f_Left, true);
-				ConfigWidget("Right", f_Right, true);
-				ConfigWidget("Up", f_Up, true);
-				ConfigWidget("Down", f_Down, true);
-				ConfigWidget("Roll Left", f_LeftRoll, true);
-				ConfigWidget("Roll Right", f_RightRoll, true);
-				ConfigWidget("Reset Roll", f_ResetRoll, true);
-				ConfigWidget("Increase FOV", f_IncFOV, true);
-				ConfigWidget("Decrease FOV", f_DecFOV, true);
+				ConfigWidget(u8"向前", f_Forward, true);
+				ConfigWidget(u8"向后", f_Backward, true);
+				ConfigWidget(u8"向左", f_Left, true);
+				ConfigWidget(u8"向右", f_Right, true);
+				ConfigWidget(u8"向上", f_Up, true);
+				ConfigWidget(u8"向下", f_Down, true);
+				ConfigWidget(u8"左转", f_LeftRoll, true);
+				ConfigWidget(u8"右转", f_RightRoll, true);
+				ConfigWidget(u8"重置", f_ResetRoll, true);
+				ConfigWidget(u8"增加视野", f_IncFOV, true);
+				ConfigWidget(u8"减少视野", f_DecFOV, true);
 			}
 			ImGui::EndGroupPanel();
 			ImGui::EndTable();
@@ -105,7 +105,7 @@ namespace cheat::feature
 
 	void FreeCamera::DrawStatus()
 	{
-		ImGui::Text("Free Camera");
+		ImGui::Text(u8"自由相机");
 	}
 
 	FreeCamera& FreeCamera::GetInstance()

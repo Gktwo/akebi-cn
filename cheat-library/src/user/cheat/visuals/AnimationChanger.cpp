@@ -231,15 +231,15 @@ namespace cheat::feature
 
     const FeatureGUIInfo& AnimationChanger::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "AnimationChanger", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"自定义动作", "Visuals", false };
         return info;
     }
 
     void AnimationChanger::DrawMain()
     {
-        ImGui::BeginGroupPanel("Animation Changer");
+        ImGui::BeginGroupPanel(u8"自定义动作");
         {
-            ConfigWidget(f_Enabled, "Changes active character's animation.\nNot all animations work for every character except Main Character.");
+            ConfigWidget(u8"自定义动作", f_Enabled, "Changes active character's animation.\nNot all animations work for every character except Main Character.");
             if (f_Enabled)
             {
                 if (ImGui::BeginCombo("Animations", f_Animation.value().c_str()))
@@ -256,8 +256,8 @@ namespace cheat::feature
                     ImGui::EndCombo();
                 }
 
-                ConfigWidget("Apply Key", f_ApplyKey, true);
-                ConfigWidget("Reset Key", f_ResetKey, true);
+                ConfigWidget(u8"应用", f_ApplyKey, true);
+                ConfigWidget(u8"重置", f_ResetKey, true);
             }
         }
         ImGui::EndGroupPanel();
@@ -270,7 +270,7 @@ namespace cheat::feature
 
     void AnimationChanger::DrawStatus()
     {
-        ImGui::Text("AnimationChanger");
+        ImGui::Text(u8"自定义动作");
     }
 
     AnimationChanger& AnimationChanger::GetInstance()

@@ -27,27 +27,27 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& AutoDestroy::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Auto Destroy Objects", "World", true };
+		static const FeatureGUIInfo info{ u8"原子崩坏", "World", true };
 		return info;
 	}
 
 	void AutoDestroy::DrawMain()
 	{
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Note. This feature is not fully tested detection-wise.\n"
-			"Not recommended for main accounts or used with high values.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"此功能安全性有很高的风险.\n"
+			u8"不要在你的主要账号上使用");
 
-		ConfigWidget("Enabled", f_Enabled, "Instantly destroys non-living objects within range.");
+		ConfigWidget(u8"开/关", f_Enabled, u8"破坏范围内的物品.");
 		ImGui::Indent();
-		ConfigWidget("Ores", f_DestroyOres, "Ores and variants, e.g. electro crystals, marrows, etc.");
-		ConfigWidget("Shields", f_DestroyShields, "Abyss mage/churl/slime shields.");
+		ConfigWidget(u8"矿石类", f_DestroyOres, u8"可采集矿石类物品.");
+		ConfigWidget(u8"怪物的护盾", f_DestroyShields, u8"怪物的护盾.");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Extremely risky!");
-		ConfigWidget("Doodads", f_DestroyDoodads, "Barrels, boxes, vases, etc.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"高风险!");
+		ConfigWidget(u8"部分探索物品", f_DestroyDoodads, u8"罐头瓶子之类.");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Extremely risky!");
-		ConfigWidget("Plants", f_DestroyPlants, "Dandelion Seeds, Sakura Bloom, etc.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"高风险!");
+		ConfigWidget(u8"植物", f_DestroyPlants, u8"需要攻击的植物类.");
 		ImGui::Unindent();
-		ConfigWidget("Range (m)", f_Range, 0.1f, 1.0f, 15.0f);
+		ConfigWidget(u8"范围 (m)", f_Range, 0.1f, 1.0f, 15.0f);
 	}
 
 	bool AutoDestroy::NeedStatusDraw() const
@@ -57,13 +57,13 @@ namespace cheat::feature
 
 	void AutoDestroy::DrawStatus()
 	{
-		ImGui::Text("Destroy [%.01fm%s%s%s%s%s]",
+		ImGui::Text(u8"自动销毁 [%.01fm%s%s%s%s%s]",
 			f_Range.value(),
 			f_DestroyOres || f_DestroyShields || f_DestroyDoodads || f_DestroyPlants ? "|" : "",
-			f_DestroyOres ? "O" : "",
-			f_DestroyShields ? "S" : "",
-			f_DestroyDoodads ? "D" : "",
-			f_DestroyPlants ? "P" : "");
+			f_DestroyOres ? u8"矿" : "",
+			f_DestroyShields ? u8"盾" : "",
+			f_DestroyDoodads ? u8"道具" : "",
+			f_DestroyPlants ? u8"植" : "");
 	}
 
 	AutoDestroy& AutoDestroy::GetInstance()

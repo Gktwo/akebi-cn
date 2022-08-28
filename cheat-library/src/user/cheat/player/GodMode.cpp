@@ -7,8 +7,8 @@
 namespace cheat::feature 
 {
     GodMode::GodMode() : Feature(),
-        NFEX(f_Enabled, "God mode", "m_GodMode", "Player", false, false),
-        NF(f_AltGodMode, "Alternative God Mode", "Player", false)
+        NFEX(f_Enabled, u8"无敌模式", "m_GodMode", "Player", false, false),
+        NF(f_AltGodMode, u8"免疫环境伤害", "Player", false)
     {
 		HookManager::install(app::VCHumanoidMove_NotifyLandVelocity, VCHumanoidMove_NotifyLandVelocity_Hook);
 		HookManager::install(app::Miscs_CheckTargetAttackable, Miscs_CheckTargetAttackable_Hook);
@@ -24,13 +24,13 @@ namespace cheat::feature
 
     void GodMode::DrawMain()
     {
-        ConfigWidget("God Mode", f_Enabled, 
-                     "Enables god mode, i.e. no incoming damage.\n" \
-                     "May not work with some types of damage.");
+        ConfigWidget(u8"免疫伤害（软件免费开源倒狗密麻麻石蜡）", f_Enabled,
+            u8"免疫受到的伤害.\n" \
+            u8"对于有些伤害可能无效.");
         ImGui::Indent();
-        ConfigWidget("Alternative God Mode", f_AltGodMode,
-            "Alternative god mode that ignores incoming damage\n" \
-            "including environmental damage.");
+        ConfigWidget(u8"免疫环境伤害", f_AltGodMode,
+            u8"免疫所有伤害\n" \
+            u8"包括环境伤害.");
         ImGui::Unindent();
     }
 
@@ -41,7 +41,7 @@ namespace cheat::feature
 
     void GodMode::DrawStatus() 
     {
-        ImGui::Text("God Mode%s", f_AltGodMode ? "+Alt " : " ");
+        ImGui::Text(u8"免疫伤害%s", f_AltGodMode ? "+Alt " : " ");
     }
 
     GodMode& GodMode::GetInstance()

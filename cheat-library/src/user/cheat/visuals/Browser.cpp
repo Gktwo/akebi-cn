@@ -20,13 +20,13 @@ namespace cheat::feature
 
     const FeatureGUIInfo& Browser::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Browser", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"ä¯ÀÀÆ÷", "Visuals", false };
         return info;
     }
 
     void Browser::DrawMain()
     {
-        ConfigWidget(f_Enabled, "Create in-game Browser");
+        ConfigWidget(u8"ä¯ÀÀÆ÷", f_Enabled, "Create in-game Browser");
         ImGui::InputText("URL", &f_URL);
     }
 
@@ -37,7 +37,7 @@ namespace cheat::feature
 
     void Browser::DrawStatus()
     {
-        ImGui::Text("Browser");
+        ImGui::Text(u8"ä¯ÀÀÆ÷");
     }
 
     Browser& Browser::GetInstance()

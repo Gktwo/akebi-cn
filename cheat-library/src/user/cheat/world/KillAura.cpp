@@ -31,38 +31,38 @@ namespace cheat::feature
 
     const FeatureGUIInfo& KillAura::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Kill Aura", "World", true };
+        static const FeatureGUIInfo info{ u8"杀戮领域", "World", true };
         return info;
     }
 
     void KillAura::DrawMain()
     {
-		ConfigWidget("Enable Kill Aura", f_Enabled, "Enables kill aura. Need to choose a mode to work.");
+		ConfigWidget(u8"开关", f_Enabled, u8"只是总开关，需要在下面设置模式.");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Choose any or both modes below.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"选择一个或者多个理想的模式.");
 
-		ConfigWidget("Crash Damage Mode", f_DamageMode, "Kill aura causes crash damage for monster around you.");
+		ConfigWidget(u8"破坏伤害模式", f_DamageMode, "Kill aura causes crash damage for monster around you.");
 		ImGui::Indent();
-		ConfigWidget("Percent mode", f_PercentDamageMode, "Crash damage with percent value.");
+		ConfigWidget(u8"百分比模式", f_PercentDamageMode, "Crash damage with percent value.");
 		if (f_DamageMode)
 		{
 			if (!f_PercentDamageMode)
 			{
-				ConfigWidget("Damage Value", f_DamageValue, 1, 0, 10000000, "Crash damage value");
+				ConfigWidget(u8"伤害值", f_DamageValue, 1, 0, 10000000, "Crash damage value");
 			}
 			else
 			{
-				ConfigWidget("Kill times", f_PercentDamageTimes, 1, 1, 100, "How many times to kill.");
+				ConfigWidget(u8"死亡时间", f_PercentDamageTimes, 1, 1, 100, "How many times to kill.");
 			}
 		}
 		ImGui::Unindent();
-		ConfigWidget("Instant Death Mode", f_InstantDeathMode, "Kill aura will attempt to instagib any valid target.");
+		ConfigWidget(u8"瞬间模式", f_InstantDeathMode, u8"尝试作用于周围所有目标.");
 		ImGui::SameLine();
 		ImGui::TextColored(ImColor(255, 165, 0, 255), "Can get buggy with bosses like PMA and Hydro Hypo.");
-		ConfigWidget("Kill Range", f_Range, 0.1f, 5.0f, 100.0f);
-		ConfigWidget("Only Hostile/Aggro", f_OnlyTargeted, "If enabled, kill aura will only affect monsters targeting/aggro towards you.");
-		ConfigWidget("Crash Attack Delay (ms)", f_AttackDelay, 1, 0, 1000, "Delay in ms before next crash damage.");
-		ConfigWidget("Crash Repeat Delay (ms)", f_RepeatDelay, 1, 100, 2000, "Delay in ms before crash damaging same monster.");
+		ConfigWidget(u8"范围", f_Range, 0.1f, 5.0f, 100.0f);
+		ConfigWidget(u8"敌不犯我，我不犯人", f_OnlyTargeted, "If enabled, kill aura will only affect monsters targeting/aggro towards you.");
+		ConfigWidget(u8"伤害延迟  (ms)", f_AttackDelay, 1, 0, 1000, "Delay in ms before next crash damage.");
+		ConfigWidget(u8"个体延迟 (ms)", f_RepeatDelay, 1, 100, 2000, "Delay in ms before crash damaging same monster.");
     }
 
     bool KillAura::NeedStatusDraw() const
@@ -72,7 +72,7 @@ namespace cheat::feature
 
     void KillAura::DrawStatus() 
     { 
-        ImGui::Text("Kill Aura [%s%s]\n[%.01fm|%s|%dms|%dms]", 
+        ImGui::Text(u8"杀戮空间 [%s%s]\n[%.01fm|%s|%dms|%dms]",
 			f_DamageMode && f_InstantDeathMode ? "Extreme" : f_DamageMode ? "Crash" : f_InstantDeathMode ? "Instant" : "None",
 			f_DamageMode ? !f_PercentDamageMode ? "|Fixed" : fmt::format("|Rate({})", f_PercentDamageTimes.value()).c_str() : "",
 			f_Range.value(),

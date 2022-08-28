@@ -23,12 +23,12 @@ namespace cheat::feature
 
 	void AutoSeelie::DrawMain()
 	{
-		ConfigWidget("Auto seelie", f_Enabled, "Auto follow seelie to its home");
+		ConfigWidget(u8"自动仙灵", f_Enabled, u8"仙灵自动回家");
 
 		if (f_Enabled)
 		{
 			ImGui::Indent();
-			ConfigWidget("Auto Electro seelie", f_ElectroSeelie, "Since you don't need to manually start electroseelie, \n"
+			ConfigWidget(u8"自动雷灵", f_ElectroSeelie, u8"Since you don't need to manually start electroseelie, \n"
 				"they start moving automatically with this option within 100m radius.");
 			ImGui::SameLine();
 			ImGui::TextColored(ImColor(255, 165, 0, 255), "Read the note!");
@@ -44,7 +44,7 @@ namespace cheat::feature
 
 	void AutoSeelie::DrawStatus()
 	{
-		ImGui::Text("AutoSeelie %s", f_ElectroSeelie ? "+ Electro" : "");
+		ImGui::Text(u8"自动仙灵 %s", f_ElectroSeelie ? u8"+ 雷" : "");
 	}
 
 	AutoSeelie& AutoSeelie::GetInstance()

@@ -10,7 +10,7 @@
 namespace cheat::feature 
 {
 
-    ChestTeleport::ChestTeleport() : ItemTeleportBase("ChestTeleport", "Chest"),
+    ChestTeleport::ChestTeleport() : ItemTeleportBase("ChestTeleport", u8"±¦Ïä"),
         NF(f_FilterChestLocked    , "Locked",       "ChestTeleport", true),
 		NF(f_FilterChestInRock    , "In rock",      "ChestTeleport", true),
 		NF(f_FilterChestFrozen    , "Frozen",       "ChestTeleport", true),
@@ -23,7 +23,7 @@ namespace cheat::feature
 		NF(f_FilterChestLuxurious , "Luxurious",    "ChestTeleport", true),
 		NF(f_FilterChestRemarkable, "Remarkable",   "ChestTeleport", true),
 
-		NF(f_FilterChest          , "Chests",       "ChestTeleport", true),
+		NF(f_FilterChest          , u8"±¦Ïä",       "ChestTeleport", true),
 		NF(f_FilterInvestigates   , "Investigates", "ChestTeleport", false),
 		NF(f_FilterBookPage       , "Book pages",   "ChestTeleport", false),
 		NF(f_FilterBGM            , "BGMs",         "ChestTeleport", false),
@@ -41,7 +41,7 @@ namespace cheat::feature
 		if (ImGui::TreeNode("Filters"))
 		{
 
-			ImGui::Text("Type Filters");
+			ImGui::Text(u8"ÀàÐÍ¹ýÂË");
 
 			ConfigWidget(f_FilterChest, "Enable chest detection and filters.");
 			ConfigWidget(f_FilterInvestigates);
@@ -110,7 +110,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& ChestTeleport::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Chest Teleport", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"±¦Ïä´«ËÍ", "Teleport", true };
 		return info;
 	}
 
@@ -243,7 +243,7 @@ namespace cheat::feature
 
 			ImGui::TableNextColumn();
 
-			if (ImGui::Button("Teleport"))
+			if (ImGui::Button(u8"´«ËÍ"))
 			{
 				auto& mapTeleport = MapTeleport::GetInstance();
 				mapTeleport.TeleportTo(chest->absolutePosition());
