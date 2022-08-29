@@ -114,9 +114,9 @@ namespace cheat::feature
 
 	void InteractiveMap::DrawMenu()
 	{
-		ImGui::BeginGroupPanel("General");
+		ImGui::BeginGroupPanel(u8"综合的");
 		{
-			ConfigWidget("Enabled", f_Enabled);
+			ConfigWidget(u8"开/关", f_Enabled);
 			ConfigWidget(f_SeparatedWindows, "Config and filters will be in separate windows.");
 			if (ConfigWidget(f_STCompletedPoints, "Save scope for completed items."))
 			{
@@ -125,7 +125,7 @@ namespace cheat::feature
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("Icon view");
+		ImGui::BeginGroupPanel(u8"图标视图");
 		{
 			ConfigWidget(f_IconSize, 0.01f, 4.0f, 100.0f);
 			ConfigWidget(f_MinimapIconSize, 0.01f, 4.0f, 100.0f);
@@ -136,9 +136,9 @@ namespace cheat::feature
 
 		ImGui::BeginGroupPanel("In/Completed icon view");
 		{
-			ConfigWidget(f_ShowCompleted, "Show completed points.");
+			ConfigWidget(f_ShowCompleted, u8"显示完成的标点.");
 			ConfigWidget(f_CompletePointTransparency, 0.01f, 0.0f, 1.0f, "Completed points transparency.");
-			ConfigWidget(f_ShowInCompleted, "Show in-completed points.");
+			ConfigWidget(f_ShowInCompleted, u8"显示未完成的点.");
 			ConfigWidget(f_InCompletePointTransparency, 0.01f, 0.0f, 1.0f, "In-completed points transparency.");
 		}
 		ImGui::EndGroupPanel();
