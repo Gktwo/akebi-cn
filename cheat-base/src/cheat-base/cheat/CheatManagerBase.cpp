@@ -45,7 +45,7 @@ namespace cheat
 
 		ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
 
-		if (!ImGui::Begin(u8"Akebi-GC 3.0.50 OS 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
+		if (!ImGui::Begin(u8"Akebi-GC 3.0.51 OS 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
 		{
 			ImGui::End();
 			return;
