@@ -53,7 +53,10 @@ namespace cheat
 
 		ImGui::BeginGroup();
 
+
 		if (ImGui::Checkbox(u8"锁定鼠标/键盘", &m_IsBlockingInput))
+
+
 		{
 			renderer::SetInputLock(this, m_IsBlockingInput);
 		}
@@ -169,7 +172,7 @@ namespace cheat
 
 		ImGui::SameLine();
 
-		if (ImGui::SmallButton("Del"))
+		if (ImGui::SmallButton(u8"删除"))
 			config::RemoveProfile(profileName);
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Delete");
@@ -288,6 +291,7 @@ namespace cheat
 		if (ImGui::BeginTable("activesTable", 1, tabFlags))
 		{
 			ImGui::TableSetupColumn(u8"已激活功能");
+
 			ImGui::TableHeadersRow();
 
 			int row = 0;

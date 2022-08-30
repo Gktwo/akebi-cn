@@ -153,7 +153,7 @@ namespace renderer
 			if (_customFontData.data != NULL)
 			{
 				newFont = io.Fonts->AddFontFromMemoryTTF(_customFontData.data, _customFontData.size, size_pixels, NULL, io.Fonts->GetGlyphRangesChineseFull());
-			}
+			}			
 			if (newFont == nullptr)
 				return;
 

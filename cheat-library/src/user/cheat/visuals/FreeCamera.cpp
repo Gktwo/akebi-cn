@@ -1,6 +1,7 @@
 #include "pch-il2cpp.h"
 #include "FreeCamera.h"
 
+#include <math.h>
 #include <helpers.h>
 #include <cheat/events.h>
 #include <cheat/game/EntityManager.h>
@@ -18,7 +19,7 @@ namespace cheat::feature
 	app::Component_1* mainCam_Camera;
 	app::Vector3 targetPosition;
 	app::Vector3 smoothPosition;
-	float smoothFOV;
+	float smoothFOV, focalLength = 0;
 	bool isEnabled = false;
 
 	FreeCamera::FreeCamera() : Feature(),
@@ -31,7 +32,10 @@ namespace cheat::feature
 		NF(f_RollSpeed, "Roll Speed", "Visuals::FreeCamera", 1.0f),
 		NF(f_FOVSpeed, "FOV Speed", "Visuals::FreeCamera", 0.1f),
 		NF(f_FOV, "Field of View", "Visuals::FreeCamera", 45.0f),
-		NF(f_Smoothing, "Smoothing", "Visuals::FreeCamera", 1.0f),
+		NF(f_MovSmoothing, "Movement Smoothing", "Visuals::FreeCamera", 1.0f),
+		NF(f_LookSmoothing, "Look Smoothing", "Visuals::FreeCamera", 1.0f),
+		NF(f_RollSmoothing, "Roll Smoothing", "Visuals::FreeCamera", 1.0f),
+		NF(f_FovSmoothing, "FOV Smoothing", "Visuals::FreeCamera", 1.0f),
 		NF(f_Forward, "Forward", "Visuals::FreeCamera", Hotkey('W')),
 		NF(f_Backward, "Backward", "Visuals::FreeCamera", Hotkey('S')),
 		NF(f_Left, "Left", "Visuals::FreeCamera", Hotkey('A')),
@@ -71,11 +75,18 @@ namespace cheat::feature
 			ImGui::BeginGroupPanel(u8"设置");
 			{
 				ConfigWidget(u8"移动速度", f_Speed, 0.01f, 0.01f, 1000.0f);
-				ConfigWidget(u8"Look Sensitivity", f_LookSens, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"视角灵敏度", f_LookSens, 0.01f, 0.01f, 100.0f);
 				ConfigWidget(u8"旋转速度", f_RollSpeed, 0.01f, 0.01f, 100.0f);
 				ConfigWidget(u8"视野速度", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
-				ConfigWidget(u8"视野范围", f_FOV, 0.1f, 0.01f, 200.0f);
-				ConfigWidget(u8"Smoothing", f_Smoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
+				ConfigWidget(u8"视野范围", f_FOV, 0.1f, 0.01f, 200.0f, u8"垂直视场变化。水平视场取决于视口的纵横比");
+				if (ImGui::Button(u8"转换FoV到35mm FF焦距"))
+					focalLength = 24 / (2 * tan((f_FOV * 3.14159265) / (2 * 180))); // FocalLength = (vertical) sensor size / 2 * tan( 2*(vertical) FoV * Pi / 180)  Remember to convert degree to radian.  
+				ImGui::Text(u8"焦距: %f", focalLength);
+				ImGui::Spacing();
+				ConfigWidget(u8"运动平滑", f_MovSmoothing, 0.01f, 0.001f, 1.0f, u8"低=流畅");
+				ConfigWidget(u8"灵敏度平滑", f_LookSmoothing, 0.01f, 0.001f, 1.0f, u8"低=流畅");
+				ConfigWidget(u8"旋转平滑", f_RollSmoothing, 0.01f, 0.001f, 1.0f, u8"低=流畅");
+				ConfigWidget(u8"视野平滑", f_FovSmoothing, 0.01f, 0.001f, 1.0f, u8"低=流畅");
 			}
 			ImGui::EndGroupPanel();
 
@@ -127,11 +138,11 @@ namespace cheat::feature
 			roll = t_eulerAngles.z;
 		}
 
-		void LerpTowards(CameraRotation target, float rotationLerpPct)
+		void LerpTowards(CameraRotation target, float lookRotationLerpPct, float rollRotationLerpPct)
 		{
-			yaw = app::Mathf_Lerp(yaw, target.yaw, rotationLerpPct, nullptr);
-			pitch = app::Mathf_Lerp(pitch, target.pitch, rotationLerpPct, nullptr);
-			roll = app::Mathf_Lerp(roll, target.roll, rotationLerpPct, nullptr);
+			yaw = app::Mathf_Lerp(yaw, target.yaw, lookRotationLerpPct, nullptr);
+			pitch = app::Mathf_Lerp(pitch, target.pitch, lookRotationLerpPct, nullptr);
+			roll = app::Mathf_Lerp(roll, target.roll, rollRotationLerpPct, nullptr);
 		}
 
 		void UpdateTransform(app::Transform* t)
@@ -204,11 +215,11 @@ namespace cheat::feature
 		// Commit the rotation changes to the transform
 		currentRotation.UpdateTransform(freeCam_Transform);
 
-		smoothPosition = app::Vector3_Lerp(freeCam_Transform_position, targetPosition, settings.f_Smoothing, nullptr);
+		smoothPosition = app::Vector3_Lerp(freeCam_Transform_position, targetPosition, settings.f_MovSmoothing, nullptr);
 		app::Transform_set_position(freeCam_Transform, smoothPosition, nullptr);
-		smoothFOV = app::Mathf_Lerp(app::Camera_get_fieldOfView(reinterpret_cast<app::Camera*>(freeCam_Camera), nullptr), settings.f_FOV, settings.f_Smoothing, nullptr);
+		smoothFOV = app::Mathf_Lerp(app::Camera_get_fieldOfView(reinterpret_cast<app::Camera*>(freeCam_Camera), nullptr), settings.f_FOV, settings.f_FovSmoothing, nullptr);
 		app::Camera_set_fieldOfView(reinterpret_cast<app::Camera*>(freeCam_Camera), smoothFOV, nullptr);
-		currentRotation.LerpTowards(targetRotation, settings.f_Smoothing);
+		currentRotation.LerpTowards(targetRotation, settings.f_LookSmoothing, settings.f_RollSmoothing);
 	}
 
 	void DisableFreeCam()
