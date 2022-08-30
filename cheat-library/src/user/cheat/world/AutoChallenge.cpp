@@ -27,7 +27,6 @@ namespace cheat::feature
 	{
 		ConfigWidget(u8"开/关", f_Enabled, "Auto collect time challenge item");
 		ImGui::SameLine();
-
 		ConfigWidget(u8"销毁炸药桶", f_BombDestroy, u8"销毁炸药桶");
 		ImGui::SameLine();
 		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"风险未知");

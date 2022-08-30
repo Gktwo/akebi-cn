@@ -274,7 +274,7 @@ namespace cheat::feature
 		ImGui::TextColored(ImColor(255, 165, 0, 255), "Wow, you found unknown chest names. This means this chest type has no filter yet.");
 		TextURL("Please contribute to issue on GitHub", "https://github.com/CallowBlack/genshin-cheat/issues/48", false, false);
 		
-		if (ImGui::Button(u8"∏¥÷∆µΩºÙ«–∞Â"))
+		if (ImGui::Button("Copy to clipboard"))
 		{
 			ImGui::LogToClipboard();
 

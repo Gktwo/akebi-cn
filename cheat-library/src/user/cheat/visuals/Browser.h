@@ -9,8 +9,6 @@ namespace cheat::feature
 	{
 	public:
 		config::Field<config::Toggle<Hotkey>> f_Enabled;
-		config::Field<float> f_planeWidth;
-		config::Field<float> f_planeHeight;
 
 		static Browser& GetInstance();
 		const FeatureGUIInfo& GetGUIInfo() const override;

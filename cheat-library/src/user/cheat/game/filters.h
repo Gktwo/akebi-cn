@@ -280,7 +280,7 @@ namespace cheat::game::filters
 		extern SimpleFilter KalpalataLotus;
 		extern SimpleFilter NilotpalaLotus;
 		extern SimpleFilter Padisarah;
-		extern SimpleFilter RukkhashavaMushroom;
+		extern SimpleFilter RukkhashavaMushrooms;
 		extern SimpleFilter SumeruRose;
 		extern SimpleFilter Viparyas;
 		extern SimpleFilter ZaytunPeach;

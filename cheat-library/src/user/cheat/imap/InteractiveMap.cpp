@@ -20,29 +20,29 @@ namespace cheat::feature
 {
 
 	InteractiveMap::InteractiveMap() : Feature(),
-		NFEX(f_Enabled, u8"交互式地图", "m_InteractiveMap", "InteractiveMap", false, false),
-		NF(f_SeparatedWindows, u8"分离窗口", "InteractiveMap", true),
-		NF(f_CompletionLogShow, u8"完成日志显示", "InteractiveMap", false),
+		NFEX(f_Enabled, "Interactive map", "m_InteractiveMap", "InteractiveMap", false, false),
+		NF(f_SeparatedWindows, "Separated windows", "InteractiveMap", true),
+		NF(f_CompletionLogShow, "Completion log show", "InteractiveMap", false),
 
-		NFS(f_STFixedPoints, u8"固定的标点", "InteractiveMap", SaveAttachType::Global),
-		NFS(f_STCustomPoints, u8"自定义标点", "InteractiveMap", SaveAttachType::Global),
-		NFS(f_STCompletedPoints, u8"保存完成的标点", "InteractiveMap", SaveAttachType::Account),
+		NFS(f_STFixedPoints, "Fixed points", "InteractiveMap", SaveAttachType::Global),
+		NFS(f_STCustomPoints, "Custom points", "InteractiveMap", SaveAttachType::Global),
+		NFS(f_STCompletedPoints, "Save completed points", "InteractiveMap", SaveAttachType::Account),
 
-		NF(f_IconSize, u8"图标大小", "InteractiveMap", 20.0f),
-		NF(f_MinimapIconSize, u8"小地图图标大小", "InteractiveMap", 14.0f),
+		NF(f_IconSize, "Icon size", "InteractiveMap", 20.0f),
+		NF(f_MinimapIconSize, "Minimap icon size", "InteractiveMap", 14.0f),
 		NF(f_DynamicSize, "Dynamic size", "InteractiveMap", false),
-		NF(f_ShowHDIcons, u8"使用高清图标", "InteractiveMap", false),
+		NF(f_ShowHDIcons, "Show HD icons", "InteractiveMap", false),
 
-		NF(f_ShowCompleted, u8"显示完成的", "InteractiveMap", false),
-		NF(f_CompletePointTransparency, u8"完成点透明度", "InteractiveMap", 0.5f),
-		NF(f_ShowInCompleted, u8"显示未完成的", "InteractiveMap", true),
-		NF(f_InCompletePointTransparency, u8"未完成点透明度", "InteractiveMap", 1.0f),
+		NF(f_ShowCompleted, "Show completed", "InteractiveMap", false),
+		NF(f_CompletePointTransparency, "Completed point transparency", "InteractiveMap", 0.5f),
+		NF(f_ShowInCompleted, "Show in-completed", "InteractiveMap", true),
+		NF(f_InCompletePointTransparency, "In-completed point transparency", "InteractiveMap", 1.0f),
 
-		NF(f_AutoDetectNewItems, u8"检测到新的物品", "InteractiveMap", true),
-		NF(f_AutoFixItemPositions, u8"修复物品位置", "InteractiveMap", true),
-		NF(f_ObjectCheckOnlyShowed, u8"仅显示探测到的", "InteractMap", true),
-		NF(f_ObjectDetectRange, u8"探测范围", "InteractiveMap", 20.0f),
-		NF(f_CheckObjectsDelay, u8"探测延迟 (ms)", "InteractiveMap", 2000),
+		NF(f_AutoDetectNewItems, "Detect new items", "InteractiveMap", true),
+		NF(f_AutoFixItemPositions, "Fix item positions", "InteractiveMap", true),
+		NF(f_ObjectCheckOnlyShowed, "Detect only showed", "InteractMap", true),
+		NF(f_ObjectDetectRange, "Detect range", "InteractiveMap", 20.0f),
+		NF(f_CheckObjectsDelay, "Detect delay (ms)", "InteractiveMap", 2000),
 
 		NF(f_AutoDetectGatheredItems, "Detect gathered items", "InteractiveMap", true),
 		NF(f_GatheredItemsDetectRange, "Detect range", "InteractiveMap", 20.0f),
@@ -114,9 +114,9 @@ namespace cheat::feature
 
 	void InteractiveMap::DrawMenu()
 	{
-		ImGui::BeginGroupPanel(u8"综合的");
+		ImGui::BeginGroupPanel("General");
 		{
-			ConfigWidget(u8"开/关", f_Enabled);
+			ConfigWidget("Enabled", f_Enabled);
 			ConfigWidget(f_SeparatedWindows, "Config and filters will be in separate windows.");
 			if (ConfigWidget(f_STCompletedPoints, "Save scope for completed items."))
 			{
@@ -125,7 +125,7 @@ namespace cheat::feature
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel(u8"图标视图");
+		ImGui::BeginGroupPanel("Icon view");
 		{
 			ConfigWidget(f_IconSize, 0.01f, 4.0f, 100.0f);
 			ConfigWidget(f_MinimapIconSize, 0.01f, 4.0f, 100.0f);
@@ -136,9 +136,9 @@ namespace cheat::feature
 
 		ImGui::BeginGroupPanel("In/Completed icon view");
 		{
-			ConfigWidget(f_ShowCompleted, u8"显示完成的标点.");
+			ConfigWidget(f_ShowCompleted, "Show completed points.");
 			ConfigWidget(f_CompletePointTransparency, 0.01f, 0.0f, 1.0f, "Completed points transparency.");
-			ConfigWidget(f_ShowInCompleted, u8"显示未完成的点.");
+			ConfigWidget(f_ShowInCompleted, "Show in-completed points.");
 			ConfigWidget(f_InCompletePointTransparency, 0.01f, 0.0f, 1.0f, "In-completed points transparency.");
 		}
 		ImGui::EndGroupPanel();
@@ -148,8 +148,8 @@ namespace cheat::feature
 			ConfigWidget(f_AutoFixItemPositions, "Do fix positions to nearest to point.\n"
 				"Only items with green line support this function.");
 
-			ConfigWidget(f_AutoDetectNewItems, u8"允许检测交互地图数据中没有的项.\n"
-				u8"只有带绿线的项目支持此功能.");
+			ConfigWidget(f_AutoDetectNewItems, "Enables detecting items what are not in interactive map data.\n"
+				"Only items with green line support this function.");
 
 			ConfigWidget(f_ObjectCheckOnlyShowed, "Detect objects only for showed filters.");
 
@@ -188,9 +188,9 @@ namespace cheat::feature
 	{
 		const auto sceneID = game::GetCurrentMapSceneID();
 		if (m_ScenesData.count(sceneID) == 0)
-			ImGui::Text(u8"抱歉. 不支持当前场景.");
+			ImGui::Text("Sorry. Current scene is not supported.");
 		
-		ImGui::InputText(u8"搜索", &m_SearchText); ImGui::SameLine();
+		ImGui::InputText("Search", &m_SearchText); ImGui::SameLine();
 		HelpMarker(
 			"This page following with filters for items.\n"
 			"Items what was activated will be appear on mini/global map. (Obviously)\n"
@@ -1793,6 +1793,7 @@ namespace cheat::feature
 		INIT_FILTER(featured, Geoculus);
 		INIT_FILTER(featured, KeySigil);
 		INIT_FILTER(featured, Lumenspar);
+		//INIT_FILTER(featured, KeySigil);
 		//INIT_FILTER(featured, ShrineOfDepth);
 		//INIT_FILTER(featured, TimeTrialChallenge);
 		//INIT_FILTER(guide, CampfireTorch);
@@ -1855,10 +1856,8 @@ namespace cheat::feature
 		INIT_FILTER(plant, FlamingFlowerStamen);
 		INIT_FILTER(plant, FluorescentFungus);
 		INIT_FILTER(plant, GlazeLily);
-		INIT_FILTER(plant, HarraFruit);
 		INIT_FILTER(plant, Horsetail);
 		INIT_FILTER(plant, JueyunChili);
-		INIT_FILTER(plant, KalpalataLotus);
 		INIT_FILTER(plant, LavenderMelon);
 		INIT_FILTER(plant, LotusHead);
 		INIT_FILTER(plant, Matsutake);
@@ -1866,13 +1865,10 @@ namespace cheat::feature
 		INIT_FILTER(plant, MistFlowerCorolla);
 		INIT_FILTER(plant, Mushroom);
 		INIT_FILTER(plant, NakuWeed);
-		INIT_FILTER(plant, NilotpalaLotus);
-		INIT_FILTER(plant, Padisarah);
 		INIT_FILTER(plant, PhilanemoMushroom);
 		INIT_FILTER(plant, Pinecone);
 		INIT_FILTER(plant, Qingxin);
 		INIT_FILTER(plant, Radish);
-		INIT_FILTER(plant, RukkhashavaMushroom);
 		INIT_FILTER(plant, SakuraBloom);
 		INIT_FILTER(plant, SangoPearl);
 		INIT_FILTER(plant, SeaGanoderma);
@@ -1880,15 +1876,12 @@ namespace cheat::feature
 		INIT_FILTER(plant, SilkFlower);
 		INIT_FILTER(plant, SmallLampGrass);
 		INIT_FILTER(plant, Snapdragon);
-		INIT_FILTER(plant, SumeruRose);
 		INIT_FILTER(plant, Sunsettia);
 		INIT_FILTER(plant, SweetFlower);
 		INIT_FILTER(plant, Valberry);
 		INIT_FILTER(plant, Violetgrass);
-		INIT_FILTER(plant, Viparyas);
 		INIT_FILTER(plant, WindwheelAster);
 		INIT_FILTER(plant, Wolfhook);
-		INIT_FILTER(plant, ZaytunPeach);
 		//INIT_FILTER(puzzle, AncientRime);
 		//INIT_FILTER(puzzle, BakeDanuki);
 		//INIT_FILTER(puzzle, BloattyFloatty);

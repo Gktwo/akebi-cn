@@ -169,7 +169,7 @@ namespace cheat
 
 		ImGui::SameLine();
 
-		if (ImGui::SmallButton(u8"É¾³ý"))
+		if (ImGui::SmallButton("Del"))
 			config::RemoveProfile(profileName);
 		if (ImGui::IsItemHovered())
 			ImGui::SetTooltip("Delete");
