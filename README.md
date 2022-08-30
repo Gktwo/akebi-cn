@@ -10,6 +10,8 @@
 	<a href="https://discord.gg/MmV8hNZB9S"><img src="https://img.shields.io/discord/440536354544156683?label=Discord&logo=discord&style=for-the-badge&color=blueviolet"></a>
 </p>
 
+[EN](README.md) | [简中](README_zh-Hans.md) | [繁中](README_zh-Hant.md)
+
 ---
 
 <h1 align="center">Getting Started</h1>
@@ -18,7 +20,7 @@
 It is recommended to use [Visual Studio 2022.](https://visualstudio.microsoft.com/)
 As well as setting up **`cheat-library`** as startup project.
 **The following is a recommended procedure, but others may be used.**
-1. Clone repository with `git clone --recurse-submodules https://github.com/Akebi-Group/Akebi-GC.git`
+1. Clone repository with `git clone -b chinese --recurse-submodules https://github.com/Akebi-Group/Akebi-GC.git`
 1. Open `Akebi-GC/akebi-gc.sln`
 1. Build solution `akebi-gc.sln`.
 
@@ -71,9 +73,10 @@ As well as setting up **`cheat-library`** as startup project.
 
 #### World
 - Auto Seelie
+- Open Team Immediately
 - Dumb Enemies
 - Freeze Enemies
-- Auto Destroy: Ores/Shields/Doodas/Plants
+- Auto Destroy: Ores/Shields/Doodads/Plants
 - Auto Loot/Open Chests
 - Pickup Range
 - Auto Talk
