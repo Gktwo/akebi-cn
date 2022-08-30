@@ -12,7 +12,7 @@ namespace cheat::feature
     static std::string f_URL;
 
     Browser::Browser() : Feature(),
-        NFEX(f_Enabled, "Browser", "Browser", "Visuals", false, false),
+        NFEX(f_Enabled, u8"浏览器", "Browser", "Visuals", false, false),
         NF(f_planeWidth, "Browser", "Visuals", 1.0f),
         NF(f_planeHeight, "Browser", "Visuals", 1.0f),
         toBeUpdate(), nextUpdate(0)
@@ -22,16 +22,16 @@ namespace cheat::feature
 
     const FeatureGUIInfo& Browser::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"�����", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"浏览器", "Visuals", false };
         return info;
     }
 
     void Browser::DrawMain()
     {
-        ConfigWidget(u8"�����", f_Enabled, "Create in-game Browser");
-        ImGui::InputText("URL", &f_URL);
-        ConfigWidget("Browser width", f_planeWidth, 0.1f, 0.5f, 20.0f);
-        ConfigWidget("Browser height", f_planeHeight, 0.1f, 0.5f, 20.0f);
+        ConfigWidget(u8"浏览器", f_Enabled, u8"创建一个浏览器窗口在游戏内");
+        ImGui::InputText(u8"链接", &f_URL);
+        ConfigWidget(u8"宽度", f_planeWidth, 0.1f, 0.5f, 20.0f);
+        ConfigWidget(u8"高度", f_planeHeight, 0.1f, 0.5f, 20.0f);
     }
 
     bool Browser::NeedStatusDraw() const
@@ -41,7 +41,7 @@ namespace cheat::feature
 
     void Browser::DrawStatus()
     {
-        ImGui::Text(u8"�����");
+        ImGui::Text(u8"浏览器");
     }
 
     Browser& Browser::GetInstance()
