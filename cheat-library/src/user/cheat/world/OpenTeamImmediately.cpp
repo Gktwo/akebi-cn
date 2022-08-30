@@ -27,7 +27,7 @@ namespace cheat::feature
 
 	void OpenTeamImmediately::DrawMain()
 	{
-		ConfigWidget(u8"快速打开配队列表", f_Enabled, u8"不等倒计时就立刻打开队伍配置.");
+		ConfigWidget("Open Team Immediately", f_Enabled, "Open team immediately without waiting for count down.");
 	}
 
 	bool OpenTeamImmediately::NeedStatusDraw() const
@@ -37,7 +37,7 @@ namespace cheat::feature
 
 	void OpenTeamImmediately::DrawStatus()
 	{
-		ImGui::Text(u8"快速配队");
+		ImGui::Text("OpenTeamImmediately");
 	}
 
 	OpenTeamImmediately& OpenTeamImmediately::GetInstance()
