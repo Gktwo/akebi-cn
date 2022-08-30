@@ -53,18 +53,18 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& FreeCamera::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"è‡ªç”±ç›¸æœº", "Visuals", true };
+		static const FeatureGUIInfo info{ u8"×ÔÓÉÏà»ú", "Visuals", true };
 		return info;
 	}
 
 	void FreeCamera::DrawMain()
 	{
-		ConfigWidget(u8"å¼€/å…³", f_Enabled);
-		ConfigWidget(u8"å†»ç»“è§’è‰²åŠ¨ä½œ", f_FreezeAnimation, u8"å†»ç»“è§’è‰²åŠ¨ä½œ.");
+		ConfigWidget(u8"¿ª/¹Ø", f_Enabled);
+		ConfigWidget(u8"¶³½á½ÇÉ«¶¯×÷", f_FreezeAnimation, u8"¶³½á½ÇÉ«¶¯×÷.");
 		if (f_Enabled)
 		{
-			ConfigWidget(u8"åˆ‡æ¢ä¼¤å®³è¦†ç›–", f_DamageOverlay, "Remove damage output overlay");
-			ConfigWidget(u8"åˆ‡æ¢æ•Œäººçš„HPè¦†ç›–", f_HpOverlay, "Remove enemy HP overlay");
+			ConfigWidget(u8"ÇĞ»»ÉËº¦¸²¸Ç", f_DamageOverlay, "Remove damage output overlay");
+			ConfigWidget(u8"ÇĞ»»µĞÈËµÄHP¸²¸Ç", f_HpOverlay, "Remove enemy HP overlay");
 		}
 
 		if (ImGui::BeginTable("FreeCameraDrawTable", 1, ImGuiTableFlags_NoBordersInBody))
@@ -72,37 +72,37 @@ namespace cheat::feature
 			ImGui::TableNextRow();
 			ImGui::TableSetColumnIndex(0);
 
-			ImGui::BeginGroupPanel(u8"è®¾ç½®");
+			ImGui::BeginGroupPanel(u8"ÉèÖÃ");
 			{
-				ConfigWidget(u8"ç§»åŠ¨é€Ÿåº¦", f_Speed, 0.01f, 0.01f, 1000.0f);
-				ConfigWidget(u8"è§†è§’çµæ•åº¦", f_LookSens, 0.01f, 0.01f, 100.0f);
-				ConfigWidget(u8"æ—‹è½¬é€Ÿåº¦", f_RollSpeed, 0.01f, 0.01f, 100.0f);
-				ConfigWidget(u8"è§†é‡é€Ÿåº¦", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
-				ConfigWidget(u8"è§†é‡èŒƒå›´", f_FOV, 0.1f, 0.01f, 200.0f, u8"å‚ç›´è§†åœºå˜åŒ–ã€‚æ°´å¹³è§†åœºå–å†³äºè§†å£çš„çºµæ¨ªæ¯”");
-				if (ImGui::Button(u8"è½¬æ¢FoVåˆ°35mm FFç„¦è·"))
+				ConfigWidget(u8"ÒÆ¶¯ËÙ¶È", f_Speed, 0.01f, 0.01f, 1000.0f);
+				ConfigWidget("Look Sensitivity", f_LookSens, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"Ğı×ªËÙ¶È", f_RollSpeed, 0.01f, 0.01f, 100.0f);
+				ConfigWidget(u8"ÊÓÒ°ËÙ¶È", f_FOVSpeed, 0.01f, 0.01f, 100.0f);
+				ConfigWidget("Field of View", f_FOV, 0.1f, 0.01f, 200.0f, "Changes Vertical FoV. Horizontal FoV depends on the viewport's aspect ratio");
+				if (ImGui::Button("Convert FoV to 35mm FF focal length"))
 					focalLength = 24 / (2 * tan((f_FOV * 3.14159265) / (2 * 180))); // FocalLength = (vertical) sensor size / 2 * tan( 2*(vertical) FoV * Pi / 180)  Remember to convert degree to radian.  
-				ImGui::Text(u8"ç„¦è·: %f", focalLength);
+				ImGui::Text("Focal length: %f", focalLength);
 				ImGui::Spacing();
-				ConfigWidget(u8"è¿åŠ¨å¹³æ»‘", f_MovSmoothing, 0.01f, 0.001f, 1.0f, u8"ä½=æµç•…");
-				ConfigWidget("Look Smoothing", f_LookSmoothing, 0.01f, 0.001f, 1.0f, u8"ä½=æµç•…");
-				ConfigWidget(u8"æ—‹è½¬å¹³æ»‘", f_RollSmoothing, 0.01f, 0.001f, 1.0f, u8"ä½=æµç•…");
-				ConfigWidget(u8"è§†é‡å¹³æ»‘", f_FovSmoothing, 0.01f, 0.001f, 1.0f, u8"ä½=æµç•…");
+				ConfigWidget("Movement Smoothing", f_MovSmoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
+				ConfigWidget("Look Smoothing", f_LookSmoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
+				ConfigWidget("Roll Smoothing", f_RollSmoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
+				ConfigWidget("FOV Smoothing", f_FovSmoothing, 0.01f, 0.001f, 1.0f, "Lower = Smoother");
 			}
 			ImGui::EndGroupPanel();
 
-			ImGui::BeginGroupPanel(u8"çƒ­é”®");
+			ImGui::BeginGroupPanel(u8"ÈÈ¼ü");
 			{
-				ConfigWidget(u8"å‘å‰", f_Forward, true);
-				ConfigWidget(u8"å‘å", f_Backward, true);
-				ConfigWidget(u8"å‘å·¦", f_Left, true);
-				ConfigWidget(u8"å‘å³", f_Right, true);
-				ConfigWidget(u8"å‘ä¸Š", f_Up, true);
-				ConfigWidget(u8"å‘ä¸‹", f_Down, true);
-				ConfigWidget(u8"å·¦è½¬", f_LeftRoll, true);
-				ConfigWidget(u8"å³è½¬", f_RightRoll, true);
-				ConfigWidget(u8"é‡ç½®", f_ResetRoll, true);
-				ConfigWidget(u8"å¢åŠ è§†é‡", f_IncFOV, true);
-				ConfigWidget(u8"å‡å°‘è§†é‡", f_DecFOV, true);
+				ConfigWidget(u8"ÏòÇ°", f_Forward, true);
+				ConfigWidget(u8"Ïòºó", f_Backward, true);
+				ConfigWidget(u8"Ïò×ó", f_Left, true);
+				ConfigWidget(u8"ÏòÓÒ", f_Right, true);
+				ConfigWidget(u8"ÏòÉÏ", f_Up, true);
+				ConfigWidget(u8"ÏòÏÂ", f_Down, true);
+				ConfigWidget(u8"×ó×ª", f_LeftRoll, true);
+				ConfigWidget(u8"ÓÒ×ª", f_RightRoll, true);
+				ConfigWidget(u8"ÖØÖÃ", f_ResetRoll, true);
+				ConfigWidget(u8"Ôö¼ÓÊÓÒ°", f_IncFOV, true);
+				ConfigWidget(u8"¼õÉÙÊÓÒ°", f_DecFOV, true);
 			}
 			ImGui::EndGroupPanel();
 			ImGui::EndTable();
@@ -116,7 +116,7 @@ namespace cheat::feature
 
 	void FreeCamera::DrawStatus()
 	{
-		ImGui::Text(u8"è‡ªç”±ç›¸æœº");
+		ImGui::Text(u8"×ÔÓÉÏà»ú");
 	}
 
 	FreeCamera& FreeCamera::GetInstance()
