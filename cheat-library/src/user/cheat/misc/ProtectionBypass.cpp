@@ -19,7 +19,7 @@ namespace cheat::feature
 	}
 
     ProtectionBypass::ProtectionBypass() : Feature(),
-        NFEX(f_Enabled, "Disable Protection", "m_DisableMhyProt", "General", true, false),
+        NFEX(f_Enabled, u8"关闭mhyprot2", "m_DisableMhyProt", "General", true, false),
 		m_CorrectSignatures({})
     {
 		HookManager::install(app::Unity_RecordUserData, RecordUserData_Hook);
@@ -36,12 +36,12 @@ namespace cheat::feature
 		// if (m_Enabled) {
 			LOG_TRACE("Trying to close mhyprot handle.");
 			if (util::CloseHandleByName(L"\\Device\\mhyprot2"))
-				LOG_INFO("The Mhyprot2 handle was successfully closed. Happy hacking!");
+				LOG_INFO(u8"成功关闭myprot2句柄。快乐的黑客!");
 			else
-				LOG_ERROR("Failed to close mhyprot2 handle. Report this Issue and describe it.");
+				LOG_ERROR(u8"关闭myhyprot2句柄失败。报告并描述此问题.");
 		//}
 
-		LOG_DEBUG("Initialized");
+		LOG_DEBUG(u8"初始化");
 	}
 
     const FeatureGUIInfo& ProtectionBypass::GetGUIInfo() const
