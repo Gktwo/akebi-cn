@@ -40,7 +40,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& Debug::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "DebugInfo", "Debug", false };
+        static const FeatureGUIInfo info{ u8"è°ƒè¯•ä¿¡æ¯", "Debug", false };
         return info;
     }
 
@@ -256,7 +256,7 @@ namespace cheat::feature
     {
         auto& manager = game::EntityManager::instance();
 
-        if (ImGui::SmallButton(u8"´«ËÍ"))
+        if (ImGui::SmallButton(u8"ä¼ é€"))
         {
             auto& mapTeleport = MapTeleport::GetInstance();
             mapTeleport.TeleportTo(entity->absolutePosition());
@@ -265,19 +265,19 @@ namespace cheat::feature
             ImGui::SetTooltip("Teleport");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton(u8"ÕÙ¼¯"))
+        if (ImGui::SmallButton(u8"å¬é›†"))
             entity->setRelativePosition(manager.avatar()->relativePosition());
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Summon");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton(u8"ÇıÖğ"))
+        if (ImGui::SmallButton(u8"é©±é€"))
             entity->setRelativePosition({ 0, 0, 0 });
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Banish");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton(u8"¸´ÖÆ"))
+        if (ImGui::SmallButton(u8"å¤åˆ¶"))
             CopyEntityDetailsToClipboard(entity);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Copy Details");
@@ -385,23 +385,23 @@ namespace cheat::feature
     {
         auto& manager = game::EntityManager::instance();
 
-        if (ImGui::Button(u8"´«ËÍµ½×î½ü"))
+        if (ImGui::Button(u8"ä¼ é€åˆ°æœ€è¿‘"))
             TeleportByCondition(entities, Debug::TeleportCondition::Closest);
 
         ImGui::SameLine();
-        if (ImGui::Button(u8"´«ËÍµ½×îÔ¶"))
+        if (ImGui::Button(u8"ä¼ é€åˆ°æœ€è¿œ"))
             TeleportByCondition(entities, Debug::TeleportCondition::Farthest);
 
         ImGui::SameLine();
-        if (ImGui::Button(u8"ÕÙ¼¯ËùÓĞ"))
+        if (ImGui::Button(u8"å¬é›†æ‰€æœ‰"))
             SummonEntities(entities);
 
         ImGui::SameLine();
-        if (ImGui::Button(u8"ÇıÖğËùÓĞ"))
+        if (ImGui::Button(u8"é©±é€æ‰€æœ‰"))
             BanishEntities(entities);
 
         ImGui::SameLine();
-        if (ImGui::Button(u8"¸´ÖÆËùÓĞÏêÏ¸ĞÅÏ¢"))
+        if (ImGui::Button(u8"å¤åˆ¶æ‰€æœ‰è¯¦ç»†ä¿¡æ¯"))
             CopyEntityDetailsToClipboard(entities);
 
         ImGui::SameLine();
@@ -411,7 +411,7 @@ namespace cheat::feature
 
         if (csvFriendly) {
             ImGui::SameLine();
-            ImGui::Checkbox(u8"°üÀ¨±êÌâ", &includeHeaders);
+            ImGui::Checkbox(u8"åŒ…æ‹¬æ ‡é¢˜", &includeHeaders);
             if (ImGui::IsItemHovered())
                 ImGui::SetTooltip("Includes headers when copying.");
         }
@@ -428,14 +428,14 @@ namespace cheat::feature
             | ImGuiTableFlags_ScrollY;
         if (ImGui::BeginTable("EntityTable", 8, flags, ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * clipSize), 0.0f))
         {
-            ImGui::TableSetupColumn(u8"ÃüÁî", ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 0.0, 0);
+            ImGui::TableSetupColumn(u8"å‘½ä»¤", ImGuiTableColumnFlags_NoSort | ImGuiTableColumnFlags_WidthFixed, 0.0, 0);
             ImGui::TableSetupColumn("ID", ImGuiTableColumnFlags_WidthFixed, 0.0f, 1);
             ImGui::TableSetupColumn(u8"gadgetID", ImGuiTableColumnFlags_WidthFixed, 0.0f, 2);
-            ImGui::TableSetupColumn(u8"Ãû³Æ", ImGuiTableColumnFlags_WidthFixed, 0.0f, 3);
-            ImGui::TableSetupColumn(u8"¾àÀë", ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_PreferSortAscending | ImGuiTableColumnFlags_WidthFixed, 0.0, 4);
-            ImGui::TableSetupColumn(u8"×ø±ê.x", ImGuiTableColumnFlags_WidthFixed, 0.0, 5);
-            ImGui::TableSetupColumn(u8"×ø±ê.y", ImGuiTableColumnFlags_WidthFixed, 0.0, 6);
-            ImGui::TableSetupColumn(u8"×ø±ê.z", ImGuiTableColumnFlags_WidthFixed, 0.0, 7);
+            ImGui::TableSetupColumn(u8"åç§°", ImGuiTableColumnFlags_WidthFixed, 0.0f, 3);
+            ImGui::TableSetupColumn(u8"è·ç¦»", ImGuiTableColumnFlags_DefaultSort | ImGuiTableColumnFlags_PreferSortAscending | ImGuiTableColumnFlags_WidthFixed, 0.0, 4);
+            ImGui::TableSetupColumn(u8"åæ ‡.x", ImGuiTableColumnFlags_WidthFixed, 0.0, 5);
+            ImGui::TableSetupColumn(u8"åæ ‡.y", ImGuiTableColumnFlags_WidthFixed, 0.0, 6);
+            ImGui::TableSetupColumn(u8"åæ ‡.z", ImGuiTableColumnFlags_WidthFixed, 0.0, 7);
             ImGui::TableSetupScrollFreeze(0, 1);
             ImGui::TableHeadersRow();
 
@@ -518,41 +518,41 @@ namespace cheat::feature
         ImGuiContext& g = *GImGui;
         ImGuiIO& io = g.IO;
 
-        ImGui::Text(u8"ÊµÌå¼ÆÊı %d", entities.size());
+        ImGui::Text(u8"å®ä½“è®¡æ•° %d", entities.size());
 
         ImGui::Checkbox("## Enable Object Name Filter", &useObjectNameFilter); ImGui::SameLine();
         if (!useObjectNameFilter)
             ImGui::BeginDisabled();
-        ImGui::InputText(u8"ÊµÌåÃû³ÆÉ¸Ñ¡Æ÷", objectNameFilter, 128);
+        ImGui::InputText(u8"å®ä½“åç§°ç­›é€‰å™¨", objectNameFilter, 128);
         if (!useObjectNameFilter)
             ImGui::EndDisabled();
 
 
-        ImGui::Checkbox(u8"°´°ë¾¶¹ıÂË", &useRadius);
+        ImGui::Checkbox(u8"æŒ‰åŠå¾„è¿‡æ»¤", &useRadius);
         if (!useRadius)
             ImGui::BeginDisabled();
 
         ImGui::SameLine();
         ImGui::PushItemWidth(200.0);
-        ImGui::SliderFloat(u8"°ë¾¶", &radius, 0.0f, 100.0f);
+        ImGui::SliderFloat(u8"åŠå¾„", &radius, 0.0f, 100.0f);
         ImGui::PopItemWidth();
         if (!useRadius)
             ImGui::EndDisabled();
 
         if (ImGui::BeginTabBar("EntityManagerTabBar", tab_bar_flags))
         {
-            if (ImGui::BeginTabItem(u8"ÀàĞÍ¹ıÂËÆ÷"))
+            if (ImGui::BeginTabItem(u8"ç±»å‹è¿‡æ»¤å™¨"))
             {
-                if (ImGui::Button(u8"Ñ¡ÔñËùÓĞ"))
+                if (ImGui::Button(u8"é€‰æ‹©æ‰€æœ‰"))
                     std::fill_n(typeFilters, 0x63, true);
                 ImGui::SameLine();
 
-                if (ImGui::Button(u8"È¡ÏûËùÓĞ"))
+                if (ImGui::Button(u8"å–æ¶ˆæ‰€æœ‰"))
                     std::fill_n(typeFilters, 0x63, false);
                 ImGui::SameLine();
 
                 ImGui::PushItemWidth(100.0);
-                ImGui::SliderInt(u8"À¸Êı", &typeFiltersColCount, 2, 5);
+                ImGui::SliderInt(u8"æ æ•°", &typeFiltersColCount, 2, 5);
                 ImGui::PopItemWidth();
 
                 if (ImGui::BeginTable("Type Filter Table", typeFiltersColCount, ImGuiTableFlags_NoBordersInBody))
@@ -567,21 +567,21 @@ namespace cheat::feature
                 ImGui::EndTabItem();
             }
 
-            if (ImGui::BeginTabItem(u8"ÊµÌåÁĞ±í"))
+            if (ImGui::BeginTabItem(u8"å®ä½“åˆ—è¡¨"))
             {
                 // Checkbox: Group by Type.
-                ImGui::Checkbox(u8"°´ÀàĞÍ·Ö×é", &groupByType);
+                ImGui::Checkbox(u8"æŒ‰ç±»å‹åˆ†ç»„", &groupByType);
                 ImGui::SameLine();
 
                 if (groupByType) {
-                    ImGui::Checkbox(u8"ÏÔÊ¾¿ÕÀàĞÍ", &showEmptyTypes);
+                    ImGui::Checkbox(u8"æ˜¾ç¤ºç©ºç±»å‹", &showEmptyTypes);
                     ImGui::SameLine();
                 }
 
-                ImGui::Checkbox(u8"½öÏÔÊ¾ÉñÍ«", &checkOnlyShells);
+                ImGui::Checkbox(u8"ä»…æ˜¾ç¤ºç¥ç³", &checkOnlyShells);
                 ImGui::SameLine();
 
-                bool sortConditionChanged = ComboEnum(u8"ÅÅĞòÄ£Ê½", &sortCondition);
+                bool sortConditionChanged = ComboEnum(u8"æ’åºæ¨¡å¼", &sortCondition);
 
                 if (entities.size() > 0) {
                     if (groupByType) {
@@ -1235,10 +1235,10 @@ namespace cheat::feature
 
     void Debug::DrawMain()
     {
-        if (ImGui::CollapsingHeader(u8"ÊµÌå¹ÜÀíÆ÷", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"å®ä½“ç®¡ç†å™¨", ImGuiTreeNodeFlags_None))
             DrawEntitiesData();
 
-        if (ImGui::CollapsingHeader(u8"Î»ÖÃ", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"ä½ç½®", ImGuiTreeNodeFlags_None))
         {
             DrawMapManager();
             DrawPositionInfo();
@@ -1253,9 +1253,9 @@ namespace cheat::feature
         //if (ImGui::CollapsingHeader("Interaction manager", ImGuiTreeNodeFlags_None))
         //	DrawInteractionManagerInfo();
 
-        if (ImGui::CollapsingHeader(u8"µØÍ¼¹ÜÀíÆ÷", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"åœ°å›¾ç®¡ç†å™¨", ImGuiTreeNodeFlags_None))
             DrawManagerData();
-        if (ImGui::CollapsingHeader(u8"FPS ¿ÉÊÓ»¯", ImGuiTreeNodeFlags_None))
+        if (ImGui::CollapsingHeader(u8"FPS å¯è§†åŒ–", ImGuiTreeNodeFlags_None))
             DrawFPSGraph();
     }
 
