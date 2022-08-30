@@ -44,12 +44,13 @@ namespace cheat::feature
 		NF(f_ObjectDetectRange, u8"探测范围", "InteractiveMap", 20.0f),
 		NF(f_CheckObjectsDelay, u8"探测延迟 (ms)", "InteractiveMap", 2000),
 
-		NF(f_AutoDetectGatheredItems, u8"Detect range", "InteractiveMap", 20.0f),
+		NF(f_AutoDetectGatheredItems, u8"检测收集的物品", "InteractiveMap", true),
+		NF(f_GatheredItemsDetectRange, u8"检测范围", "InteractiveMap", 20.0f),
 
-		NF(f_CompleteNearestPoint, "Complete nearest point", "InteractiveMap", Hotkey()),
-		NF(f_RevertLatestCompletion, "Revert latest completion", "InteractiveMap", Hotkey()),
-		NF(f_CompleteOnlyViewed, "Complete only showed", "InteractiveMap", true),
-		NF(f_PointFindRange, "Point finding range", "InteractiveMap", 30.0f),
+		NF(f_CompleteNearestPoint, u8"完成最近的点", "InteractiveMap", Hotkey()),
+		NF(f_RevertLatestCompletion, u8"恢复最新的完成", "InteractiveMap", Hotkey()),
+		NF(f_CompleteOnlyViewed, u8"仅显示完成的", "InteractiveMap", true),
+		NF(f_PointFindRange, u8"点寻找范围", "InteractiveMap", 30.0f),
 
 		NFS(f_CustomPointIndex, "Custom point index", "InteractiveMap", 1000000),
 		NFS(f_LastUserID, "Last user id", "InteractiveMap", 0),
