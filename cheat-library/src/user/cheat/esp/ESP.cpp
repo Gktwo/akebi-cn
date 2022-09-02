@@ -21,26 +21,26 @@ namespace cheat::feature
 	ESP::ESP() : Feature(),
 		NF(f_Enabled, "ESP", "ESP", false),
 
-		NF(f_DrawBoxMode, "Draw Mode", "ESP", DrawMode::Box),
-		NF(f_DrawTracerMode, "Tracer Mode", "ESP", DrawTracerMode::Line),
-		NF(f_Fill, "Fill Box/Rectangle/Arrows", "ESP", false),
-		NF(f_FillTransparency, "Fill Transparency", "ESP", 0.5f),
+		NF(f_DrawBoxMode, u8"绘制模式", "ESP", DrawMode::Box),
+		NF(f_DrawTracerMode, u8"跟踪模式", "ESP", DrawTracerMode::Line),
+		NF(f_Fill, u8"填充 方框/矩形/箭头", "ESP", false),
+		NF(f_FillTransparency, u8"填充透明度", "ESP", 0.5f),
 
-		NF(f_ArrowRadius, "Arrow Radius", "ESP", 100.0f),
-		NF(f_OutlineThickness, "Outline Thickness", "ESP", 1.0f),
-		NF(f_TracerSize, "Tracer Size", "ESP", 1.0f),
-		NF(f_MiddleScreenTracer, "Middle Screen Tracer", "ESP", false),
-		NF(f_DrawDistance, "Draw Distance", "ESP", false),
-		NF(f_DrawName, "Draw Name", "ESP", false),
+		NF(f_ArrowRadius, u8"箭头半径", "ESP", 100.0f),
+		NF(f_OutlineThickness, u8"追踪线宽度", "ESP", 1.0f),
+		NF(f_TracerSize, u8"追踪大小", "ESP", 1.0f),
+		NF(f_MiddleScreenTracer, u8"从屏幕中间开始追踪", "ESP", false),
+		NF(f_DrawDistance, u8"绘制距离", "ESP", false),
+		NF(f_DrawName, u8"绘制名称", "ESP", false),
 
-		NF(f_FontSize, "Font Size", "ESP", 12.0f),
-		NF(f_FontOutline, "Font outline", "ESP", true),
-		NF(f_FontOutlineSize, "Font outline size", "ESP", 1.0f),
+		NF(f_FontSize, u8"字体大小", "ESP", 12.0f),
+		NF(f_FontOutline, u8"字体描边", "ESP", true),
+		NF(f_FontOutlineSize, u8"字体描边大小", "ESP", 1.0f),
 
-		NF(f_GlobalFontColor, "Font Color", "ESP", ImColor(255, 255, 255)),
-		NF(f_GlobalBoxColor, "Box Color", "ESP", ImColor(255, 255, 255)),
-		NF(f_GlobalLineColor, "Tracer Color", "ESP", ImColor(255, 255, 255)),
-		NF(f_GlobalRectColor, "Rect Color", "ESP", ImColor(255, 255, 255)),
+		NF(f_GlobalFontColor, u8"字体颜色", "ESP", ImColor(255, 255, 255)),
+		NF(f_GlobalBoxColor, u8"方框颜色", "ESP", ImColor(255, 255, 255)),
+		NF(f_GlobalLineColor, u8"追踪颜色", "ESP", ImColor(255, 255, 255)),
+		NF(f_GlobalRectColor, u8"矩形颜色", "ESP", ImColor(255, 255, 255)),
 
 		NF(f_MinSize, "Min. Entity Size", "ESP", 0.5f),
 		NF(f_Range, "Range", "ESP", 100.0f),
@@ -64,51 +64,51 @@ namespace cheat::feature
 	{
 		if (ImGui::BeginGroupPanel("General", true))
 		{
-			ConfigWidget("ESP Enabled", f_Enabled, "Show filtered object through obstacles.");
-			ConfigWidget("Range (m)", f_Range, 1.0f, 1.0f, 200.0f);
+			ConfigWidget(u8"开关", f_Enabled, u8"无视障碍显示物品位置.");
+			ConfigWidget(u8"范围 (m)", f_Range, 1.0f, 1.0f, 200.0f);
 
-			ConfigWidget(f_DrawBoxMode, "Select the mode of box drawing.");
-			ConfigWidget(f_DrawTracerMode, "Select the mode of tracer drawing.");
+			ConfigWidget(u8"绘制模式", f_DrawBoxMode, u8"选择绘制模式.");
+			ConfigWidget(u8"追踪模式", f_DrawTracerMode, u8"选择跟踪模式.");
 
 			ConfigWidget(f_Fill);
-			ConfigWidget(f_FillTransparency, 0.01f, 0.0f, 1.0f, "Transparency of filled part.");
-			ConfigWidget(f_MiddleScreenTracer, "Draw tracer from middle part of the screen.");
+			ConfigWidget(u8"方框填充透明度", f_FillTransparency, 0.01f, 0.0f, 1.0f, u8"填充绘制方框的透明度.");
+			ConfigWidget(f_MiddleScreenTracer, u8"从屏幕的中间部分绘制跟踪线条.");
 
 			if (f_DrawTracerMode.value() == DrawTracerMode::OffscreenArrows)
 			{
-				if (ImGui::BeginGroupPanel("Arrow tracer options", true))
+				if (ImGui::BeginGroupPanel(u8"箭头追踪选项", true))
 				{
-					ConfigWidget(f_TracerSize, 0.005f, 0.1f, 10.0f, "Size of tracer.");
-					ConfigWidget(f_ArrowRadius, 0.5f, 50.0f, 300.0f, "Radius of arrow.");
-					ConfigWidget(f_OutlineThickness, 0.005f, 0.0f, 10.0f, "Outline thickness of arrow.");
+					ConfigWidget(f_TracerSize, 0.005f, 0.1f, 10.0f, u8"追踪大小.");
+					ConfigWidget(f_ArrowRadius, 0.5f, 50.0f, 300.0f, u8"箭头范围.");
+					ConfigWidget(f_OutlineThickness, 0.005f, 0.0f, 10.0f, u8"箭头描边程度.");
 				}
 				ImGui::EndGroupPanel();
 			}
 
 			ImGui::Spacing();
-			ConfigWidget(f_DrawName, "Draw name of object.");
-			ConfigWidget(f_DrawDistance, "Draw distance of object.");
+			ConfigWidget(f_DrawName, u8"绘制物品名称.");
+			ConfigWidget(f_DrawDistance, u8"绘制到物品的距离.");
 
 			ImGui::Spacing();
-			ConfigWidget(f_FontSize, 1, 1, 100, "Font size of name or distance.");
-			ConfigWidget("## Font outline enabled", f_FontOutline); ImGui::SameLine();
-			ConfigWidget("Font outline", f_FontOutlineSize, 0.001f, 0.0f, 10.0f);
+			ConfigWidget(f_FontSize, 1, 1, 100, u8"物品名称/距离的字体大小.");
+			ConfigWidget(u8"## 字体描边已开启", f_FontOutline); ImGui::SameLine();
+			ConfigWidget(u8"字体描边", f_FontOutlineSize, 0.001f, 0.0f, 10.0f);
 
 			ImGui::Spacing();
 			if (ImGui::BeginGroupPanel("Global colors", true))
 			{
-				if (ConfigWidget(f_GlobalFontColor, "Color of line, name, or distance text font."))
+				if (ConfigWidget(f_GlobalFontColor, u8"线条，名称，距离的字体颜色."))
 					m_FontContrastColor = ImGui::CalcContrastColor(f_GlobalFontColor);
 
-				ConfigWidget(f_GlobalBoxColor, "Color of box font.");
-				ConfigWidget(f_GlobalLineColor, "Color of line font.");
-				ConfigWidget(f_GlobalRectColor, "Color of rectangle font.");
+				ConfigWidget(f_GlobalBoxColor, u8"矩形颜色.");
+				ConfigWidget(f_GlobalLineColor, u8"线条颜色.");
+				ConfigWidget(f_GlobalRectColor, u8"追踪颜色.");
 			}
 			ImGui::EndGroupPanel();
 
-			ConfigWidget(f_MinSize, 0.05f, 0.1f, 200.0f, "Minimum entity size as measured in-world.\n" \
-				"Some entities have either extremely small or no bounds at all.\n" \
-				"This parameter helps filter out entities that don't meet this condition.");
+			ConfigWidget(f_MinSize, 0.05f, 0.1f, 200.0f, u8"世界中透视的最小实体体积大小.\n" \
+				u8"有些实体的很小或根本没有体积.\n" \
+				u8"此参数有助于筛选出不符合此条件的实体.");
 		}
 		ImGui::EndGroupPanel();
 
@@ -130,7 +130,7 @@ namespace cheat::feature
 
 	void ESP::DrawStatus()
 	{
-		ImGui::Text("ESP [%.01fm|%s|%s%s%s%s]",
+		ImGui::Text(u8"绘制透视 [%.01fm|%s|%s%s%s%s]",
 			f_Range.value(),
 			f_DrawBoxMode.value() == DrawMode::Box ? "Box" : f_DrawBoxMode.value() == DrawMode::Rectangle ? "Rect" : "None",
 			f_Fill ? "F" : "",
@@ -788,7 +788,7 @@ namespace cheat::feature
 		ADD_FILTER_FIELD(plant, Pinecone);
 		ADD_FILTER_FIELD(plant, Qingxin);
 		ADD_FILTER_FIELD(plant, Radish);
-		ADD_FILTER_FIELD(plant, RukkhashavaMushroom);
+
 		ADD_FILTER_FIELD(plant, SakuraBloom);
 		ADD_FILTER_FIELD(plant, SangoPearl);
 		ADD_FILTER_FIELD(plant, SeaGanoderma);

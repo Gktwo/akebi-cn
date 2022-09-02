@@ -2,7 +2,7 @@ name: Publish
 
 on:
    push:
-    branches: [ master ]
+    branches: [ 300cn中文 ]
 
 env:
   SOLUTION_FILE_PATH: ./akebi-gc.sln

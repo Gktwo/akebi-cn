@@ -16,7 +16,7 @@ namespace cheat::feature
         NF(f_ExcludeImportant, "Exclude Katheryne/Tubby/Wagner", "AutoTalk", true),
         NF(f_FastDialog, "Fast dialog", "AutoTalk", false),
         NF(f_CutsceneUSM, "Skip Cutscenes", "AutoTalk", false),
-        NF(f_TimeSpeedup, "Time Speed", "AutoTalk", 5.0f)
+        NF(f_TimeSpeedup, u8"速度", "AutoTalk", 5.0f)
     {
         HookManager::install(app::MoleMole_InLevelCutScenePageContext_UpdateView, InLevelCutScenePageContext_UpdateView_Hook);
         HookManager::install(app::MoleMole_InLevelCutScenePageContext_ClearView, InLevelCutScenePageContext_ClearView_Hook);
@@ -25,26 +25,26 @@ namespace cheat::feature
 
     const FeatureGUIInfo& DialogSkip::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Auto Talk", "World", true };
+        static const FeatureGUIInfo info{ u8"自动剧情", "World", true };
         return info;
     }
 
     void DialogSkip::DrawMain()
     {
-        ConfigWidget("Enabled", f_Enabled, "Automatically continue the dialog.");
-        ConfigWidget("Auto-select Dialog", f_AutoSelectDialog, "Automatically select dialog choices.");
+        ConfigWidget(u8"开/关", f_Enabled, "Automatically continue the dialog.");
+        ConfigWidget(u8"自动选择选项", f_AutoSelectDialog, "Automatically select dialog choices.");
         if (f_AutoSelectDialog)
         {
             ImGui::Indent();
-            ConfigWidget("Exclude Katheryne/Tubby/Wagner", f_ExcludeImportant, "Exclude Kath/Tubby/Wagner from auto-select.");
+            ConfigWidget(u8"不包括 Katheryne/Tubby/Wagner", f_ExcludeImportant, "Exclude Kath/Tubby/Wagner from auto-select.");
             ImGui::Unindent();
         }
-        ConfigWidget("Fast Dialog", f_FastDialog, "Speeds up Time");
+        ConfigWidget(u8"快速对话", f_FastDialog, "Speeds up Time");
         if (f_FastDialog)
         {
             ConfigWidget(f_TimeSpeedup, 0.1f, 2.0f, 50.0f, "Time Speedup Multipler \nHigher Values will lead to sync issues with servers \nand is not recommended for Laggy Internet connections.");
         }
-        ConfigWidget("Skip Cutscenes", f_CutsceneUSM, "Automatically skips game movies.");
+        ConfigWidget(u8"跳过动画", f_CutsceneUSM, "Automatically skips game movies.");
     }
 
     bool DialogSkip::NeedStatusDraw() const
@@ -55,7 +55,7 @@ namespace cheat::feature
     void DialogSkip::DrawStatus()
     {
         if (f_Enabled)
-            ImGui::Text("Dialog [%s%s%s%s%s]",
+            ImGui::Text(u8"快速剧情 [%s%s%s%s%s]",
                 f_AutoSelectDialog ? "Auto" : "Manual",
                 f_AutoSelectDialog && (f_ExcludeImportant || f_FastDialog) ? "|" : "",
                 f_ExcludeImportant ? "Exc" : "",

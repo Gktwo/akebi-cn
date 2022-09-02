@@ -7,7 +7,7 @@
 namespace cheat::feature 
 {
     GodMode::GodMode() : Feature(),
-        NFEX(f_Enabled, "God mode", "m_GodMode", "Player", false, false)
+        NFEX(f_Enabled, u8"无敌模式", "m_GodMode", "Player", false, false)
     {
 		HookManager::install(app::VCHumanoidMove_NotifyLandVelocity, VCHumanoidMove_NotifyLandVelocity_Hook);
 		HookManager::install(app::Miscs_CheckTargetAttackable, Miscs_CheckTargetAttackable_Hook);
@@ -23,7 +23,7 @@ namespace cheat::feature
 
     void GodMode::DrawMain()
     {
-        ConfigWidget("God Mode", f_Enabled, "Enables god mode, i.e. no incoming damage including environmental damage.\n");
+        ConfigWidget(u8"免疫伤害（软件免费开源倒狗密麻麻石蜡）", f_Enabled, u8"免费软件，请勿上当受骗");
     }
 
     bool GodMode::NeedStatusDraw() const
@@ -33,7 +33,7 @@ namespace cheat::feature
 
     void GodMode::DrawStatus() 
     {
-        ImGui::Text("God Mode");
+        ImGui::Text(u8"免疫伤害");
     }
 
     GodMode& GodMode::GetInstance()

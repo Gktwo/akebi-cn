@@ -10,7 +10,7 @@ namespace cheat::feature
 {
 
 	MapTeleport::MapTeleport() : Feature(),
-		NF(f_Enabled, "Map teleport", "MapTeleport", false),
+		NF(f_Enabled, u8"大地图传送", "MapTeleport", false),
 		NF(f_DetectHeight, "Auto height detect", "MapTeleport", true),
 		NF(f_DefaultHeight, "Default teleport height", "MapTeleport", 300.0f),
 		NF(f_Key, "Teleport key", "MapTeleport", Hotkey('T'))
@@ -33,13 +33,13 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& MapTeleport::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Map Teleport", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"大地图传送", "Teleport", true };
 		return info;
 	}
 
 	void MapTeleport::DrawMain()
 	{
-		ConfigWidget("Enabled",
+		ConfigWidget(u8"大地图传送",
 			f_Enabled,
 			"Enable teleport-to-mark functionality.\n" \
 			"Usage: \n" \
@@ -53,11 +53,11 @@ namespace cheat::feature
 		if (!f_Enabled)
 			ImGui::BeginDisabled();
 
-		ConfigWidget("Override Height (m)", f_DefaultHeight, 1.0F, 200.0F, 800.0F,
+		ConfigWidget(u8"高度 (m)", f_DefaultHeight, 1.0F, 200.0F, 800.0F,
 			"If teleport cannot get ground height of target location,\nit will teleport you to the height specified here.\n" \
 			"It is recommended to have this value to be at least as high as a mountain.\nOtherwise, you may fall through the ground.");
 
-		ConfigWidget("Teleport Key", f_Key, true,
+		ConfigWidget(u8"热键", f_Key, true,
 			"Key to hold down before clicking on target location.");
 
 		if (!f_Enabled)

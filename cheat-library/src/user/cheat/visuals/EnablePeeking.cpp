@@ -15,13 +15,13 @@ namespace cheat::feature
 
     const FeatureGUIInfo& EnablePeeking::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "EnablePeeking", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"反虚化", "Visuals", false };
         return info;
     }
 
     void EnablePeeking::DrawMain()
     {
-        ConfigWidget(f_Enabled, ";)");
+        ConfigWidget(u8"反虚化", f_Enabled, ";)");
     }
 
     bool EnablePeeking::NeedStatusDraw() const
@@ -31,7 +31,7 @@ namespace cheat::feature
 
     void EnablePeeking::DrawStatus()
     {
-        ImGui::Text("Enable Peeking");
+        ImGui::Text(u8"反虚化");
     }
 
     EnablePeeking& EnablePeeking::GetInstance()
