@@ -15,6 +15,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\user\cheat\misc\About.h" />
     <ClInclude Include="src\user\cheat\misc\sniffer\pipe\messages\PipeMessage.h" />
     <ClInclude Include="src\user\cheat\misc\sniffer\pipe\messages\PipeModifyData.h" />
     <ClInclude Include="src\user\cheat\misc\sniffer\pipe\messages\PipePacketData.h" />
@@ -100,6 +101,7 @@
     <ClInclude Include="src\user\cheat\world\DialogSkip.h" />
     <ClInclude Include="src\user\cheat\world\DumbEnemies.h" />
     <ClInclude Include="src\user\cheat\world\FreezeEnemies.h" />
+    <ClInclude Include="src\user\cheat\world\GameSpeed.h" />
     <ClInclude Include="src\user\cheat\world\KillAura.h" />
     <ClInclude Include="src\user\cheat\world\MobVacuum.h" />
     <ClInclude Include="src\user\cheat\world\OpenTeamImmediately.h" />
@@ -111,6 +113,7 @@
     <Font Include="res\Ruda-ExtraBold.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\user\cheat\misc\About.cpp" />
     <ClCompile Include="src\user\cheat\misc\sniffer\pipe\messages\PipeMessage.cpp" />
     <ClCompile Include="src\user\cheat\misc\sniffer\pipe\messages\PipeModifyData.cpp" />
     <ClCompile Include="src\user\cheat\misc\sniffer\pipe\messages\PipePacketData.cpp" />
@@ -193,6 +196,7 @@
     <ClCompile Include="src\user\cheat\world\DialogSkip.cpp" />
     <ClCompile Include="src\user\cheat\world\DumbEnemies.cpp" />
     <ClCompile Include="src\user\cheat\world\FreezeEnemies.cpp" />
+    <ClCompile Include="src\user\cheat\world\GameSpeed.cpp" />
     <ClCompile Include="src\user\cheat\world\KillAura.cpp" />
     <ClCompile Include="src\user\cheat\world\MobVacuum.cpp" />
     <ClCompile Include="src\user\cheat\world\OpenTeamImmediately.cpp" />
@@ -1099,7 +1103,8 @@
       </Command>
     </PostBuildEvent>
     <CustomBuildStep>
-      <Command>"$(OutDir)injector.exe" powershell -nop -c "&amp;amp; {sleep 20}"</Command>
+      <Command>"$(OutDir)injector.exe" 
+powershell -nop -c "&amp;{sleep 30}"</Command>
       <Outputs>$(OutDir)_noexist.nope;%(Outputs)</Outputs>
       <Inputs>$(TargetPath);%(Inputs)</Inputs>
     </CustomBuildStep>
