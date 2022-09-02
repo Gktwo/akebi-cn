@@ -20,6 +20,8 @@ namespace cheat::feature
 		NF(f_DestroyShields, "Destroy Shields", "AutoDestroy", false),
 		NF(f_DestroyDoodads, "Destroy Doodads", "AutoDestroy", false),
 		NF(f_DestroyPlants, "Destroy Plants", "AutoDestroy", false),
+		NF(f_DestroySpecialObjects, "Destroy Special Objects", "AutoDestroy", false),
+		NF(f_DestroySpecialChests, "Destroy Special Chests", "AutoDestroy", false),
 		NF(f_Range, "Range", "AutoDestroy", 10.0f)
 	{
 		HookManager::install(app::MoleMole_LCAbilityElement_ReduceModifierDurability, LCAbilityElement_ReduceModifierDurability_Hook);
@@ -40,12 +42,14 @@ namespace cheat::feature
 		ImGui::Indent();
 		ConfigWidget(u8"矿石类", f_DestroyOres, u8"可采集矿石类物品.");
 		ConfigWidget(u8"怪物的护盾", f_DestroyShields, u8"怪物的护盾.");
-		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"高风险!");
 		ConfigWidget(u8"部分探索物品", f_DestroyDoodads, u8"罐头瓶子之类.");
+		ConfigWidget("Plants", f_DestroyPlants, "Dandelion Seeds, Sakura Bloom, etc.");
+		ConfigWidget("Special Objects", f_DestroySpecialObjects, "Destroy Ancient Rime, Large and Small Rock Piles");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"高风险!");
-		ConfigWidget(u8"植物", f_DestroyPlants, u8"需要攻击的植物类.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), "Risk Unknown!");
+		ConfigWidget("Special Chests", f_DestroySpecialChests, "Destroy Chests with Brambles, Frozen, or In Rocks");
+		ImGui::SameLine();
+		ImGui::TextColored(ImColor(255, 165, 0, 255), "Risk Unknown!");
 		ImGui::Unindent();
 		ConfigWidget(u8"范围 (m)", f_Range, 0.1f, 1.0f, 15.0f);
 	}
@@ -57,13 +61,15 @@ namespace cheat::feature
 
 	void AutoDestroy::DrawStatus()
 	{
-		ImGui::Text(u8"自动销毁 [%.01fm%s%s%s%s%s]",
+		ImGui::Text(u8"自动销毁 [%.01fm%s%s%s%s%s%s%s]",
 			f_Range.value(),
-			f_DestroyOres || f_DestroyShields || f_DestroyDoodads || f_DestroyPlants ? "|" : "",
+			f_DestroyOres || f_DestroyShields || f_DestroyDoodads || f_DestroyPlants || f_DestroySpecialObjects || f_DestroySpecialChests ? "|" : "",
 			f_DestroyOres ? u8"矿" : "",
 			f_DestroyShields ? u8"盾" : "",
 			f_DestroyDoodads ? u8"道具" : "",
-			f_DestroyPlants ? u8"植" : "");
+			f_DestroyPlants ? u8"植" : "",
+			f_DestroySpecialObjects ? "SO" : "",
+			f_DestroySpecialChests ? "SC" : "");
 	}
 
 	AutoDestroy& AutoDestroy::GetInstance()
@@ -99,9 +105,11 @@ namespace cheat::feature
 				(autoDestroy.f_DestroyOres && game::filters::combined::Ores.IsValid(manager.entity(entity))) ||
 				(autoDestroy.f_DestroyDoodads && (game::filters::combined::Doodads.IsValid(manager.entity(entity)) || game::filters::chest::SBramble.IsValid(manager.entity(entity)))) ||
 				(autoDestroy.f_DestroyShields && !game::filters::combined::MonsterBosses.IsValid(manager.entity(entity)) && (
-					game::filters::combined::MonsterShielded.IsValid(manager.entity(entity)) ||									// For shields attached to monsters, e.g. abyss mage shields.
-					game::filters::combined::MonsterEquips.IsValid(manager.entity(entity)))) ||									// For shields/weapons equipped by monsters, e.g. rock shield.
-					(autoDestroy.f_DestroyPlants && game::filters::combined::PlantDestroy.IsValid(manager.entity(entity)))		// For plants e.g dandelion seeds.
+					game::filters::combined::MonsterShielded.IsValid(manager.entity(entity)) ||											// For shields attached to monsters, e.g. abyss mage shields.
+					game::filters::combined::MonsterEquips.IsValid(manager.entity(entity)))) ||											// For shields/weapons equipped by monsters, e.g. rock shield.
+					(autoDestroy.f_DestroyPlants && game::filters::combined::PlantDestroy.IsValid(manager.entity(entity))) ||			// For plants e.g dandelion seeds.
+				(autoDestroy.f_DestroySpecialObjects && game::filters::combined::BreakableObjects.IsValid(manager.entity(entity))) ||	// For Breakable Objects e.g Ancient Rime, Large and Small Rock Piles.
+				(autoDestroy.f_DestroySpecialChests && game::filters::combined::Chests.IsValid(manager.entity(entity)))					// For Special Chests e.g Brambles, Frozen, Encased in Rock.
 				)
 			)
 		{
