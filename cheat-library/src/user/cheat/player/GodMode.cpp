@@ -7,7 +7,7 @@
 namespace cheat::feature 
 {
     GodMode::GodMode() : Feature(),
-        NFEX(f_Enabled, u8"无敌模式", "m_GodMode", "Player", false, false),
+        NFEX(f_Enabled, u8"无敌模式", "m_GodMode", "Player", false, false)
     {
 		HookManager::install(app::VCHumanoidMove_NotifyLandVelocity, VCHumanoidMove_NotifyLandVelocity_Hook);
 		HookManager::install(app::Miscs_CheckTargetAttackable, Miscs_CheckTargetAttackable_Hook);
