@@ -44,10 +44,10 @@ namespace cheat::feature
         ConfigWidget(f_DressPath, u8"裙子.\n" \
             "Example path: C:\\Dress.png");
 
-        if (ImGui::Button(u8"应用"))
+        ConfigWidget(f_GliderPath, "Glider Texture.\n" \
             "Example path: C:\\Glider.png");
 
-        if (ImGui::Button("Apply"))
+        if (ImGui::Button(u8"应用"))
             ApplyTexture = true;
     }
 
