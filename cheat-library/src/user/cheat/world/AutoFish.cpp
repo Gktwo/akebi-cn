@@ -10,10 +10,10 @@
 namespace cheat::feature
 {
     AutoFish::AutoFish() : Feature(),
-        NFEX(f_Enabled, "Auto Fish", "m_AutoFish", "AutoFish", false, false),
-        NF(f_DelayBeforeCatch, "Delay before catch", "AutoFish", 2000),
-        NF(f_AutoRecastRod, "Recast rod", "AutoFish", true),
-        NF(f_DelayBeforeRecast, "Delay before recast", "AutoFish", 500)
+        NFEX(f_Enabled, u8"自动钓鱼", "m_AutoFish", u8"自动钓鱼", false, false),
+        NF(f_DelayBeforeCatch, u8"抓取延迟", u8"自动钓鱼", 2000),
+        NF(f_AutoRecastRod, u8"重新抛竿", u8"自动钓鱼", true),
+        NF(f_DelayBeforeRecast, u8"抛竿延迟", u8"自动钓鱼", 500)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(AutoFish::OnGameUpdate);
 

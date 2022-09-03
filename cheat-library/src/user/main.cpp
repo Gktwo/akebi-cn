@@ -37,15 +37,15 @@ void Run(HMODULE* phModule)
 
 	while (GetModuleHandle("UserAssembly.dll") == nullptr)
 	{
-		LOG_DEBUG("UserAssembly.dll正在初始化，请等待....");
+		LOG_DEBUG("UserAssembly.dll isn't initialized, waiting for 2 sec.");
 		Sleep(2000);
 	}
 
 #ifdef _DEBUG
-	LOG_DEBUG("正在加载库，预计等待10秒.");
+	LOG_DEBUG("Waiting 10sec for loading game library.");
 	Sleep(15000);
 #else
-	LOG_DEBUG("等待游戏初始化,预计等待15秒.");
+	LOG_DEBUG("Waiting 15sec for game initialize.");
     Sleep(15000);
 #endif
 	

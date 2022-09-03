@@ -11,8 +11,8 @@ namespace cheat::feature
 {
 
 	AutoRun::AutoRun() : Feature(),
-		NF(f_Enabled, "Auto Run", "Player::AutoRun", false),
-		NF(f_Speed,	"Speed", "Player::AutoRun",1.0f)
+		NF(f_Enabled, u8"自动行走", "Player::AutoRun", false),
+		NF(f_Speed,	u8"速度", "Player::AutoRun",1.0f)
 	{
 		events::GameUpdateEvent += MY_METHOD_HANDLER(AutoRun::OnGameUpdate);
 	}
@@ -26,7 +26,7 @@ namespace cheat::feature
 	void AutoRun::DrawMain()
 	{
 		ConfigWidget(u8"开/关", f_Enabled);
-		ConfigWidget(u8"速度", f_Speed, 0.01f, 0.01f, 1000.0f, "Speed of character \n Not recommended going above 5");
+		ConfigWidget(u8"速度", f_Speed, 0.01f, 0.01f, 1000.0f, u8"速度\n不建议超过5");
 	}
 
 	bool AutoRun::NeedStatusDraw() const

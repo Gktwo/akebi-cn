@@ -17,13 +17,13 @@
 namespace cheat::feature
 {
 	CustomTeleports::CustomTeleports() : Feature(),
-		NF(f_Enabled,		"Custom Teleport",		"CustomTeleports",	false),
-		NF(f_Next,			"Teleport Next",		"CustomTeleports",	Hotkey(VK_OEM_6)),
-		NF(f_Previous,		"Teleport Previous",	"CustomTeleports",	Hotkey(VK_OEM_4)),
-		NF(f_Auto,			"Auto Teleport",		"CustomTeleports",	false),
-		NF(f_DelayTime,		"Delay time (in s)",	"CustomTeleports",	20),
-		NF(f_Interpolate,	"Interpolate Teleport",	"CustomTeleports",	false),
-		NF(f_Speed,			"Interpolation Speed",	"CustomTeleports",	10.0f),
+		NF(f_Enabled, u8"自定义传送", u8"自定义传送", false),
+		NF(f_Next, u8"传送下一个", u8"自定义传送", Hotkey(VK_OEM_6)),
+		NF(f_Previous, u8"传送上一个", u8"自定义传送", Hotkey(VK_OEM_4)),
+		NF(f_Auto, u8"自动传送", u8"自定义传送", false),
+		NF(f_DelayTime, u8"延迟时间（秒）", u8"自定义传送", 20),
+		NF(f_Interpolate, u8"内插传送", u8"自定义传送", false),
+		NF(f_Speed, u8"插补速度", u8"自定义传送", 10.0f),
 		dir(util::GetCurrentPath() /= "teleports"),
 		nextTime(0)
 	{
@@ -317,14 +317,14 @@ namespace cheat::feature
 					 "3. You can now press Next or Previous Hotkey to Teleport through the Checklist\n"
 					 "Initially it will teleport the player to the selection made\n"
 					 "Note: Double click or click the arrow to open teleport details");
-		ConfigWidget("Enable Interpolation", f_Interpolate, "Enable interpolation between teleports when using keybinds."); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
+		ConfigWidget(u8"启用插值", f_Interpolate, "Enable interpolation between teleports when using keybinds."); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
 		ConfigWidget(u8"插补速度", f_Speed, 0.1f, 0.1f, 99.0f,
 					 "Interpolation speed.\n recommended setting below or equal to 0.1.");
 		ConfigWidget(u8"自动传送", f_Auto, "Enable automatic forward teleporation between teleports"); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
 		ConfigWidget(u8"延迟 (s)", f_DelayTime, 1, 0, 60, "Delay (in s) between teleport.\n"
 			"Note: This is not fully tested detection-wise.\nNot recommended with low values.");
 
-		if (ImGui::Button("Delete Checked"))
+		if (ImGui::Button(u8"删除选中"))
 		{
 			if (!Teleports.empty())
 			{
@@ -379,7 +379,7 @@ namespace cheat::feature
 				}
 			}
 			ImGui::SameLine();
-			ImGui::InputText("Search", &searchBuffer_);
+			ImGui::InputText(u8"搜索", &searchBuffer_);
 			unsigned int index = 0;
 			searchIndices.clear();
 
@@ -387,11 +387,11 @@ namespace cheat::feature
 			for (auto &Teleport : Teleports)
 				if (Teleport.name.length() > maxNameLength)
 					maxNameLength = Teleport.name.length();
-			ImGui::BeginTable("Teleports", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable | ImGuiTableFlags_NoSavedSettings);
+			ImGui::BeginTable(u8"传送", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable | ImGuiTableFlags_NoSavedSettings);
 			ImGui::TableSetupColumn("#", ImGuiTableColumnFlags_WidthFixed, 20);
-			ImGui::TableSetupColumn("Commands", ImGuiTableColumnFlags_WidthFixed, 130);
-			ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthFixed, maxNameLength * 8 + 10);
-			ImGui::TableSetupColumn("Position");
+			ImGui::TableSetupColumn(u8"命令", ImGuiTableColumnFlags_WidthFixed, 130);
+			ImGui::TableSetupColumn(u8"名称", ImGuiTableColumnFlags_WidthFixed, maxNameLength * 8 + 10);
+			ImGui::TableSetupColumn(u8"坐标");
 			ImGui::TableHeadersRow();
 
 			for (const auto &[name, position, description] : Teleports)

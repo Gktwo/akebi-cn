@@ -34,8 +34,7 @@ namespace cheat::feature
 			ConfigWidget(u8"作用半径 (m)", f_Radius, 0.1f, 5.0f, 100.0f, u8"一般物品的作用距离.");
 			ConfigWidget(u8"作用半径2", f_MobDropRadius, 0.1f, 5.0f, 100.0f, u8"掉落物的作用距离.\n"
 				u8"(比如掉落物和装备类)");
-			ConfigWidget(u8"位置距离 (m)", f_Distance, 0.1f, 1.0f, 10.0f, "Distance between the player and the loot.\n"
-				"Values under 1.5 may be too intruding.");
+			ConfigWidget(u8"位置距离 (m)", f_Distance, 0.1f, 1.0f, 10.0f, u8"玩家和战利品之间的距离。\n1.5以下的值可能太过干扰.");
 			if (ImGui::TreeNode(u8"战利品类型"))
 			{
 				for (auto& [section, filters] : m_Sections)

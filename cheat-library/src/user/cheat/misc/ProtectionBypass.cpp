@@ -53,7 +53,7 @@ namespace cheat::feature
     void ProtectionBypass::DrawMain()
     {
 		ConfigWidget(f_Enabled, 
-			"Close mhyprot2 handle (changes will take effect after relaunch).");
+			u8"关闭mhyprot2句柄（更改将在重新启动后生效）.");
     }
 
     ProtectionBypass& ProtectionBypass::GetInstance()

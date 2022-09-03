@@ -160,7 +160,7 @@ namespace util
         if (savedPath != nullptr)
             return std::string(savedPath);
 
-        LOG_DEBUG("%s 路径没有找到。请手动指向.", friendName);
+        LOG_DEBUG("%s path not found. Please point to it manually.", friendName);
 
         auto titleStr = string_format("Select %s", friendName);
         auto selectedPath = filter == nullptr ? SelectDirectory(titleStr.c_str()) : SelectFile(filter, titleStr.c_str());

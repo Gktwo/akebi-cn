@@ -9,8 +9,8 @@
 namespace cheat::feature
 {
 	AutoSeelie::AutoSeelie() : Feature(),
-		NF(f_Enabled, "Auto seelie", "Auto Seelie", false),
-		NF(f_ElectroSeelie, "Auto Electro seelie", "Auto Seelie", false),
+		NF(f_Enabled, u8"自动仙灵", u8"自动仙灵", false),
+		NF(f_ElectroSeelie, u8"自动雷灵", u8"自动雷灵", false),
 		nextTime(0)
 	{
 		events::GameUpdateEvent += MY_METHOD_HANDLER(AutoSeelie::OnGameUpdate);
@@ -29,10 +29,9 @@ namespace cheat::feature
 		{
 			ImGui::Indent();
 
-			ConfigWidget(u8"自动雷灵", f_ElectroSeelie, "Since you don't need to manually start electroseelie, \n"
-				"they start moving automatically with this option within 100m radius.");
+			ConfigWidget(u8"自动雷灵", f_ElectroSeelie, u8"由于您不需要手动启动electroseelie，\n他们开始在半径100米范围内使用此选项自动移动."                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            );
 			ImGui::SameLine();
-			ImGui::TextColored(ImColor(255, 165, 0, 255), "Read the note!");
+			ImGui::TextColored(ImColor(255, 165, 0, 255), u8"请阅读注意事项!");
 			ImGui::Unindent();
 		}
 
