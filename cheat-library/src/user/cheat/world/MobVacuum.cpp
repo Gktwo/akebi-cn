@@ -82,7 +82,7 @@ namespace cheat::feature
             f_Instantly ? u8"立即" : fmt::format("Normal|{:.1f}", f_Speed.value()).c_str(),
             f_Radius.value(),
             f_Distance.value(),
-            f_OnlyTarget ? u8"仅活动" : u8"全部"
+            f_OnlyTarget ? u8"仅活动" : u8"全部",
             f_SetCollider ? "RC" : "");
     }
 
