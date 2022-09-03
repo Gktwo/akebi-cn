@@ -8,27 +8,27 @@
 namespace cheat::feature
 {
     GameSpeed::GameSpeed() : Feature(),
-        NF(f_Enabled, "GameSpeed Enabled", "GameSpeed", false),
-        NF(f_Hotkey, "GameSpeed HotKey", "GameSpeed", Hotkey(VK_CAPITAL)),
-        NF(f_Speed, "GameSpeed Multiplier", "GameSpeed", 5.0f)
+        NF(f_Enabled, u8"开关", u8"全局变速", false),
+        NF(f_Hotkey, u8"游戏速度热键", u8"全局变速", Hotkey(VK_CAPITAL)),
+        NF(f_Speed, u8"速度倍数", u8"全局变速", 5.0f)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(GameSpeed::OnGameUpdate);
     }
 
     const FeatureGUIInfo& GameSpeed::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "GameSpeed", "World", true };
+        static const FeatureGUIInfo info{ u8"全局变速", "World", true };
         return info;
     }
 
     void GameSpeed::DrawMain()
     {
-        ConfigWidget("GameSpeed Enabled", f_Enabled, "Speeds up game with hotkey");
+        ConfigWidget(u8"开关", f_Enabled, u8"使用热键加速游戏");
         if (f_Enabled)
         {
-            ConfigWidget("GameSpeed Hotkey", f_Hotkey);
-            ConfigWidget(f_Speed, 1.0f, 0.0f, 20.0f, "Set GameSpeed Multiplier\n" \
-                "Do NOT use this in the Open World, only use in menus/etc, VERY DANGEROUS!");
+            ConfigWidget(u8"游戏速度热键", f_Hotkey);
+            ConfigWidget(f_Speed, 1.0f, 0.0f, 20.0f, u8"设置游戏速度乘数\n" \
+                u8"不要在开放世界中使用，仅在菜单/等中使用，非常危险!");
         }
     }
 
@@ -39,7 +39,7 @@ namespace cheat::feature
 
     void GameSpeed::DrawStatus()
     {
-        ImGui::Text("GameSpeed");
+        ImGui::Text(u8"全局加速");
     }
 
     GameSpeed& GameSpeed::GetInstance()

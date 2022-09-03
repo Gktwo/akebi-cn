@@ -8,7 +8,7 @@ namespace cheat::feature
     static void LevelSceneElementViewPlugin_Tick_Hook(app::LevelSceneElementViewPlugin* __this, float inDeltaTime, MethodInfo* method);
 
     ElementalSight::ElementalSight() : Feature(),
-        NF(f_Enabled, "Permanent Elemental Sight", "ElementalSight", false)
+        NF(f_Enabled, u8"元素视野", u8"元素视野", false)
     {
         HookManager::install(app::MoleMole_LevelSceneElementViewPlugin_Tick, LevelSceneElementViewPlugin_Tick_Hook);
     }
@@ -21,8 +21,8 @@ namespace cheat::feature
 
     void ElementalSight::DrawMain()
     {
-        ConfigWidget(u8"元素视野", f_Enabled, "Elemental sight is kept on even when moving.\n"
-                     "To turn off, toggle off and use Elemental Sight again.");
+        ConfigWidget(u8"元素视野", f_Enabled, u8"元素视线即使在移动时也会保持.\n"
+                     u8"要关闭，请关闭并再次使用元素视线.");
     }
 
     bool ElementalSight::NeedStatusDraw() const

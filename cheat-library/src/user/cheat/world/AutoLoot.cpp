@@ -16,22 +16,22 @@ namespace cheat::feature
 	float g_default_range = 3.0f;
 
     AutoLoot::AutoLoot() : Feature(),
-        NF(f_AutoPickup,     "Auto-pickup drops",               "AutoLoot", false),
-		NF(f_AutoTreasure,   "Auto-open treasures",             "AutoLoot", false),
-		NF(f_UseCustomRange, "Use custom pickup range",         "AutoLoot", false),
-		NF(f_PickupFilter,	 "Pickup filter",					"AutoLoot", false),
-		NF(f_PickupFilter_Animals,	 "Animals filter",			"AutoLoot", true),
-		NF(f_PickupFilter_DropItems, "Drop items filter",		"AutoLoot", true),
-		NF(f_PickupFilter_Resources, "Resources filter",		"AutoLoot", true),
-		NF(f_Chest,			 "Chests",							"AutoLoot", false),
-		NF(f_Leyline,		 "Leylines",						"AutoLoot", false),
-		NF(f_Investigate,	 "Search points",					"AutoLoot", false),
-		NF(f_QuestInteract,  "Quest interacts",					"AutoLoot", false),
-        NF(f_Others,		 "Other treasures",					"AutoLoot", false),
-		NF(f_DelayTime,		 "Delay time (in ms)",				"AutoLoot", 200),
-		NF(f_UseDelayTimeFluctuation, "Use delay fluctuation", "AutoLoot", false),
-		NF(f_DelayTimeFluctuation,		 "Delay fluctuation +(in ms)",				"AutoLoot", 200),
-        NF(f_CustomRange,    "Pickup Range",                    "AutoLoot", 5.0f),
+        NF(f_AutoPickup,     u8"自动拾取掉落",               u8"自动拾取", false),
+		NF(f_AutoTreasure,   u8"自动拾取宝箱",         u8"自动拾取", false),
+		NF(f_UseCustomRange, u8"自定义范围",         u8"自动拾取", false),
+		NF(f_PickupFilter,	 u8"拾取过滤器", u8"自动拾取", false),
+		NF(f_PickupFilter_Animals,	 u8"动物过滤器", u8"自动拾取", true),
+		NF(f_PickupFilter_DropItems, u8"掉落物过滤器", u8"自动拾取", true),
+		NF(f_PickupFilter_Resources, u8"资源过滤器", u8"自动拾取", true),
+		NF(f_Chest,			 u8"宝箱", u8"自动拾取", false),
+		NF(f_Leyline,		 u8"地脉", u8"自动拾取", false),
+		NF(f_Investigate,	 u8"调查点", u8"自动拾取", false),
+		NF(f_QuestInteract,  u8"任务交互", u8"自动拾取", false),
+        NF(f_Others,		 u8"其他箱子", u8"自动拾取", false),
+		NF(f_DelayTime,		 u8"延迟时间 (in ms)", u8"自动拾取", 200),
+		NF(f_UseDelayTimeFluctuation, u8"使用模拟手动", u8"自动拾取", false),
+		NF(f_DelayTimeFluctuation,		 u8"模拟延迟 +(in ms)", u8"自动拾取", 200),
+        NF(f_CustomRange,    u8"拾取范围", u8"自动拾取", 5.0f),
 		toBeLootedItems(), nextLootTime(0)
     {
 		// Auto loot
@@ -68,13 +68,13 @@ namespace cheat::feature
 			
 			ImGui::BeginGroupPanel(u8"拾取范围");
 			{
-				ConfigWidget(u8"开/关", f_UseCustomRange, "Enable custom pickup range.\n" \
-					"High values are not recommended, as it is easily detected by the server.\n\n" \
+				ConfigWidget(u8"开/关", f_UseCustomRange, u8"启用自定义拾取范围.\n" \
+					u8"不建议使用高值，因为服务器很容易检测到.\n\n" \
 					u8"如果与自动拾取/自动宝箱一起使用，请最后打开此选项.");
 				ImGui::SameLine();
 				ImGui::TextColored(ImColor(255, 165, 0, 255), u8"查看注意事项");
 				ImGui::SetNextItemWidth(100.0f);
-				ConfigWidget(u8"范围 (m)", f_CustomRange, 0.1f, 0.5f, 40.0f, "Modifies pickup/open range to this value (in meters).");
+				ConfigWidget(u8"范围 (m)", f_CustomRange, 0.1f, 0.5f, 40.0f, u8"将拾取/打开范围修改为该值（以米为单位）.");
 			}
 			ImGui::EndGroupPanel();
 			
@@ -100,18 +100,18 @@ namespace cheat::feature
 			ImGui::TableSetColumnIndex(1);
 			ImGui::BeginGroupPanel(u8"自动宝箱");
 			{
-				ConfigWidget(u8"开关", f_AutoTreasure, "Automatically opens chests and other treasures.\n" \
-					"Note: Using this with custom range and low delay times is extremely risky.\n" \
-					"Abuse will definitely merit a ban.\n\n" \
+				ConfigWidget(u8"开关", f_AutoTreasure, u8"自动打开箱子和其他宝藏.\n" \
+					u8"注意：在自定义范围和低延迟时间下使用此方法非常危险.\n" \
+					u8"虐待行为肯定应该被禁止.\n\n" \
 					u8"如果与自定义范围一起使用，请确保先启用该选项.");
 				ImGui::SameLine();
-				ImGui::TextColored(ImColor(255, 165, 0, 255), "Read the note!");
+				ImGui::TextColored(ImColor(255, 165, 0, 255), u8"读便条");
 				ImGui::Indent();
-				ConfigWidget(u8"宝箱", f_Chest, "Common, precious, luxurious, etc.");
-				ConfigWidget(u8"地脉", f_Leyline, "Mora/XP, overworld/Trounce bosses, etc.");
-				ConfigWidget(u8"调查点", f_Investigate, "Marked as Investigate/Search, etc.");
-				ConfigWidget(u8"任务交互", f_QuestInteract, "Valid quest interact points.");
-				ConfigWidget(u8"其他", f_Others, "Book Pages, Spincrystals, etc.");
+				ConfigWidget(u8"宝箱", f_Chest, u8"普通、珍贵、豪华等.");
+				ConfigWidget(u8"地脉", f_Leyline, u8"Mora/XP, overworld/Trounce bosses, etc.");
+				ConfigWidget(u8"调查点", f_Investigate, u8"标记像调查/搜索等.");
+				ConfigWidget(u8"任务交互", f_QuestInteract, u8"有效的任务交互点.");
+				ConfigWidget(u8"其他", f_Others, u8"书页、旋转晶体等.");
 				ImGui::Unindent();
 			}
 			ImGui::EndGroupPanel();
@@ -120,10 +120,10 @@ namespace cheat::feature
 			
     	ImGui::BeginGroupPanel(u8"拾取类型");
 	    {
-			ConfigWidget(u8"开/关", f_PickupFilter, "Enable pickup filter.\n");
-			ConfigWidget(u8"动物", f_PickupFilter_Animals, "Fish, Lizard, Frog, Flying animals."); ImGui::SameLine();
-			ConfigWidget(u8"掉落物", f_PickupFilter_DropItems, "Material, Mineral, Artifact."); ImGui::SameLine();
-			ConfigWidget(u8"资源", f_PickupFilter_Resources, "Everything beside Animals and Drop Items (Plants, Books, etc).");
+			ConfigWidget(u8"开/关", f_PickupFilter, u8"启用拾取过滤器.\n");
+			ConfigWidget(u8"动物", f_PickupFilter_Animals, u8"鱼、蜥蜴、青蛙、飞行动物."); ImGui::SameLine();
+			ConfigWidget(u8"掉落物", f_PickupFilter_DropItems, u8"材料、矿物、人工制品."); ImGui::SameLine();
+			ConfigWidget(u8"资源", f_PickupFilter_Resources, u8"除了动物和掉落物品（植物、书籍等）以外的所有物品).");
 	    }
     	ImGui::EndGroupPanel();
     }
@@ -137,11 +137,11 @@ namespace cheat::feature
     {
 		ImGui::Text(u8"自动战利品\n[%s%s%s%s%s%s]",
 			f_AutoPickup ? "AP" : "",
-			f_AutoTreasure ? fmt::format("{}AT", f_AutoPickup ? "|" : "").c_str() : "",
-			f_UseCustomRange ? fmt::format("{}CR{:.1f}m", f_AutoPickup || f_AutoTreasure ? "|" : "", f_CustomRange.value()).c_str() : "",
-			f_PickupFilter ? fmt::format("{}PF", f_AutoPickup || f_AutoTreasure || f_UseCustomRange ? "|" : "").c_str() : "",
+			f_AutoTreasure ? fmt::format(u8"{}箱子", f_AutoPickup ? "|" : "").c_str() : "",
+			f_UseCustomRange ? fmt::format(u8"{}自定义范围{:.1f}m", f_AutoPickup || f_AutoTreasure ? "|" : "", f_CustomRange.value()).c_str() : "",
+			f_PickupFilter ? fmt::format(u8"{}过滤器", f_AutoPickup || f_AutoTreasure || f_UseCustomRange ? "|" : "").c_str() : "",
 			f_AutoPickup || f_AutoTreasure ? fmt::format("|{}ms", f_DelayTime.value()).c_str() : "", 
-			f_UseDelayTimeFluctuation ? fmt::format("|FL+{}ms", f_DelayTimeFluctuation.value()).c_str() : ""
+			f_UseDelayTimeFluctuation ? fmt::format(u8"|模拟手动+{}ms", f_DelayTimeFluctuation.value()).c_str() : ""
 		);
     }
 

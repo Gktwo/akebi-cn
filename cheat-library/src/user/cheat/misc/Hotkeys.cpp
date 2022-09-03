@@ -17,7 +17,7 @@ namespace cheat::feature
     void Hotkeys::DrawMain()
     {
         static std::string searchBuffer;
-        ImGui::InputText("Search", &searchBuffer);
+        ImGui::InputText(u8"ËÑË÷", &searchBuffer);
 
         ImGui::BeginChild("Hotkeys");
         

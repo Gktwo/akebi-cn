@@ -8,7 +8,7 @@ namespace cheat::feature
     static void MoleMole_VCBaseSetDitherValue_set_ManagerDitherAlphaValue_Hook(app::MoleMole_VCBaseSetDitherValue* __this, float value, MethodInfo* method);
 
     EnablePeeking::EnablePeeking() : Feature(),
-        NF(f_Enabled, "Enable Peeking", "Visuals::EnablePeeking", false)
+        NF(f_Enabled, u8"·´Ðé»¯", "Visuals::EnablePeeking", false)
     {
         HookManager::install(app::MoleMole_VCBaseSetDitherValue_set_ManagerDitherAlphaValue, MoleMole_VCBaseSetDitherValue_set_ManagerDitherAlphaValue_Hook);
     }

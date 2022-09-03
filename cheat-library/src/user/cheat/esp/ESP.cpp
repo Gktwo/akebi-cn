@@ -42,8 +42,8 @@ namespace cheat::feature
 		NF(f_GlobalLineColor, u8"追踪颜色", "ESP", ImColor(255, 255, 255)),
 		NF(f_GlobalRectColor, u8"矩形颜色", "ESP", ImColor(255, 255, 255)),
 
-		NF(f_MinSize, "Min. Entity Size", "ESP", 0.5f),
-		NF(f_Range, "Range", "ESP", 100.0f),
+		NF(f_MinSize, u8"最小实体大小", "ESP", 0.5f),
+		NF(f_Range, u8"范围", "ESP", 100.0f),
 		m_Search({})
 	{
 		InstallFilters();
@@ -95,7 +95,7 @@ namespace cheat::feature
 			ConfigWidget(u8"字体描边", f_FontOutlineSize, 0.001f, 0.0f, 10.0f);
 
 			ImGui::Spacing();
-			if (ImGui::BeginGroupPanel("Global colors", true))
+			if (ImGui::BeginGroupPanel(u8"全局颜色", true))
 			{
 				if (ConfigWidget(f_GlobalFontColor, u8"线条，名称，距离的字体颜色."))
 					m_FontContrastColor = ImGui::CalcContrastColor(f_GlobalFontColor);
@@ -112,8 +112,8 @@ namespace cheat::feature
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::Text("How to use item filters:\n\tLMB - Toggle visibility\n\tRMB - Open color picker");
-		ImGui::InputText("Search Filters", &m_Search);
+		ImGui::Text(u8"如何使用项目过滤器：\n\tLMB-切换可见性\n\tRMB-打开颜色选择器");
+		ImGui::InputText(u8"搜索过滤器", &m_Search);
 
 		for (auto& [section, filters] : m_Sections)
 		{
@@ -132,7 +132,7 @@ namespace cheat::feature
 	{
 		ImGui::Text(u8"绘制透视 [%.01fm|%s|%s%s%s%s]",
 			f_Range.value(),
-			f_DrawBoxMode.value() == DrawMode::Box ? "Box" : f_DrawBoxMode.value() == DrawMode::Rectangle ? "Rect" : "None",
+			f_DrawBoxMode.value() == DrawMode::Box ? u8"方框" : f_DrawBoxMode.value() == DrawMode::Rectangle ? "Rect" : "None",
 			f_Fill ? "F" : "",
 			f_DrawTracerMode.value() == DrawTracerMode::Line ? "L" : f_DrawTracerMode.value() == DrawTracerMode::OffscreenArrows ? "A" : "",
 			f_DrawName ? "N" : "",

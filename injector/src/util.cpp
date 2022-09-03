@@ -38,7 +38,7 @@ void WaitForCloseProcess(const std::string& processName)
     if (pid == -1)
         return;
 
-    std::cout << "发现 '" << processName << "' 进程，请关闭它，软件会自动开启游戏..." << std::endl;
+    std::cout << "Found '" << processName << "' process. Waiting for closing..." << std::endl;
 
 #ifdef _DEBUG
     std::stringstream stream;

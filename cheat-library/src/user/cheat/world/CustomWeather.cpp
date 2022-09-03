@@ -42,7 +42,7 @@ namespace cheat::feature
     }
 
     CustomWeather::CustomWeather() : Feature(),
-        NF(f_Enabled, "Custom Weather", "World", false),
+        NF(f_Enabled, u8"自定义天气", "World", false),
         NF(f_Lightning, u8"高亮敌人", "World", false),
         toBeUpdate(), nextUpdate(0)
     {
