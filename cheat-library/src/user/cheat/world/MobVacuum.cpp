@@ -22,7 +22,8 @@ namespace cheat::feature
         NF(f_Distance, "Distance", "MobVacuum", 1.5f),
         NF(f_Radius, "Radius", "MobVacuum", 10.0f),
         NF(f_OnlyTarget, "Only targeted", "MobVacuum", true),
-        NF(f_Instantly, "Instantly", "MobVacuum", false)
+        NF(f_Instantly,  "Instantly",     "MobVacuum", false),
+        NF(f_SetCollider, "SetCollider", "MobVacuum", false)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(MobVacuum::OnGameUpdate);
         events::MoveSyncEvent += MY_METHOD_HANDLER(MobVacuum::OnMoveSync);
@@ -63,6 +64,7 @@ namespace cheat::feature
 
     	ConfigWidget(u8"瞬间作用", f_Instantly, u8"立刻作用.");
         ConfigWidget(u8"只作用被注意的目标", f_OnlyTarget, u8"如果开启,指挥作用于对你攻击的怪物，不影响动物.");
+        ConfigWidget(u8"移除碰撞器", f_SetCollider, u8"如果启用，怪物将无法推你，无论距离或大小");
         ConfigWidget(u8"速度", f_Speed, 0.1f, 1.0f, 15.0f, u8"如果没有开启立即作用，那么这是移动速度.");
         ConfigWidget(u8"半径 (m)", f_Radius, 0.1f, 5.0f, 150.0f, u8"作用半径.");
         ConfigWidget(u8"围绕距离 (m)", f_Distance, 0.1f, 0.5f, 10.0f, u8"目标围绕在你周围.");
@@ -81,7 +83,7 @@ namespace cheat::feature
             f_Radius.value(),
             f_Distance.value(),
             f_OnlyTarget ? u8"仅活动" : u8"全部"
-        );
+            f_SetCollider ? "RC" : "");
     }
 
     MobVacuum& MobVacuum::GetInstance()
@@ -142,6 +144,27 @@ namespace cheat::feature
         return avatarEntity->relativePosition() + avatarEntity->forward() * f_Distance;
     }
 
+    // Set Monster's collider
+    // Taiga#5555: There might be an in-game function for this already I'm just not sure which one
+    void SetMonsterCollider(bool v)
+    {
+        auto monsterRoot = app::GameObject_Find(string_to_il2cppi("/EntityRoot/MonsterRoot"), nullptr);
+        if (monsterRoot != nullptr)
+        {
+            auto transform = app::GameObject_GetComponentByName(monsterRoot, string_to_il2cppi("Transform"), nullptr);
+            auto monsterCount = app::Transform_get_childCount(reinterpret_cast<app::Transform*>(transform), nullptr);
+            for (int i = 0; i <= monsterCount - 1; i++)
+            {
+                auto monsters = app::Transform_GetChild(reinterpret_cast<app::Transform*>(transform), i, nullptr);
+                auto monsterGameObject = app::Component_1_get_gameObject(reinterpret_cast<app::Component_1*>(monsters), nullptr);
+                auto monsterTransform = app::GameObject_GetComponentByName(monsterGameObject, string_to_il2cppi("Transform"), nullptr);
+                auto transformChild = app::Transform_GetChild(reinterpret_cast<app::Transform*>(monsterTransform), 1, nullptr);
+                auto colliderGameObject = app::Component_1_get_gameObject(reinterpret_cast<app::Component_1*>(transformChild), nullptr);
+                app::GameObject_SetActive(colliderGameObject, v, nullptr);
+            }
+        }
+    }
+
     // Mob vacuum update function.
     // Changes position of monster, if mob vacuum enabled.
     void MobVacuum::OnGameUpdate()
@@ -168,6 +191,8 @@ namespace cheat::feature
         {
             if (!IsEntityForVac(entity))
                 continue;
+
+            SetMonsterCollider(!f_SetCollider);
 
             if (f_Instantly)
             {
@@ -210,6 +235,8 @@ namespace cheat::feature
         auto entity = manager.entity(entityId);
         if (!IsEntityForVac(entity))
             return;
+
+        SetMonsterCollider(!f_SetCollider);
 
         app::Vector3 targetPos = CalcMobVacTargetPos();
         app::Vector3 entityPos = entity->relativePosition();
