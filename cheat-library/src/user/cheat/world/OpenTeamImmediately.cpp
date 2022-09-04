@@ -11,7 +11,7 @@ namespace cheat::feature
 
 
 	OpenTeamImmediately::OpenTeamImmediately() : Feature(),
-		NF(f_Enabled, "Enable Open Team Immediately", "Open Team", false),
+		NF(f_Enabled, u8"快速打开配队列表", "Open Team", false),
 		InLevelPlayerProfilePageContext(nullptr)
 	{
 		//HookManager::install(app::MoleMole_InLevelMainPageContext_DoTeamCountDown_c_Iterator0__MoveNext, MoleMole_InLevelMainPageContext_DoTeamCountDown_c_Iterator0__MoveNext_Hook);
@@ -21,13 +21,13 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& OpenTeamImmediately::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "", "World", false };
+		static const FeatureGUIInfo info{ "", u8"大世界", false };
 		return info;
 	}
 
 	void OpenTeamImmediately::DrawMain()
 	{
-		ConfigWidget("Open Team Immediately", f_Enabled, "Open team immediately without waiting for count down.");
+		ConfigWidget(u8"快速打开配队列表", f_Enabled, u8"不等倒计时就立刻打开队伍配置.");
 	}
 
 	bool OpenTeamImmediately::NeedStatusDraw() const
@@ -37,7 +37,7 @@ namespace cheat::feature
 
 	void OpenTeamImmediately::DrawStatus()
 	{
-		ImGui::Text("OpenTeamImmediately");
+		ImGui::Text(u8"快速配队");
 	}
 
 	OpenTeamImmediately& OpenTeamImmediately::GetInstance()

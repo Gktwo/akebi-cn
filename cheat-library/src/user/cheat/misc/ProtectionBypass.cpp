@@ -46,14 +46,14 @@ namespace cheat::feature
 
     const FeatureGUIInfo& ProtectionBypass::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info { "", "Settings", false };
+        static const FeatureGUIInfo info { "", u8"设置", false };
         return info;
     }
 
     void ProtectionBypass::DrawMain()
     {
 		ConfigWidget(f_Enabled, 
-			"Close mhyprot2 handle (changes will take effect after relaunch).");
+			u8"关闭mhyprot2句柄（更改将在重新启动后生效）.");
     }
 
     ProtectionBypass& ProtectionBypass::GetInstance()

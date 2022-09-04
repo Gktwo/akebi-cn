@@ -42,7 +42,7 @@ namespace cheat::feature
     }
 
     CustomWeather::CustomWeather() : Feature(),
-        NF(f_Enabled, "Custom Weather", "World", false),
+        NF(f_Enabled, u8"自定义天气", "World", false),
         NF(f_Lightning, u8"高亮敌人", "World", false),
         toBeUpdate(), nextUpdate(0)
     {
@@ -51,7 +51,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& CustomWeather::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"自定义天气", "Visuals", true };
+        static const FeatureGUIInfo info{ u8"自定义天气", u8"模组和视觉类", true };
         return info;
     }
 

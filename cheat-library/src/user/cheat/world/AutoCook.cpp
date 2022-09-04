@@ -21,10 +21,10 @@ namespace cheat::feature
     static void CookingQtePageContext_UpdateProficiency(app::CookingQtePageContext* __this, MethodInfo* method);
 
     AutoCook::AutoCook() : Feature(),
-        NF(f_Enabled, "Standart Cooking", "AutoCook", false),
-        NF(f_FastProficiency, "Fast Proficiency", "AutoCook", false),
-        NF(f_CountField, "Count Item", "AutoCook", 1),
-        NF(f_QualityField, "Quality", "AutoCook", "Normal")
+        NF(f_Enabled, u8"±ê×¼Åëâ¿", "AutoCook", false),
+        NF(f_FastProficiency, u8"¿ìËÙÊìÁ·", "AutoCook", false),
+        NF(f_CountField, u8"ÖÆ×÷ÊıÁ¿", "AutoCook", 1),
+        NF(f_QualityField, u8"ÖÊÁ¿", "AutoCook", "Normal")
     {
         HookManager::install(app::MoleMole_PlayerModule_RequestPlayerCook, PlayerModule_RequestPlayerCook);
         HookManager::install(app::MoleMole_PlayerModule_OnPlayerCookRsp, PlayerModule_OnPlayerCookRsp);
@@ -33,19 +33,19 @@ namespace cheat::feature
 
     const FeatureGUIInfo& AutoCook::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"è‡ªåŠ¨çƒ¹é¥ª", "World", true };
+        static const FeatureGUIInfo info{ u8"×Ô¶¯Åëâ¿", u8"´óÊÀ½ç", true };
         return info;
     }
 
     void AutoCook::DrawMain()
     {
-        ConfigWidget(f_Enabled, u8"å¿«é€Ÿçƒ¹é¥ªå½“é£Ÿè°±æ‰“å¼€. \n" \
-            u8"å¦‚æœå¿«é€Ÿçƒ¹é¥ªæ˜¯æœªè§£é”çš„ï¼Œä½ è¿˜éœ€è¦æ‰“å¼€å¿«é€Ÿç†Ÿç»ƒ.");
-        ConfigWidget(f_FastProficiency, u8"å°½å¯èƒ½å¿«é€Ÿå‡†å¤‡ä¸€ä»½æœªç»ç ”ç©¶çš„é£Ÿè°±.");
-        ConfigWidget(u8"åˆ¶ä½œä¸ªæ•°", f_CountField, 1, 1, 100,
-            u8"ä¸€æ¬¡åšå¤šå°‘ä¸ª.\n" \
-            u8"(ä»…é€‚ç”¨äºæ ‡å‡†æ¨¡å¼.)");
-        if (ImGui::BeginCombo(u8"çƒ¹é¥ªè´¨é‡", f_QualityField.value().c_str()))
+        ConfigWidget(f_Enabled, u8"¿ìËÙÅëâ¿µ±Ê³Æ×´ò¿ªÊ±. \n" \
+            u8"Èç¹û¿ìËÙÅëâ¿ÊÇÎ´½âËøµÄ£¬Äã»¹ĞèÒª´ò¿ª¿ìËÙÊìÁ·.");
+        ConfigWidget(f_FastProficiency, u8"¾¡¿ÉÄÜ¿ìËÙ×¼±¸Ò»·İÎ´¾­ÑĞ¾¿µÄÊ³Æ×.");
+        ConfigWidget(u8"ÖÆ×÷¸öÊı", f_CountField, 1, 1, 100,
+            u8"Ò»´Î×ö¶àÉÙ¸ö.\n" \
+            u8"(½öÊÊÓÃÓÚ±ê×¼Ä£Ê½.)");
+        if (ImGui::BeginCombo(u8"Åëâ¿ÖÊÁ¿", f_QualityField.value().c_str()))
         {
             for (auto& [qualityName, quality] : qualities)
             {
@@ -68,9 +68,9 @@ namespace cheat::feature
     void AutoCook::DrawStatus()
     {
         if (f_FastProficiency)
-            ImGui::Text(u8"è‡ªåŠ¨çƒ¹é¥ª [ç†Ÿç»ƒ]");
+            ImGui::Text(u8"×Ô¶¯Åëâ¿ [ÊìÁ·]");
         else
-            ImGui::Text(u8"è‡ªåŠ¨çƒ¹é¥ª [æ ‡å‡†, %s]", f_QualityField.value().c_str());
+            ImGui::Text(u8"×Ô¶¯Åëâ¿ [±ê×¼, %s]", f_QualityField.value().c_str());
     }
 
     AutoCook& AutoCook::GetInstance()

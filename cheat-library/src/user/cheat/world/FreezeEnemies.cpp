@@ -18,7 +18,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& FreezeEnemies::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"冻结敌人", "World", false };
+        static const FeatureGUIInfo info{ u8"冻结敌人", u8"大世界", false };
         return info;
     }
 

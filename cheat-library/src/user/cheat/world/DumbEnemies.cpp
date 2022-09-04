@@ -8,14 +8,14 @@ namespace cheat::feature
     static void VCMonsterAIController_TryDoSkill_Hook(void* __this, uint32_t skillID, MethodInfo* method);
 
     DumbEnemies::DumbEnemies() : Feature(),
-        NF(f_Enabled, u8"怪物变傻", "DumbEnemies", false)
+        NF(f_Enabled, u8"怪物变傻", u8"怪物变傻", false)
     {
 		HookManager::install(app::MoleMole_VCMonsterAIController_TryDoSkill, VCMonsterAIController_TryDoSkill_Hook);
     }
 
     const FeatureGUIInfo& DumbEnemies::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "", "World", false };
+        static const FeatureGUIInfo info{ "", u8"大世界", false };
         return info;
     }
 

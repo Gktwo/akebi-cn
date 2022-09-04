@@ -14,16 +14,16 @@ namespace cheat::feature
 	static void BaseMoveSyncPlugin_ConvertSyncTaskToMotionInfo_Hook(app::BaseMoveSyncPlugin* __this, MethodInfo* method);
 
     KillAura::KillAura() : Feature(),
-        NF(f_Enabled,      "Kill aura",                 "KillAura", false),
-		NF(f_DamageMode,   "Damage mode",               "Damage mode", false),
-		NF(f_PercentDamageMode, "Percent damage mode",  "Damage mode", false),
-		NF(f_InstantDeathMode,   "Instant death",       "Instant death", false),
-        NF(f_OnlyTargeted, "Only targeted",             "KillAura", true),
-        NF(f_Range,        "Range",                     "KillAura", 15.0f),
-        NF(f_AttackDelay,  "Attack delay time (in ms)", "KillAura", 100),
-        NF(f_RepeatDelay,  "Repeat delay time (in ms)", "KillAura", 1000),
-		NF(f_DamageValue, "Crash damage value", "Damage mode", 233.0f),
-		NF(f_PercentDamageTimes, "Times to kill", "Damage mode", 3)
+		NF(f_Enabled, u8"杀戮光环", u8"杀戮领域", false),
+		NF(f_DamageMode, u8"破坏模式", u8"破坏模式", false),
+		NF(f_PercentDamageMode, u8"损伤模式百分比", u8"破坏模式", false),
+		NF(f_InstantDeathMode, u8"立即死亡", "Instant death", false),
+		NF(f_OnlyTargeted, u8"只针对", u8"杀戮领域", true),
+		NF(f_Range, u8"范围", "KillAura", 15.0f),
+		NF(f_AttackDelay, u8"攻击延迟时间（毫秒)", u8"杀戮领域", 100),
+		NF(f_RepeatDelay, u8"重复延迟时间（毫秒）", u8"杀戮领域", 1000),
+		NF(f_DamageValue, u8"碰撞损伤值", u8"破坏模式", 233.0f),
+		NF(f_PercentDamageTimes, u8"杀死时间", u8"破坏模式", 3)
     { 
 		events::GameUpdateEvent += MY_METHOD_HANDLER(KillAura::OnGameUpdate);
 		HookManager::install(app::MoleMole_BaseMoveSyncPlugin_ConvertSyncTaskToMotionInfo, BaseMoveSyncPlugin_ConvertSyncTaskToMotionInfo_Hook);
@@ -31,7 +31,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& KillAura::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"杀戮领域", "World", true };
+        static const FeatureGUIInfo info{ u8"杀戮领域", u8"大世界", true };
         return info;
     }
 
@@ -41,28 +41,28 @@ namespace cheat::feature
 		ImGui::SameLine();
 		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"选择一个或者多个理想的模式.");
 
-		ConfigWidget(u8"破坏伤害模式", f_DamageMode, "Kill aura causes crash damage for monster around you.");
+		ConfigWidget(u8"破坏伤害模式", f_DamageMode, u8"杀死光环对你周围的怪物造成碰撞伤害.");
 		ImGui::Indent();
-		ConfigWidget(u8"百分比模式", f_PercentDamageMode, "Crash damage with percent value.");
+		ConfigWidget(u8"百分比模式", f_PercentDamageMode, u8"碰撞损坏百分比值.");
 		if (f_DamageMode)
 		{
 			if (!f_PercentDamageMode)
 			{
-				ConfigWidget(u8"伤害值", f_DamageValue, 1, 0, 10000000, "Crash damage value");
+				ConfigWidget(u8"伤害值", f_DamageValue, 1, 0, 10000000, u8"碰撞损伤值");
 			}
 			else
 			{
-				ConfigWidget(u8"死亡时间", f_PercentDamageTimes, 1, 1, 100, "How many times to kill.");
+				ConfigWidget(u8"死亡时间", f_PercentDamageTimes, 1, 1, 100, u8"杀死需要的时间.");
 			}
 		}
 		ImGui::Unindent();
 		ConfigWidget(u8"瞬间模式", f_InstantDeathMode, u8"尝试作用于周围所有目标.");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Can get buggy with bosses like PMA and Hydro Hypo.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"可能与机械阵列和水无相等出现bug.");
 		ConfigWidget(u8"范围", f_Range, 0.1f, 5.0f, 100.0f);
-		ConfigWidget(u8"敌不犯我，我不犯人", f_OnlyTargeted, "If enabled, kill aura will only affect monsters targeting/aggro towards you.");
-		ConfigWidget(u8"伤害延迟  (ms)", f_AttackDelay, 1, 0, 1000, "Delay in ms before next crash damage.");
-		ConfigWidget(u8"个体延迟 (ms)", f_RepeatDelay, 1, 100, 2000, "Delay in ms before crash damaging same monster.");
+		ConfigWidget(u8"敌不犯我，我不犯人", f_OnlyTargeted, u8"如果启用，杀戮光环将只影响以你为目标的怪物/对你的攻击.");
+		ConfigWidget(u8"伤害延迟  (ms)", f_AttackDelay, 1, 0, 1000, u8"下一次碰撞损坏前的延迟（毫秒）.");
+		ConfigWidget(u8"个体延迟 (ms)", f_RepeatDelay, 1, 100, 2000, u8"碰撞前延迟毫秒，同一怪物.");
     }
 
     bool KillAura::NeedStatusDraw() const

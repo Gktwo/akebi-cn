@@ -56,7 +56,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& ProfileChanger::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"自定义信息", "Visuals", true };
+        static const FeatureGUIInfo info{ u8"自定义信息", u8"模组和视觉类", true };
         return info;
     }
 
@@ -76,7 +76,7 @@ namespace cheat::feature
             ConfigWidget(u8"最大经验值", f_MaxExp, 1, 2, 100000, u8"改变最大经验值.");
             ConfigWidget(f_ExpBar, "Changes the ExpBar visually.");
             if (f_ExpBar)
-                ConfigWidget("ExpBarValue", f_ExpBarValue, 1, 2, 100, "Changes the ExpBar visually.");
+                ConfigWidget(u8"经验条值", f_ExpBarValue, 1, 2, 100, u8"改变经验条显示.");
         }   
         ConfigWidget(f_WorldLevel, u8"改变世界等级.");
         ConfigWidget(f_Avatar, u8"改变角色头像.\n" \

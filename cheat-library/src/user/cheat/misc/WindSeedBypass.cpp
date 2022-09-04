@@ -18,7 +18,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& WindSeedBypass::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"阻断风种子", "Settings", true };
+        static const FeatureGUIInfo info{ u8"阻断风种子", u8"设置", true };
         return info;
     }
 

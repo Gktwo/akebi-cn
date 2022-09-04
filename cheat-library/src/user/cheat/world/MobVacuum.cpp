@@ -30,7 +30,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& MobVacuum::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"万象天引", "World", true };
+        static const FeatureGUIInfo info{ u8"万象天引", u8"大世界", true };
         return info;
     }
 
@@ -63,6 +63,7 @@ namespace cheat::feature
 
     	ConfigWidget(u8"瞬间作用", f_Instantly, u8"立刻作用.");
         ConfigWidget(u8"只作用被注意的目标", f_OnlyTarget, u8"如果开启,指挥作用于对你攻击的怪物，不影响动物.");
+        ConfigWidget(u8"移除碰撞器", f_SetCollider, u8"如果启用，怪物将无法推你，无论距离或大小");
         ConfigWidget(u8"速度", f_Speed, 0.1f, 1.0f, 15.0f, u8"如果没有开启立即作用，那么这是移动速度.");
         ConfigWidget(u8"半径 (m)", f_Radius, 0.1f, 5.0f, 150.0f, u8"作用半径.");
         ConfigWidget(u8"围绕距离 (m)", f_Distance, 0.1f, 0.5f, 10.0f, u8"目标围绕在你周围.");
@@ -80,8 +81,8 @@ namespace cheat::feature
             f_Instantly ? u8"立即" : fmt::format("Normal|{:.1f}", f_Speed.value()).c_str(),
             f_Radius.value(),
             f_Distance.value(),
-            f_OnlyTarget ? u8"仅活动" : u8"全部"
-        );
+            f_OnlyTarget ? u8"仅活动" : u8"全部",
+            f_SetCollider ? "RC" : "");
     }
 
     MobVacuum& MobVacuum::GetInstance()

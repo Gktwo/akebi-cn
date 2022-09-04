@@ -15,7 +15,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& FPSUnlock::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"fps解锁", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"fps解锁", u8"模组和视觉类", false };
         return info;
     }
 

@@ -12,7 +12,7 @@ namespace cheat::feature
 {
     ItemTeleportBase::ItemTeleportBase(const std::string& section, const std::string& name) : Feature(),
 		NF(f_Key, u8"传送到最近的", section, Hotkey()),
-		NF(f_ShowInfo, "Show Info", section, true),
+		NF(f_ShowInfo, u8"显示信息", section, true),
         section(section), name(name)
     {
 		f_Key.value().PressedEvent += MY_METHOD_HANDLER(ItemTeleportBase::OnTeleportKeyPressed);
@@ -20,7 +20,7 @@ namespace cheat::feature
 
     void ItemTeleportBase::DrawMain()
     {
-		auto desc = util::string_format("When key pressed, will teleport to nearest %s if exists.", name.c_str());
+		auto desc = util::string_format(u8"按键时，将传送到最近的%s如果存在。", name.c_str());
 		ConfigWidget(f_Key, desc.c_str());
 
 		DrawFilterOptions();

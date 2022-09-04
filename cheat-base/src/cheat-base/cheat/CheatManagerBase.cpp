@@ -47,7 +47,8 @@ namespace cheat
 
 		ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
 
-		if (!ImGui::Begin(u8"Akebi-GC 3.0.51 OS 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
+		if (!ImGui::Begin(u8"Akebi-GC 3.0.51 os v.0904 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
+
 		{
 			ImGui::End();
 			return;
@@ -80,9 +81,9 @@ namespace cheat
 				index++;
 			}
 
-			ImGui::TextColored(ImColor(255, 136, 0, 255), "Private ToF cheat:");
+			ImGui::TextColored(ImColor(255, 136, 0, 255), u8"汉化by@gktwo:");
 			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, 0xC0D5C8FF);
-			TextURL("Acai", "http://acai-tof.shop", true, false);
+			TextURL(u8"qq群", "https://jq.qq.com/?_wv=1027&k=JNXeTQFV", true, false);
 			ImGui::PopStyleColor();
 
 			ImGui::EndListBox();
@@ -139,7 +140,7 @@ namespace cheat
 
 	void CheatManagerBase::DrawProfileGlobalActivities()
 	{
-		if (ImGui::Button("Add new profile"))
+		if (ImGui::Button(u8"添加新配置文件"))
 		{
 			std::unordered_set<std::string> profileNameSet = { config::GetProfiles().begin(), config::GetProfiles().end() };
 			size_t index = 0;
@@ -147,7 +148,7 @@ namespace cheat
 			do 
 			{
 				index++;
-				std::string newName = fmt::format("Profile #{}", index);
+				std::string newName = fmt::format(u8"配置文件 #{}", index);
 				if (profileNameSet.count(newName) == 0)
 					name = newName;
 
@@ -164,10 +165,10 @@ namespace cheat
 		if (isPopupOpen)
 			ImGui::BeginDisabled();
 
-		if (ImGui::SmallButton("Rnm"))
+		if (ImGui::SmallButton(u8"重命名"))
 			ImGui::OpenRenamePopup(profileName);
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("Rename");
+			ImGui::SetTooltip(u8"重命名");
 
 		if (isPopupOpen)
 			ImGui::EndDisabled();
@@ -183,14 +184,14 @@ namespace cheat
 		if (ImGui::SmallButton(u8"删除"))
 			config::RemoveProfile(profileName);
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("Delete");
+			ImGui::SetTooltip(u8"删除");
 
 		ImGui::SameLine();
 
-		if (ImGui::SmallButton("Dupe"))
+		if (ImGui::SmallButton(u8"复制配置文件"))
 			config::DuplicateProfile(profileName);
 		if (ImGui::IsItemHovered())
-			ImGui::SetTooltip("Duplicate Profile");
+			ImGui::SetTooltip(u8"复制配置文件");
 	}
 
 	void CheatManagerBase::DrawProfileEntry(const std::string& profileName)
@@ -200,7 +201,7 @@ namespace cheat
 
 	void CheatManagerBase::DrawProfileTableHeader()
 	{
-		ImGui::TableSetupColumn("Name");
+		ImGui::TableSetupColumn(u8"名称");
 	}
 
 	int CheatManagerBase::GetProfileTableColumnCount()
@@ -218,7 +219,7 @@ namespace cheat
 			ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * 10), 0.0f))
 		{
 			DrawProfileTableHeader();
-			ImGui::TableSetupColumn("Actions");
+			ImGui::TableSetupColumn(u8"行动");
 			ImGui::TableSetupScrollFreeze(0, 1);
 			ImGui::TableHeadersRow();
 
@@ -248,7 +249,7 @@ namespace cheat
 		if (m_IsProfileConfigurationShowed)
 			ImGui::BeginDisabled();
 
-		bool buttonPressed = ImGui::Button("Configure...");
+		bool buttonPressed = ImGui::Button(u8"设定...");
 
 		if (m_IsProfileConfigurationShowed)
 			ImGui::EndDisabled();
@@ -425,7 +426,7 @@ namespace cheat
 		if (m_IsProfileConfigurationShowed)
 		{
 			ImGui::SetNextWindowSize({ 0, ImGui::GetTextLineHeightWithSpacing() * 11 }, ImGuiCond_FirstUseEver);
-			if (ImGui::Begin("Config profile configuration", &m_IsProfileConfigurationShowed))
+			if (ImGui::Begin(u8"配置文件设置", &m_IsProfileConfigurationShowed))
 				DrawProfileConfiguration();
 
 			ImGui::End();

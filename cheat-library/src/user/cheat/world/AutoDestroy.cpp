@@ -15,21 +15,21 @@ namespace cheat::feature
 	static void LCAbilityElement_ReduceModifierDurability_Hook(app::LCAbilityElement* __this, int32_t modifierDurabilityIndex, float reduceDurability, app::Nullable_1_Single_ deltaTime, MethodInfo* method);
 
 	AutoDestroy::AutoDestroy() : Feature(),
-		NF(f_Enabled, "Auto Destroy", "AutoDestroy", false),
-		NF(f_DestroyOres, "Destroy Ores", "AutoDestroy", false),
-		NF(f_DestroyShields, "Destroy Shields", "AutoDestroy", false),
-		NF(f_DestroyDoodads, "Destroy Doodads", "AutoDestroy", false),
-		NF(f_DestroyPlants, "Destroy Plants", "AutoDestroy", false),
-		NF(f_DestroySpecialObjects, "Destroy Special Objects", "AutoDestroy", false),
-		NF(f_DestroySpecialChests, "Destroy Special Chests", "AutoDestroy", false),
-		NF(f_Range, "Range", "AutoDestroy", 10.0f)
+		NF(f_Enabled, u8"自动销毁", u8"自动破坏", false),
+		NF(f_DestroyOres, u8"矿石类", u8"自动破坏", false),
+		NF(f_DestroyShields, u8"怪物的护盾", u8"自动破坏", false),
+		NF(f_DestroyDoodads, u8"部分探索物品", u8"自动破坏", false),
+		NF(f_DestroyPlants, u8"植物", u8"自动破坏", false),
+		NF(f_DestroySpecialObjects, u8"特殊对象", u8"自动破坏", false),
+		NF(f_DestroySpecialChests, u8"特殊箱子", u8"自动破坏", false),
+		NF(f_Range, u8"范围", u8"自动破坏", 10.0f)
 	{
 		HookManager::install(app::MoleMole_LCAbilityElement_ReduceModifierDurability, LCAbilityElement_ReduceModifierDurability_Hook);
 	}
 
 	const FeatureGUIInfo& AutoDestroy::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"原子崩坏", "World", true };
+		static const FeatureGUIInfo info{ u8"原子崩坏", u8"大世界", true };
 		return info;
 	}
 
@@ -43,13 +43,13 @@ namespace cheat::feature
 		ConfigWidget(u8"矿石类", f_DestroyOres, u8"可采集矿石类物品.");
 		ConfigWidget(u8"怪物的护盾", f_DestroyShields, u8"怪物的护盾.");
 		ConfigWidget(u8"部分探索物品", f_DestroyDoodads, u8"罐头瓶子之类.");
-		ConfigWidget("Plants", f_DestroyPlants, "Dandelion Seeds, Sakura Bloom, etc.");
-		ConfigWidget("Special Objects", f_DestroySpecialObjects, "Destroy Ancient Rime, Large and Small Rock Piles");
+		ConfigWidget(u8"植物", f_DestroyPlants, u8"蒲公英种子、樱花花等.");
+		ConfigWidget(u8"特殊对象", f_DestroySpecialObjects, u8"摧毁古老的雾凇、大小岩石堆");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Risk Unknown!");
-		ConfigWidget("Special Chests", f_DestroySpecialChests, "Destroy Chests with Brambles, Frozen, or In Rocks");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"未知风险!");
+		ConfigWidget(u8"特殊箱子", f_DestroySpecialChests, u8"用荆棘、冰冻或岩石的箱子");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Risk Unknown!");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"高风险!");
 		ImGui::Unindent();
 		ConfigWidget(u8"范围 (m)", f_Range, 0.1f, 1.0f, 15.0f);
 	}
@@ -68,8 +68,8 @@ namespace cheat::feature
 			f_DestroyShields ? u8"盾" : "",
 			f_DestroyDoodads ? u8"道具" : "",
 			f_DestroyPlants ? u8"植" : "",
-			f_DestroySpecialObjects ? "SO" : "",
-			f_DestroySpecialChests ? "SC" : "");
+			f_DestroySpecialObjects ? u8"特物" : "",
+			f_DestroySpecialChests ? u8"特箱" : "");
 	}
 
 	AutoDestroy& AutoDestroy::GetInstance()

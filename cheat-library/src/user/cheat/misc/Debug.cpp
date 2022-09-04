@@ -40,7 +40,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& Debug::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"调试信息", "Debug", false };
+        static const FeatureGUIInfo info{ u8"调试信息", u8"调试", false };
         return info;
     }
 
@@ -262,25 +262,25 @@ namespace cheat::feature
             mapTeleport.TeleportTo(entity->absolutePosition());
         };
         if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Teleport");
+            ImGui::SetTooltip(u8"传送");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton(u8"召集"))
+        if (ImGui::SmallButton(u8"传送"))
             entity->setRelativePosition(manager.avatar()->relativePosition());
         if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Summon");
+            ImGui::SetTooltip(u8"传送");
 
         ImGui::SameLine();
         if (ImGui::SmallButton(u8"驱逐"))
             entity->setRelativePosition({ 0, 0, 0 });
         if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Banish");
+            ImGui::SetTooltip(u8"驱逐");
 
         ImGui::SameLine();
-        if (ImGui::SmallButton(u8"复制"))
+        if (ImGui::SmallButton(u8"复制详细信息"))
             CopyEntityDetailsToClipboard(entity);
         if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Copy Details");
+            ImGui::SetTooltip(u8"复制详细信息");
     }
 
     std::vector<game::Entity*> SortEntities(std::vector<game::Entity*> entities, Debug::EntitySortCondition condition)
@@ -770,28 +770,28 @@ namespace cheat::feature
     void DrawPositionInfo()
     {
         auto avatarPos = app::ActorUtils_GetAvatarPos(nullptr);
-        ImGui::Text("Avatar position: %s", il2cppi_to_string(avatarPos).c_str());
+        ImGui::Text(u8"角色位置: %s", il2cppi_to_string(avatarPos).c_str());
 
         auto relativePos = app::WorldShiftManager_GetRelativePosition(avatarPos, nullptr);
-        ImGui::Text("Relative position: %s", il2cppi_to_string(relativePos).c_str());
+        ImGui::Text(u8"相对位置: %s", il2cppi_to_string(relativePos).c_str());
 
         auto levelPos = app::Miscs_GenLevelPos_1(avatarPos, nullptr);
-        ImGui::Text("Level position: %s", il2cppi_to_string(levelPos).c_str());
+        ImGui::Text(u8"水平位置: %s", il2cppi_to_string(levelPos).c_str());
 
 
         static app::Vector3 teleportPos = {};
-        ImGui::InputFloat3("Teleport position", reinterpret_cast<float*>(&teleportPos));
+        ImGui::InputFloat3("传送坐标", reinterpret_cast<float*>(&teleportPos));
 
         auto& teleport = MapTeleport::GetInstance();
-        if (ImGui::Button("Map teleport"))
+        if (ImGui::Button(u8"地图传送"))
             teleport.TeleportTo(app::Vector2{ teleportPos.x, teleportPos.y });
 
         ImGui::SameLine();
 
-        if (ImGui::Button("World teleport"))
+        if (ImGui::Button(u8"世界传送"))
             teleport.TeleportTo(teleportPos);
 
-        if (ImGui::TreeNode("Ground pos info"))
+        if (ImGui::TreeNode(u8"地面位置信息"))
         {
             auto groundNormal = app::Miscs_CalcCurrentGroundNorm(avatarPos, nullptr);
             ImGui::Text("Ground normal: %s", il2cppi_to_string(groundNormal).c_str());
@@ -813,19 +813,19 @@ namespace cheat::feature
 
             ImGui::TreePop();
         }
-        if (ImGui::Button("Copy Position"))
+        if (ImGui::Button(u8"复制坐标"))
         {
             auto text = il2cppi_to_string(avatarPos);
             ImGui::SetClipboardText(text.c_str());
         }
         ImGui::SameLine();
-        if (ImGui::Button("Copy All Info"))
+        if (ImGui::Button(u8"复制全部信息"))
         {
             auto text = il2cppi_to_string(avatarPos) + "\n" + il2cppi_to_string(relativePos) + "\n" + il2cppi_to_string(levelPos) + "\n" + il2cppi_to_string(app::Miscs_CalcCurrentGroundNorm(avatarPos, nullptr));
             ImGui::SetClipboardText(text.c_str());
         }
         ImGui::SameLine();
-        if (ImGui::Button("Copy as json"))
+        if (ImGui::Button(u8"复制到json"))
         {
             std::string text = "\"position\":[";
             text += std::to_string(avatarPos.x) + ",";
@@ -848,10 +848,10 @@ namespace cheat::feature
             return;
 
         int temp = mapManager->fields.playerSceneID;
-        ImGui::InputInt("Player scene id", &temp);
+        ImGui::InputInt(u8"玩家场景id", &temp);
 
         temp = mapManager->fields.mapSceneID;
-        ImGui::InputInt("Map scene id", &temp);
+        ImGui::InputInt(u8"地图场景id", &temp);
     }
 
     void DrawImGuiFocusTest()
@@ -925,7 +925,7 @@ namespace cheat::feature
             if (ImGui::Button(added ? "Update" : "Add"))
                 chestNames[entityName] = tempName;
 
-            if (ImGui::Button("Teleport"))
+            if (ImGui::Button(u8"传送"))
             {
                 auto& mapTeleport = MapTeleport::GetInstance();
                 mapTeleport.TeleportTo(entity->absolutePosition());

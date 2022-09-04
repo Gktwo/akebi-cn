@@ -16,10 +16,6 @@ namespace cheat::feature
 		virtual bool NeedStatusDraw() const override;
 		void DrawStatus() override;
 	private:
-		SafeQueue<uint32_t> toBeUpdate;
-		SafeValue<int64_t> nextUpdate;
-		int f_DelayUpdate = 100;
-
 		void OnGameUpdate();
 		PaimonFollow();
 	};
