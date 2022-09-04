@@ -106,7 +106,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& InteractiveMap::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"大地图标记", u8"大世界", false };
+		static const FeatureGUIInfo info{ "", u8"大世界", false };
 		return info;
 	}
 
