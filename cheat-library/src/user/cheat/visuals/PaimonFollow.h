@@ -1,6 +1,7 @@
 #pragma once
 #include <cheat-base/cheat/Feature.h>
 #include <cheat-base/config/config.h>
+#include <cheat-base/thread-safe.h>
 
 namespace cheat::feature
 {
@@ -15,6 +16,9 @@ namespace cheat::feature
 		virtual bool NeedStatusDraw() const override;
 		void DrawStatus() override;
 	private:
+		SafeQueue<uint32_t> toBeUpdate;
+		SafeValue<int64_t> nextUpdate;
+		int f_DelayUpdate = 100;
 
 		void OnGameUpdate();
 		PaimonFollow();

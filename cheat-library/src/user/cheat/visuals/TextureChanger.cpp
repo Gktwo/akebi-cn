@@ -18,7 +18,6 @@ namespace cheat::feature
         NF(f_BodyPath, u8"体", "Visuals::TextureChanger", false),
         NF(f_DressPath, u8"裙子", "Visuals::TextureChanger", false),
         NF(f_GliderPath, "Glider", "Visuals::TextureChanger", false),
-        NF(f_GliderPath, "Glider", "Visuals::TextureChanger", false),
         toBeUpdate(), nextUpdate(0)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(TextureChanger::OnGameUpdate);
@@ -35,7 +34,6 @@ namespace cheat::feature
         ConfigWidget(f_Enabled, "Texture Changer.");
         ImGui::Text(u8"当前角色: %s", ActiveHero.c_str());
         ImGui::Text("Active Glider: %s", ActiveGlider.c_str());
-        ImGui::Text("Active Glider: %s", ActiveGlider.c_str());
  
         ConfigWidget(f_HeadPath, u8"头.\n" \
             "Example path: C:\\Head.png");
@@ -46,7 +44,7 @@ namespace cheat::feature
         ConfigWidget(f_DressPath, u8"裙子.\n" \
             "Example path: C:\\Dress.png");
 
-        ConfigWidget(f_GliderPath, u8"风之翼.\n" \
+        ConfigWidget(f_GliderPath, "Glider Texture.\n" \
             "Example path: C:\\Glider.png");
 
         if (ImGui::Button(u8"应用"))

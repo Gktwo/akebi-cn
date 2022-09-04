@@ -32,6 +32,7 @@ namespace cheat::feature
         ImGui::InputText(u8"链接", &f_URL);
         ConfigWidget(u8"宽度", f_planeWidth, 0.1f, 0.5f, 20.0f);
         ConfigWidget(u8"高度", f_planeHeight, 0.1f, 0.5f, 20.0f);
+
     }
 
     bool Browser::NeedStatusDraw() const
