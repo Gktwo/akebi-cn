@@ -31,7 +31,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& MobVacuum::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"万象天引", "World", true };
+        static const FeatureGUIInfo info{ u8"万象天引", u8"大世界", true };
         return info;
     }
 

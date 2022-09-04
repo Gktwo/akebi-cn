@@ -231,7 +231,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& AnimationChanger::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"自定义动作", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"自定义动作", u8"模组和视觉类", false };
         return info;
     }
 

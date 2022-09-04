@@ -17,7 +17,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& CameraZoom::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "CameraZoom", "Visuals", false };
+        static const FeatureGUIInfo info{ "CameraZoom", u8"模组和视觉类", false };
         return info;
     }
 

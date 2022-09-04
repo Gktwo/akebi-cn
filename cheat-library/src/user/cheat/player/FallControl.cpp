@@ -18,7 +18,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& cheat::feature::FallControl::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"坠落控制", "Player", true };
+        static const FeatureGUIInfo info{ u8"坠落控制", u8"玩家类", true };
         return info;
     }
 

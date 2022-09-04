@@ -17,7 +17,7 @@ namespace cheat::feature
 	}
 	const FeatureGUIInfo& AutoSeelie::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "", "World", true };
+		static const FeatureGUIInfo info{ "", u8"¥Û ¿ΩÁ", true };
 		return info;
 	}
 

@@ -13,22 +13,22 @@ namespace cheat::feature
 	app::Vector3 zero;
 
 	NoClip::NoClip() : Feature(),
-		NF(f_Enabled,			"No clip",				"NoClip", false),
-		NF(f_NoAnimation,		"No Animation",			"NoClip", true),
-		NF(f_UseCustomKeys,		"Use Custom Hotkeys",	"NoClip", false),
-		NF(f_ForwardKey,		"Forward HotKey",		"NoClip", Hotkey(ImGuiKey_W)),
-		NF(f_LeftKey,			"Left HotKey",			"NoClip", Hotkey(ImGuiKey_A)),
-		NF(f_BackKey,			"Back HotKey",			"NoClip", Hotkey(ImGuiKey_S)),
-		NF(f_RightKey,			"Right HotKey",			"NoClip", Hotkey(ImGuiKey_D)),
-		NF(f_AscendKey,			"Ascend HotKey",		"NoClip", Hotkey(ImGuiKey_Space)),
-		NF(f_DescendKey,		"Descend HotKey",		"NoClip", Hotkey(ImGuiKey_ModShift)),
-		NF(f_AltSpeedKey,		"Alt Speed Hotkey",		"NoClip", Hotkey(ImGuiKey_ModCtrl)),
-		NF(f_Speed,				"Speed",				"NoClip", 5.5f),
-		NF(f_CameraRelative,	"Relative to camera",	"NoClip", true),
-		NF(f_VelocityMode,		"Velocity mode",		"NoClip", false),
-		NF(f_FreeflightMode,	"Freeflight mode",		"NoClip", false),
-		NF(f_AltSpeedEnabled,	"Alt speed enabled",	"NoClip", false),
-		NF(f_AltSpeed,			"Alt speed",			"NoClip", 1.0f)
+		NF(f_Enabled, u8"自由移动", u8"穿墙模式", false),
+		NF(f_NoAnimation, u8"没有动画", u8"穿墙模式", true),
+		NF(f_UseCustomKeys, u8"使用自定义热键", u8"穿墙模式", false),
+		NF(f_ForwardKey, u8"向前热键", u8"穿墙模式", Hotkey(ImGuiKey_W)),
+		NF(f_LeftKey, u8"向左热键", u8"穿墙模式", Hotkey(ImGuiKey_A)),
+		NF(f_BackKey, u8"返回热键", u8"穿墙模式", Hotkey(ImGuiKey_S)),
+		NF(f_RightKey, u8"向右热键", u8"穿墙模式", Hotkey(ImGuiKey_D)),
+		NF(f_AscendKey, u8"上升热键", u8"穿墙模式", Hotkey(ImGuiKey_Space)),
+		NF(f_DescendKey, u8"下降热键", u8"穿墙模式", Hotkey(ImGuiKey_ModShift)),
+		NF(f_AltSpeedKey, u8"Alt速度热键", u8"穿墙模式", Hotkey(ImGuiKey_ModCtrl)),
+		NF(f_Speed, u8"速度", u8"穿墙模式", 5.5f),
+		NF(f_CameraRelative, u8"相对于摄像机", u8"穿墙模式", true),
+		NF(f_VelocityMode, u8"速度模式", u8"穿墙模式", false),
+		NF(f_FreeflightMode, u8"自由飞行模式", u8"穿墙模式", false),
+		NF(f_AltSpeedEnabled, u8"Alt速度启用", u8"穿墙模式", false),
+		NF(f_AltSpeed, u8"变速", u8"穿墙模式", 1.0f)
 
 	{
 		HookManager::install(app::MoleMole_HumanoidMoveFSM_LateTick, HumanoidMoveFSM_LateTick_Hook);
@@ -39,7 +39,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& NoClip::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"自由移动", "Player", true };
+		static const FeatureGUIInfo info{ u8"自由移动", u8"玩家类", true };
 		return info;
 	}
 

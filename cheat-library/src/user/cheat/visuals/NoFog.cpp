@@ -15,7 +15,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& NoFog::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"去雾", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"去雾", u8"模组和视觉类", false };
         return info;
     }
 

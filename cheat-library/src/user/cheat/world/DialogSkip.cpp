@@ -25,26 +25,26 @@ namespace cheat::feature
 
     const FeatureGUIInfo& DialogSkip::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"自动剧情", "World", true };
+        static const FeatureGUIInfo info{ u8"自动剧情", u8"大世界", true };
         return info;
     }
 
     void DialogSkip::DrawMain()
     {
-        ConfigWidget(u8"开/关", f_Enabled, "Automatically continue the dialog.");
-        ConfigWidget(u8"自动选择选项", f_AutoSelectDialog, "Automatically select dialog choices.");
+        ConfigWidget(u8"开/关", f_Enabled, u8"自动继续对话框.");
+        ConfigWidget(u8"自动选择选项", f_AutoSelectDialog, u8"自动选择对话框选项.");
         if (f_AutoSelectDialog)
         {
             ImGui::Indent();
-            ConfigWidget(u8"不包括 Katheryne/Tubby/Wagner", f_ExcludeImportant, "Exclude Kath/Tubby/Wagner from auto-select.");
+            ConfigWidget(u8"不包括 凯瑟琳/壶灵/瓦格纳", f_ExcludeImportant, u8"从自动选择中排除凯瑟琳/壶灵/瓦格纳.");
             ImGui::Unindent();
         }
-        ConfigWidget(u8"快速对话", f_FastDialog, "Speeds up Time");
+        ConfigWidget(u8"快速对话", f_FastDialog, u8"Speeds up Time");
         if (f_FastDialog)
         {
-            ConfigWidget(f_TimeSpeedup, 0.1f, 2.0f, 50.0f, "Time Speedup Multipler \nHigher Values will lead to sync issues with servers \nand is not recommended for Laggy Internet connections.");
+            ConfigWidget(f_TimeSpeedup, 0.1f, 2.0f, 50.0f, u8"时间加速倍数\n较高的值将导致与服务器的同步问题，不建议延迟Internet连接.");
         }
-        ConfigWidget(u8"跳过动画", f_CutsceneUSM, "Automatically skips game movies.");
+        ConfigWidget(u8"跳过动画", f_CutsceneUSM, u8"自动跳过游戏电影.");
     }
 
     bool DialogSkip::NeedStatusDraw() const

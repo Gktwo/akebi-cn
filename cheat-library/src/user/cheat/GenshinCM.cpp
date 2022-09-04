@@ -25,8 +25,8 @@ bool cheat::GenshinCM::CursorGetVisibility()
 }
 
 cheat::GenshinCM::GenshinCM() :
-	NFEX(f_AccConfig, "Account Config", "data", "General::Multi-Account", internal::AccountConfig(), true),
-	NFS(f_ShowType,   "Name show type",         "General::Multi-Account", ShowType::Pseudo)
+	NFEX(f_AccConfig, u8"’ ªß≈‰÷√", "data", "General::Multi-Account", internal::AccountConfig(), true),
+	NFS(f_ShowType,   u8"√˚≥∆œ‘ æ∑Ω Ω",         "General::Multi-Account", ShowType::Pseudo)
 {
 	events::AccountChangedEvent += MY_METHOD_HANDLER(cheat::GenshinCM::OnAccountChanged);
 }
@@ -106,7 +106,7 @@ void cheat::GenshinCM::DrawProfileEntryActivities(const std::string& profileName
 	}
 
 	if (ImGui::IsItemHovered())
-		ImGui::SetTooltip(isAccountAttached ? "Dettach" : u8"º”‘ÿ≈‰÷√");
+		ImGui::SetTooltip(isAccountAttached ? u8"–∂‘ÿ≈‰÷√" : u8"º”‘ÿ≈‰÷√");
 
 	if (m_CurrentAccount.userID == 0)
 		ImGui::EndDisabled();
@@ -134,7 +134,7 @@ void cheat::GenshinCM::DrawProfileEntry(const std::string& profileName)
 	auto accountCount = profileIds.count(profileName) > 0 ? profileIds[profileName].size() : 0;
 	if (accountCount == 0)
 	{
-		ImGui::Text("No accounts.");
+		ImGui::Text(u8"√ª”–’Àªß.");
 		return;
 	}
 
@@ -145,7 +145,7 @@ void cheat::GenshinCM::DrawProfileEntry(const std::string& profileName)
 void cheat::GenshinCM::DrawProfileTableHeader()
 {
 	CheatManagerBase::DrawProfileTableHeader();
-	ImGui::TableSetupColumn("Accounts");
+	ImGui::TableSetupColumn(u8"’Àªß");
 }
 
 int cheat::GenshinCM::GetProfileTableColumnCount()
@@ -162,8 +162,8 @@ void cheat::GenshinCM::DrawAccountsList(const std::string& profileName)
 	if (ImGui::BeginTable("Accounts", 2, flags,
 		ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * 10), 0.0f))
 	{
-		ImGui::TableSetupColumn("Name");
-		ImGui::TableSetupColumn("Actions");
+		ImGui::TableSetupColumn(u8"√˚≥∆");
+		ImGui::TableSetupColumn(u8"––∂Ø");
 		ImGui::TableSetupScrollFreeze(0, 1);
 		ImGui::TableHeadersRow();
 
@@ -220,7 +220,7 @@ void cheat::GenshinCM::DrawProfileLine()
 	ImColor textColor = accountAttached ? ACTIVE_COLOR : ImColor(ImGui::GetColorU32(ImGuiCol_Text));
 	ImGui::TextColored(textColor, name.c_str()); ImGui::SameLine();
 
-	if (ImGui::Button(accountAttached ? "Deattach" : "Attach", ImVec2(buttonWidth, 0.0f)))
+	if (ImGui::Button(accountAttached ? u8"–∂‘ÿ≈‰÷√" : u8"º”‘ÿ≈‰÷√", ImVec2(buttonWidth, 0.0f)))
 	{
 		if (accountAttached)
 			DetachAccount(m_CurrentAccount.userID, currentProfile);

@@ -15,7 +15,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& EnablePeeking::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"反虚化", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"反虚化", u8"模组和视觉类", false };
         return info;
     }
 
