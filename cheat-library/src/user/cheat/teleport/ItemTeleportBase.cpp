@@ -20,7 +20,7 @@ namespace cheat::feature
 
     void ItemTeleportBase::DrawMain()
     {
-		auto desc = util::string_format("When key pressed, will teleport to nearest %s if exists.", name.c_str());
+		auto desc = util::string_format(u8"按键时，将传送到最近的%s如果存在。", name.c_str());
 		ConfigWidget(f_Key, desc.c_str());
 
 		DrawFilterOptions();

@@ -33,7 +33,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& NoCD::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"技能冷却", "Player", true };
+        static const FeatureGUIInfo info{ u8"技能冷却", u8"玩家类", true };
         return info;
     }
 

@@ -56,7 +56,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& ESP::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "", "ESP", false };
+		static const FeatureGUIInfo info{ "", u8"ªÊ÷∆Õ∏ ”", false };
 		return info;
 	}
 

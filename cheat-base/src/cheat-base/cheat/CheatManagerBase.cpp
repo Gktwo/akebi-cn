@@ -47,7 +47,7 @@ namespace cheat
 
 		ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
 
-		if (!ImGui::Begin(u8"Akebi-GC 3.0.0 os 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
+		if (!ImGui::Begin(u8"Akebi-GC 3.0.0 os v.0904 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
 
 		{
 			ImGui::End();
@@ -219,7 +219,7 @@ namespace cheat
 			ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * 10), 0.0f))
 		{
 			DrawProfileTableHeader();
-			ImGui::TableSetupColumn("Actions");
+			ImGui::TableSetupColumn(u8"行动");
 			ImGui::TableSetupScrollFreeze(0, 1);
 			ImGui::TableHeadersRow();
 

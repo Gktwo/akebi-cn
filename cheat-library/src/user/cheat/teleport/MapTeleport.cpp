@@ -33,7 +33,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& MapTeleport::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"大地图传送", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"大地图传送", u8"传送类", true };
 		return info;
 	}
 

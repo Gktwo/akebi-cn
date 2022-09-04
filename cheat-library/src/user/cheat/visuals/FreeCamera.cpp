@@ -53,7 +53,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& FreeCamera::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"自由相机", "Visuals", true };
+		static const FeatureGUIInfo info{ u8"自由相机", u8"模组和视觉类", true };
 		return info;
 	}
 

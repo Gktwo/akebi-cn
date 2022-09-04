@@ -30,7 +30,7 @@ namespace cheat::feature
 
 		NF(f_IconSize, u8"图标大小", "InteractiveMap", 20.0f),
 		NF(f_MinimapIconSize, u8"小地图图标大小", "InteractiveMap", 14.0f),
-		NF(f_DynamicSize, u8"DynamicSize", "InteractiveMap", false),
+		NF(f_DynamicSize, u8"动态图标", "InteractiveMap", false),
 		NF(f_ShowHDIcons, u8"使用高清图标", "InteractiveMap", false),
 
 		NF(f_ShowCompleted, u8"显示完成的", "InteractiveMap", false),
@@ -106,7 +106,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& InteractiveMap::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "", "World", false };
+		static const FeatureGUIInfo info{ u8"大地图标记", u8"大世界", false };
 		return info;
 	}
 
@@ -163,7 +163,7 @@ namespace cheat::feature
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("聚集探测");
+		ImGui::BeginGroupPanel(u8"聚集探测");
 		{
 			ConfigWidget(f_AutoDetectGatheredItems, u8"启用检测收集的项目.\n"
 				u8"它仅适用于启用此功能后将收集的项目.\n"
@@ -174,7 +174,7 @@ namespace cheat::feature
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::BeginGroupPanel("手工完成");
+		ImGui::BeginGroupPanel(u8"手工完成");
 		{
 			ConfigWidget(f_CompleteNearestPoint, true, u8"按下时，完成最近的化身点.");
 			ConfigWidget(f_RevertLatestCompletion, true, u8"按下时，还原为最新的完整操作.");

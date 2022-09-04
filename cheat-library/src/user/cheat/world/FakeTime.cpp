@@ -23,7 +23,7 @@ namespace cheat::feature
 	}
 	const FeatureGUIInfo& FakeTime::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"虚假时间", "World", true };
+		static const FeatureGUIInfo info{ u8"虚假时间", u8"大世界", true };
 		return info;
 	}
 	void FakeTime::DrawMain()

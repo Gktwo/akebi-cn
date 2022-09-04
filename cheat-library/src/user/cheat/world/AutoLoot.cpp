@@ -44,7 +44,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& AutoLoot::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"自动战利品", "World", true };
+        static const FeatureGUIInfo info{ u8"自动战利品", u8"大世界", true };
         return info;
     }
 
@@ -91,7 +91,7 @@ namespace cheat::feature
 				ConfigWidget(u8"开/关", f_UseDelayTimeFluctuation, u8"启用延迟波动.\n" \
 					u8"模拟人工点击延迟，因为手动点击从不一致.");
 				ImGui::SameLine();
-				ImGui::TextColored(ImColor(255, 165, 0, 255), "Read the note!");
+				ImGui::TextColored(ImColor(255, 165, 0, 255), u8"请阅读注意事项!");
 				ImGui::SetNextItemWidth(100.0f);
 				ConfigWidget(u8"延迟范围 +(ms)", f_DelayTimeFluctuation, 1, 0, 1000, u8"延迟在“延迟时间+延迟时间+范围”之间随机波动");
 			}

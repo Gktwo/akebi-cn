@@ -19,7 +19,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& AutoChallenge::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"自动挑战", "World", true };
+		static const FeatureGUIInfo info{ u8"自动挑战", u8"大世界", true };
 		return info;
 	}
 

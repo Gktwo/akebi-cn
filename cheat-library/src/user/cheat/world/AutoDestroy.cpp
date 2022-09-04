@@ -29,7 +29,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& AutoDestroy::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"原子崩坏", "World", true };
+		static const FeatureGUIInfo info{ u8"原子崩坏", u8"大世界", true };
 		return info;
 	}
 

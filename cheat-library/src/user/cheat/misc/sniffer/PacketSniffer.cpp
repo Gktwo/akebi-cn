@@ -11,9 +11,9 @@
 namespace cheat::feature 
 {
 	PacketSniffer::PacketSniffer() : Feature(),
-		NF(f_CaptureEnabled, u8"²¶»ñ", "PacketSniffer", false),
-		NF(f_ManipulationEnabled, u8"²Ù×İ", "PacketSniffer", false),
-		NF(f_PipeName, "Pipe name", "PacketSniffer", "genshin_packet_pipe")
+		NF(f_CaptureEnabled, u8"²¶»ñ", u8"°üĞáÌ½Æ÷", false),
+		NF(f_ManipulationEnabled, u8"²Ù×İ", u8"°üĞáÌ½Æ÷", false),
+		NF(f_PipeName, u8"Í¨µÀÃû³Æ", u8"°üĞáÌ½Æ÷", "genshin_packet_pipe")
 
 	{
 		client.Connect(f_PipeName.value());
@@ -24,7 +24,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& PacketSniffer::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"°üĞáÌ½Æ÷", "Settings", true };
+		static const FeatureGUIInfo info{ u8"°üĞáÌ½Æ÷", u8"ÉèÖÃ", true };
 		return info;
 	}
 

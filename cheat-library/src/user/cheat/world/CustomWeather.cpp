@@ -51,7 +51,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& CustomWeather::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"自定义天气", "Visuals", true };
+        static const FeatureGUIInfo info{ u8"自定义天气", u8"模组和视觉类", true };
         return info;
     }
 

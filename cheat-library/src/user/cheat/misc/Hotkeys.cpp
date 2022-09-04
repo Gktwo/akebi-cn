@@ -10,7 +10,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& Hotkeys::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "", "Hotkeys", false };
+        static const FeatureGUIInfo info{ "", u8"¿ì½Ý¼ü", false };
         return info;
     }
 

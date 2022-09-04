@@ -11,7 +11,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& OculiTeleport::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"神瞳传送", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"神瞳传送", u8"传送类", true };
 		return info;
 	}
 

@@ -22,7 +22,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& Browser::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ u8"浏览器", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"浏览器", u8"模组和视觉类", false };
         return info;
     }
 

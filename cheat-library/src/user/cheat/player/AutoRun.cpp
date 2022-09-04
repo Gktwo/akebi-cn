@@ -19,7 +19,7 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& AutoRun::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ u8"自动行走（废物功能）", "Player", true };
+		static const FeatureGUIInfo info{ u8"自动行走（废物功能）", u8"玩家类", true };
 		return info;
 	}
 
