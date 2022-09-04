@@ -32,8 +32,7 @@ DO_APP_FUNC(0x01939830, void, MoleMole_LoadingManager_SceneGoto, (MoleMole_Loadi
 DO_APP_FUNC(0x019321B0, void, MoleMole_LoadingManager_PerformPlayerTransmit, (MoleMole_LoadingManager* __this, Vector3 targetPos, EnterType__Enum enterType, uint32_t token, EvtTransmitAvatar_EvtTransmitAvatar_TransmitType__Enum transType, uint32_t enterReason, MethodInfo* method));
 DO_APP_FUNC(0x019384A0, void, MoleMole_LoadingManager_RequestSceneTransToPoint, (MoleMole_LoadingManager* __this, uint32_t sceneId, uint32_t pointId, void* finishCallBackInForceDrag, MethodInfo* method));
 DO_APP_FUNC(0x01935630, bool, MoleMole_LoadingManager_NeedTransByServer, (MoleMole_LoadingManager* __this, uint32_t sceneId, Vector3 position, MethodInfo* method));
-DO_APP_FUNC(0x0341E6C0, Vector3, MoleMole_LocalEntityInfoData_get_initPos, (LocalEntityInfoData* __this, MethodInfo* method)); 
-// shared offset
+//DO_APP_FUNC(0x0341E6C0, Vector3, MoleMole_LocalEntityInfoData_get_initPos, (LocalEntityInfoData* __this, MethodInfo* method)); // shared offset
 
 
 // Unlimited stamina
@@ -110,7 +109,7 @@ DO_APP_FUNC(0x01DD7F60, void, MoleMole_PlayerModule_OnReciveLuaShell, (MoleMole_
 
 
 // Debug hooks
-DO_APP_FUNC(0x01D2E820, AttackResult_1*, MoleMole_AttackResult_FillProtoAttackResult, (AttackResult* __this, uint32_t attackerID, uint32_t defenseId, AttackResult_1* protoAttackResult, MethodInfo* method));
+//DO_APP_FUNC(0x01D2E820, AttackResult_1*, MoleMole_AttackResult_FillProtoAttackResult, (AttackResult* __this, uint32_t attackerID, uint32_t defenseId, AttackResult_1* protoAttackResult, MethodInfo* method));
 DO_APP_FUNC(0x01B4BA40, void, MoleMole_LevelSyncCombatPlugin_SendFaceToDir, (void* __this, uint32_t runtimeID, Vector3 forward, MethodInfo* method));
 DO_APP_FUNC(0x03B29D80, void, MoleMole_BaseEntity_FireEvent, (BaseEntity* __this, BaseEvent* e, bool immediately, MethodInfo* method));
 DO_APP_FUNC(0x0230F010, bool, MoleMole_ActorAbilityPlugin_OnEvent, (void* __this, BaseEvent* e, MethodInfo* method));
@@ -251,7 +250,7 @@ DO_APP_FUNC(0x00C99290, Vector3, ActorUtils_GetAvatarPos, (MethodInfo* method));
 DO_APP_FUNC(0x00CA1440, void, ActorUtils_SetAvatarPos, (Vector3 pos, MethodInfo* method));
 DO_APP_FUNC(0x00CA7440, void, ActorUtils_SyncAvatarMotion, (int32_t state, MethodInfo* method));
 
-DO_APP_FUNC(0x008C9070, Notify, Notify_CreateNotify_1, (MoleMole_NotifyTypes__Enum type, Object* body, MethodInfo* method));
+//DO_APP_FUNC(0x008C9070, Notify, Notify_CreateNotify_1, (MoleMole_NotifyTypes__Enum type, Object* body, MethodInfo* method));
 
 // should be 'op_Implicit' not 'get_value'
 DO_APP_FUNC(0x0302C8F0, float, MoleMole_SafeFloat_get_Value, (SafeFloat safeFloat, MethodInfo* method));
