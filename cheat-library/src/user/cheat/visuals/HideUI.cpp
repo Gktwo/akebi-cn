@@ -9,20 +9,20 @@ namespace cheat::feature
     app::GameObject* ui_camera{};
 
     HideUI::HideUI() : Feature(),
-		NFEX(f_Enabled, "Hide UI", "HideUI", "Visuals", false, false)
+		NFEX(f_Enabled, u8"隐藏ui", u8"隐藏ui", "Visuals", false, false)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(HideUI::OnGameUpdate);
     }
 
     const FeatureGUIInfo& HideUI::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "HideUI", "Visuals", false };
+        static const FeatureGUIInfo info{ "HideUI", u8"模组和视觉类", false };
         return info;
     }
 
     void HideUI::DrawMain()
     {
-        ConfigWidget(f_Enabled, "Hide in-game UI.");
+        ConfigWidget(f_Enabled, "Hide in-game UI.\nWhen you switch to another scene (e.g. into Domains), turn off and re-enable this feature");
     }
 
     bool HideUI::NeedStatusDraw() const
@@ -47,15 +47,19 @@ namespace cheat::feature
         {
             if (ui_camera == nullptr)
                 ui_camera = app::GameObject_Find(string_to_il2cppi("/UICamera"), nullptr);
-
-            
-            if (ui_camera)
+  
+            if (ui_camera->fields._.m_CachedPtr != nullptr)
                 app::GameObject_SetActive(ui_camera, false, nullptr);
         }
         else
         {
             if (ui_camera)
-                app::GameObject_SetActive(ui_camera, true, nullptr);
+            {
+                if (ui_camera->fields._.m_CachedPtr != nullptr)
+                    app::GameObject_SetActive(ui_camera, true, nullptr);
+
+                ui_camera = nullptr;
+            }
         }
     }
 }

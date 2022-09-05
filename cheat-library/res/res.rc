@@ -50,9 +50,9 @@ END
 // RCDATA
 //
 
-IMGUI_FONT              RCDATA                  "Ruda-Bold.ttf"
+IMGUI_FONT              RCDATA                  "45.ttf"
 
-IMGUI_FONT_BOLD         RCDATA                  "Ruda-ExtraBold.ttf"
+IMGUI_FONT_BOLD         RCDATA                  "85.ttf"
 
 SIGNATURES              RCDATA                  "signatures.json"
 
@@ -608,7 +608,7 @@ HDRUINSENTINEL          PNG                     "iconsHD\\RuinSentinel.png"
 
 HDRUINSERPENT           PNG                     "iconsHD\\RuinSerpent.png"
 
-HDRUKKHASHAVAMUSHROOMS  PNG                     "iconsHD\\RukkhashavaMushrooms.png"
+
 
 HDRUSTYKOI              PNG                     "iconsHD\\RustyKoi.png"
 
@@ -1354,7 +1354,7 @@ RUINSENTINEL            PNG                     "icons\\RuinSentinel.png"
 
 RUINSERPENT             PNG                     "icons\\RuinSerpent.png"
 
-RUKKHASHAVAMUSHROOMS    PNG                     "icons\\RukkhashavaMushrooms.png"
+
 
 RUSTYKOI                PNG                     "icons\\RustyKoi.png"
 

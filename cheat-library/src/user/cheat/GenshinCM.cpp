@@ -25,8 +25,8 @@ bool cheat::GenshinCM::CursorGetVisibility()
 }
 
 cheat::GenshinCM::GenshinCM() :
-	NFEX(f_AccConfig, "Account Config", "data", "General::Multi-Account", internal::AccountConfig(), true),
-	NFS(f_ShowType,   "Name show type",         "General::Multi-Account", ShowType::Pseudo)
+	NFEX(f_AccConfig, u8"帐户配置", "data", "General::Multi-Account", internal::AccountConfig(), true),
+	NFS(f_ShowType,   u8"名称显示方式",         "General::Multi-Account", ShowType::Pseudo)
 {
 	events::AccountChangedEvent += MY_METHOD_HANDLER(cheat::GenshinCM::OnAccountChanged);
 }
@@ -106,19 +106,19 @@ void cheat::GenshinCM::DrawProfileEntryActivities(const std::string& profileName
 	}
 
 	if (ImGui::IsItemHovered())
-		ImGui::SetTooltip(isAccountAttached ? "Dettach" : "Attach");
+		ImGui::SetTooltip(isAccountAttached ? u8"卸载配置" : u8"加载配置");
 
 	if (m_CurrentAccount.userID == 0)
 		ImGui::EndDisabled();
 
 	ImGui::SameLine();
 
-	if (ImGui::SmallButton("Acl"))
-		ImGui::OpenPopup("Account list");
+	if (ImGui::SmallButton(u8"账户列表"))
+		ImGui::OpenPopup(u8"账户列表");
 	if (ImGui::IsItemHovered())
-		ImGui::SetTooltip("Account list");
+		ImGui::SetTooltip(u8"账户列表");
 
-	if (ImGui::BeginPopup("Account list", ImGuiWindowFlags_AlwaysAutoResize))
+	if (ImGui::BeginPopup(u8"账户列表", ImGuiWindowFlags_AlwaysAutoResize))
 	{
 		DrawAccountsList(profileName);
 		ImGui::EndPopup();
@@ -134,18 +134,18 @@ void cheat::GenshinCM::DrawProfileEntry(const std::string& profileName)
 	auto accountCount = profileIds.count(profileName) > 0 ? profileIds[profileName].size() : 0;
 	if (accountCount == 0)
 	{
-		ImGui::Text("No accounts.");
+		ImGui::Text(u8"没有账户.");
 		return;
 	}
 
 	ImColor textColor = IsAccountAttached(m_CurrentAccount.userID, profileName) ? ACTIVE_COLOR : ImColor(ImGui::GetColorU32(ImGuiCol_Text));
-	ImGui::TextColored(textColor, "%d account%s", accountCount, accountCount > 1 ? "s" : "");
+	ImGui::TextColored(textColor, u8"%d 账户%s", accountCount, accountCount > 1 ? "s" : "");
 }
 
 void cheat::GenshinCM::DrawProfileTableHeader()
 {
 	CheatManagerBase::DrawProfileTableHeader();
-	ImGui::TableSetupColumn("Accounts");
+	ImGui::TableSetupColumn(u8"账户");
 }
 
 int cheat::GenshinCM::GetProfileTableColumnCount()
@@ -162,8 +162,8 @@ void cheat::GenshinCM::DrawAccountsList(const std::string& profileName)
 	if (ImGui::BeginTable("Accounts", 2, flags,
 		ImVec2(0.0f, ImGui::GetTextLineHeightWithSpacing() * 10), 0.0f))
 	{
-		ImGui::TableSetupColumn("Name");
-		ImGui::TableSetupColumn("Actions");
+		ImGui::TableSetupColumn(u8"名称");
+		ImGui::TableSetupColumn(u8"行动");
 		ImGui::TableSetupScrollFreeze(0, 1);
 		ImGui::TableHeadersRow();
 
@@ -182,7 +182,7 @@ void cheat::GenshinCM::DrawAccountsList(const std::string& profileName)
 
 			ImGui::TableNextColumn();
 
-			if (ImGui::Button("Remove"))
+			if (ImGui::Button(u8"移除"))
 				DetachAccount(userID, profileName);
 
 			ImGui::SameLine();
@@ -220,7 +220,7 @@ void cheat::GenshinCM::DrawProfileLine()
 	ImColor textColor = accountAttached ? ACTIVE_COLOR : ImColor(ImGui::GetColorU32(ImGuiCol_Text));
 	ImGui::TextColored(textColor, name.c_str()); ImGui::SameLine();
 
-	if (ImGui::Button(accountAttached ? "Deattach" : "Attach", ImVec2(buttonWidth, 0.0f)))
+	if (ImGui::Button(accountAttached ? u8"卸载配置" : u8"加载配置", ImVec2(buttonWidth, 0.0f)))
 	{
 		if (accountAttached)
 			DetachAccount(m_CurrentAccount.userID, currentProfile);
@@ -231,7 +231,7 @@ void cheat::GenshinCM::DrawProfileLine()
 
 void cheat::GenshinCM::DrawProfileConfiguration()
 {
-	ConfigWidget(f_ShowType, "Set accounts' name showing type.");
+	ConfigWidget(f_ShowType, u8"设置帐户名称显示类型.");
 	auto& pseudos = f_AccConfig.value().pseudos;
 	if (pseudos.count(m_CurrentAccount.userID) > 0)
 	{
@@ -273,7 +273,7 @@ void cheat::GenshinCM::OnAccountChanged(uint32_t userID)
 
 	auto& settings = feature::Settings::GetInstance();
 
-	ImGuiToast toast(ImGuiToastType_Info, settings.f_NotificationsDelay.value(), "Account was updated.\nConfig profile was changed.");
+	ImGuiToast toast(ImGuiToastType_Info, settings.f_NotificationsDelay.value(), u8"帐户已更新。\nConfig配置文件已更改.");
 	toast.set_title("Config multi-account");
 	ImGui::InsertNotification(toast);
 }

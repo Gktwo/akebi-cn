@@ -9,7 +9,7 @@ namespace cheat::feature
     static void SCameraModuleInitialize_SetWarningLocateRatio_Hook(app::SCameraModuleInitialize* __this, double deltaTime, app::CameraShareData* data, MethodInfo* method);
 
     CameraZoom::CameraZoom() : Feature(),
-        NF(f_Enabled, "Camera Zoom", "Visuals::CameraZoom", false),
+        NF(f_Enabled, u8"视距", "Visuals::CameraZoom", false),
         NF(f_Zoom, "Zoom", "Visuals::CameraZoom", 200)
     {
         HookManager::install(app::MoleMole_SCameraModuleInitialize_SetWarningLocateRatio, SCameraModuleInitialize_SetWarningLocateRatio_Hook);
@@ -17,14 +17,14 @@ namespace cheat::feature
 
     const FeatureGUIInfo& CameraZoom::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "CameraZoom", "Visuals", false };
+        static const FeatureGUIInfo info{ "CameraZoom", u8"模组和视觉类", false };
         return info;
     }
 
     void CameraZoom::DrawMain()
     {
-        ConfigWidget("", f_Enabled); ImGui::SameLine();
-        ConfigWidget("Camera Zoom", f_Zoom, 0.01f, 1.0f, 500.0f, "Custom camera zooming.\n"
+        ConfigWidget(u8"视距", f_Enabled); ImGui::SameLine();
+        ConfigWidget(u8"倍数", f_Zoom, 0.01f, 1.0f, 500.0f, "Custom camera zooming.\n"
             "Specified value is multiplier for default zoom distance.\n"
 			"For example:\n"
             "\t2.0 = 2.0 * defaultZoom"
@@ -38,7 +38,7 @@ namespace cheat::feature
 
     void CameraZoom::DrawStatus()
     {
-        ImGui::Text("Camera zoom [%.1fx]", f_Zoom.value());
+        ImGui::Text(u8"视距 [%.1fx]", f_Zoom.value());
     }
 
     CameraZoom& CameraZoom::GetInstance()

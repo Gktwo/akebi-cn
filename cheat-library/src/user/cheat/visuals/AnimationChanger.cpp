@@ -231,28 +231,28 @@ namespace cheat::feature
     };
 
     AnimationChanger::AnimationChanger() : Feature(),
-        NF(f_Enabled, "Animation Changer", "Visuals::AnimationChanger", false),
-        NF(f_Animation, "Animation", "Visuals::AnimationChanger", "ExtraAttack"),
-        NF(f_ApplyKey, "Apply Animation", "Visuals::AnimationChanger", Hotkey('Y')),
-        NF(f_ResetKey, "Reset Animation", "Visuals::AnimationChanger", Hotkey('R'))
+        NF(f_Enabled, u8"自定义动作开关", "Visuals::AnimationChanger", false),
+        NF(f_Animation, u8"动作", "Visuals::AnimationChanger", "ExtraAttack"),
+        NF(f_ApplyKey, u8"应用", "Visuals::AnimationChanger", Hotkey('Y')),
+        NF(f_ResetKey, u8"重置", "Visuals::AnimationChanger", Hotkey('R'))
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(AnimationChanger::OnGameUpdate);
     }
 
     const FeatureGUIInfo& AnimationChanger::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "AnimationChanger", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"自定义动作", u8"模组和视觉类", false };
         return info;
     }
 
     void AnimationChanger::DrawMain()
     {
-        ImGui::BeginGroupPanel("Animation Changer");
+        ImGui::BeginGroupPanel(u8"自定义动作");
         {
-            ConfigWidget(f_Enabled, "Changes active character's animation.\nNot all animations work for every character except Main Character.");
+            ConfigWidget(u8"自定义动作", f_Enabled, u8"更改活动角色的动画。\n 注意 除主要角色外，所有动画都适用于每个角色.");
             if (f_Enabled)
             {
-                if (ImGui::BeginCombo("Animations", f_Animation.value().c_str()))
+                if (ImGui::BeginCombo(u8"动作", f_Animation.value().c_str()))
                 {
                     for (auto& animation : animations)
                     {
@@ -266,8 +266,8 @@ namespace cheat::feature
                     ImGui::EndCombo();
                 }
 
-                ConfigWidget("Apply Key", f_ApplyKey, true);
-                ConfigWidget("Reset Key", f_ResetKey, true);
+                ConfigWidget(u8"应用", f_ApplyKey, true);
+                ConfigWidget(u8"重置", f_ResetKey, true);
             }
         }
         ImGui::EndGroupPanel();
@@ -280,7 +280,7 @@ namespace cheat::feature
 
     void AnimationChanger::DrawStatus()
     {
-        ImGui::Text("AnimationChanger");
+        ImGui::Text(u8"自定义动作");
     }
 
     AnimationChanger& AnimationChanger::GetInstance()

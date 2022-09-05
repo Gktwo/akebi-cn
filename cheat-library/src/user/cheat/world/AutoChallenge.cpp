@@ -9,32 +9,33 @@ namespace cheat::feature
 {
 
 	AutoChallenge::AutoChallenge() : Feature(),
-		NF(f_Enabled, "Auto challenge", "AutoChallenge", false),
-		NF(f_BombDestroy, "Bomb destroy", "AutoChallenge", false),
-		NF(f_Delay, "Collect delay", "AutoChallenge", 1000),
-		NF(f_Range, "Collect range", "AutoChallenge", 20.f)
+		NF(f_Enabled, u8"自动挑战", u8"自动挑战", false),
+		NF(f_BombDestroy, u8"销毁炸药桶", u8"自动挑战", false),
+		NF(f_Delay, u8"收集范围", u8"自动挑战", 1000),
+		NF(f_Range, u8"收集延迟", u8"自动挑战", 20.f)
 	{
 		events::GameUpdateEvent += MY_METHOD_HANDLER(AutoChallenge::OnGameUpdate);
 	}
 
 	const FeatureGUIInfo& AutoChallenge::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Auto Challenge", "World", true };
+		static const FeatureGUIInfo info{ u8"自动挑战", u8"大世界", true };
 		return info;
 	}
 
 	void AutoChallenge::DrawMain()
 	{
-		ConfigWidget("Enabled", f_Enabled, "Auto collect time challenge item");
+		ConfigWidget(u8"开/关", f_Enabled, u8"自动收集时间挑战项目");
 		ImGui::SameLine();
-		ConfigWidget("Destroy Bomb", f_BombDestroy, "Auto destroy bombbarrel");
+
+		ConfigWidget(u8"销毁炸药桶", f_BombDestroy, u8"销毁炸药桶");
 		ImGui::SameLine();
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "I haven't tested how high the risk is");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"风险未知");
 		ImGui::SetNextItemWidth(200.f);
-		ConfigWidget("Range", f_Range, 0.1f, 0.f, 300.f, "Collect range.");
+		ConfigWidget(u8"范围", f_Range, 0.1f, 0.f, 300.f, u8"收集范围.");
 		ImGui::SameLine();
 		ImGui::SetNextItemWidth(200.f);
-		ConfigWidget("Delay", f_Delay, 1, 0, 2000, "Collect delay.");
+		ConfigWidget(u8"延迟", f_Delay, 1, 0, 2000, u8"收集延迟.");
 	}
 
 	bool AutoChallenge::NeedStatusDraw() const
@@ -44,7 +45,7 @@ namespace cheat::feature
 
 	void AutoChallenge::DrawStatus()
 	{
-		ImGui::Text("Challenge [%.01fm]", f_Range.value());
+		ImGui::Text(u8"自动挑战 [%.01fm]", f_Range.value());
 	}
 
 	AutoChallenge& AutoChallenge::GetInstance()

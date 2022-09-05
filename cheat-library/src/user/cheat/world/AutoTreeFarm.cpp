@@ -22,27 +22,27 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& AutoTreeFarm::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Auto Tree Farm", "World", true };
+		static const FeatureGUIInfo info{ u8"自动伐木", u8"大世界", true };
 		return info;
 	}
 
 	void AutoTreeFarm::DrawMain()
 	{
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Note. This feature is not fully tested detection-wise.\n"
-			"Not recommended for main accounts or used with high values.");
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"注意：此功能未经检测.\n"
+			u8"不要使用在主要账号上.");
 
-		ConfigWidget("Enabled", m_Enabled, "Automatically attack trees in range.");
-		ConfigWidget("Attack Delay (ms)", m_AttackDelay, 1, 0, 1000, "Delay before attacking the next tree (in ms).");
-		ConfigWidget("Repeat Delay (ms)", m_RepeatDelay, 1, 500, 1000, "Delay before attacking the same tree (in ms).\nValues <500ms will not work.");
+		ConfigWidget(u8"开/关", m_Enabled, u8"自动攻击范围内的树.");
+		ConfigWidget(u8"攻击间隔 (ms)", m_AttackDelay, 1, 0, 1000, u8"下一棵树的延迟 (in ms).");
+		ConfigWidget(u8"攻击延迟 (ms)", m_RepeatDelay, 1, 500, 1000, u8"攻击的延迟 (in ms).\n延迟小于500ms无法工作.");
 
-		ConfigWidget("Attacks per Tree", m_AttackPerTree, 1, 0, 100, "Count of attacks for one tree.\n" \
-			"Recommended to set to 10 or lower to avoid attacking empty trees.\n" \
-			"Set to 0 for unlimited attacks (even empty trees, extremely high risk).\n" \
-			"Note: Memorized trees' attacks are reset after game restart."
+		ConfigWidget(u8"每次攻击次数", m_AttackPerTree, 1, 0, 100, u8"每棵树的攻击次数.\n" \
+			u8"建议设置为10或更低，以避免攻击空树.\n" \
+			u8"设置为0表示无限攻击（即使是空树，风险极高).\n" \
+			u8"注意：游戏重新启动后，数值将重置."
 		);
 
-		ConfigWidget("Range (m)", m_Range, 0.1f, 1.0f, 15.0f);
-		ImGui::TextColored(ImColor(255, 165, 0, 255), "Range is softly limited to ~15m for safety purposes.");
+		ConfigWidget(u8"范围 (m)", m_Range, 0.1f, 1.0f, 15.0f);
+		ImGui::TextColored(ImColor(255, 165, 0, 255), u8"15m的范围大概是安全的吧.");
 	}
 
 	bool AutoTreeFarm::NeedStatusDraw() const
@@ -52,7 +52,7 @@ namespace cheat::feature
 
 	void AutoTreeFarm::DrawStatus()
 	{
-		ImGui::Text("Tree Farm\n[%dms|%dms|%d|%.1fm]",
+		ImGui::Text(u8"自动砍树\n[%dms|%dms|%d|%.1fm]",
 			m_AttackDelay.value(),
 			m_RepeatDelay.value(),
 			m_AttackPerTree.value(),

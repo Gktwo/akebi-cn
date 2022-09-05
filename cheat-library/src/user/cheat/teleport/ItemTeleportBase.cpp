@@ -11,8 +11,8 @@
 namespace cheat::feature 
 {
     ItemTeleportBase::ItemTeleportBase(const std::string& section, const std::string& name) : Feature(),
-		NF(f_Key, "Teleport to Nearest", section, Hotkey()),
-		NF(f_ShowInfo, "Show Info", section, true),
+		NF(f_Key, u8"传送到最近的", section, Hotkey()),
+		NF(f_ShowInfo, u8"显示信息", section, true),
         section(section), name(name)
     {
 		f_Key.value().PressedEvent += MY_METHOD_HANDLER(ItemTeleportBase::OnTeleportKeyPressed);
@@ -20,7 +20,7 @@ namespace cheat::feature
 
     void ItemTeleportBase::DrawMain()
     {
-		auto desc = util::string_format("When key pressed, will teleport to nearest %s if exists.", name.c_str());
+		auto desc = util::string_format(u8"按键时，将传送到最近的%s如果存在。", name.c_str());
 		ConfigWidget(f_Key, desc.c_str());
 
 		DrawFilterOptions();
@@ -30,7 +30,7 @@ namespace cheat::feature
 
 	void ItemTeleportBase::DrawItems()
 	{
-		auto nodeName = util::string_format("%s list", name.c_str());
+		auto nodeName = util::string_format(u8"%s 列表", name.c_str());
 		if (ImGui::TreeNode(nodeName.c_str()))
 		{
 			DrawEntities();
@@ -66,7 +66,7 @@ namespace cheat::feature
 		if (entity == nullptr)
 		{
 			ImGui::Text(name.c_str()); ImGui::SameLine();
-			ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), "not found");
+			ImGui::TextColored(ImVec4(1.0f, 0.1f, 0.1f, 1.0f), u8"没有找到");
 			return;
 		}
 		
@@ -87,7 +87,7 @@ namespace cheat::feature
 		auto entities = manager.entities(*this);
 		if (entities.size() == 0)
 		{
-			ImGui::Text("Not found.");
+			ImGui::Text(u8"没有找到.");
 			return;
 		}
 
@@ -95,7 +95,7 @@ namespace cheat::feature
 		{
 			ImGui::Text("Dist %.03fm", manager.avatar()->distance(entity));
 			ImGui::SameLine();
-			auto label = util::string_format("Teleport ## %p", entity);
+			auto label = util::string_format(u8"传送搜索 ## %p", entity);
 			if (ImGui::Button(label.c_str()))
 			{
 				MapTeleport& mapTeleport = MapTeleport::GetInstance();

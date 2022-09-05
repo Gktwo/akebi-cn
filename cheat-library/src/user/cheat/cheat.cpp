@@ -10,6 +10,7 @@
 #include <cheat/misc/ProtectionBypass.h>
 #include <cheat/misc/Hotkeys.h>
 #include <cheat/misc/Debug.h>
+#include <cheat/misc/About.h>
 #include <cheat/misc/sniffer/PacketSniffer.h>
 #include <cheat/misc/WindSeedBypass.h>
 
@@ -32,6 +33,7 @@
 #include <cheat/world/FakeTime.h>
 #include <cheat/world/AutoSeelie.h>
 #include <cheat/world/VacuumLoot.h>
+#include <cheat/world/GameSpeed.h>
 
 #include <cheat/teleport/ChestTeleport.h>
 #include <cheat/teleport/MapTeleport.h>
@@ -45,6 +47,7 @@
 #include <cheat/world/AutoCook.h>
 #include <cheat/world/AutoChallenge.h>
 #include <cheat/world/CustomWeather.h>
+#include <cheat/world/OpenTeamImmediately.h>
 
 #include <cheat/visuals/NoFog.h>
 #include <cheat/visuals/FPSUnlock.h>
@@ -81,6 +84,7 @@ namespace cheat
 			FEAT_INST(Settings),
 			FEAT_INST(Hotkeys),
 			FEAT_INST(Debug),
+			FEAT_INST(About),
 			FEAT_INST(PacketSniffer),
 			FEAT_INST(WindSeedBypass),
 
@@ -96,6 +100,7 @@ namespace cheat
 			FEAT_INST(AutoTreeFarm),
 			FEAT_INST(AutoDestroy),
 			FEAT_INST(AutoSeelie),
+			FEAT_INST(OpenTeamImmediately),
 			FEAT_INST(VacuumLoot),
 			FEAT_INST(DialogSkip),
 			FEAT_INST(DumbEnemies),
@@ -105,6 +110,7 @@ namespace cheat
 			FEAT_INST(AutoChallenge),
 			FEAT_INST(MobVacuum),
 			FEAT_INST(FakeTime),
+			FEAT_INST(GameSpeed),
 
 			FEAT_INST(ChestTeleport),
 			FEAT_INST(OculiTeleport),
@@ -136,14 +142,15 @@ namespace cheat
 #undef FEAT_INST
 
 		manager.SetModuleOrder({
-			"Player",
-			"World",
-			"Teleport",
-			"ESP",
-			"Visuals",
-			"Hotkeys",
-			"Settings",
-			"Debug"
+			u8"玩家类",
+			u8"大世界",
+			u8"传送类",
+			u8"绘制透视",
+			u8"模组和视觉类",
+			u8"快捷键",
+			u8"设置",
+			u8"关于",
+			u8"调试"
 			});
 
 		LPBYTE pFontData = nullptr;

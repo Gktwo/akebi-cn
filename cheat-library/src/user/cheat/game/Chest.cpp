@@ -20,7 +20,7 @@ namespace cheat::game
 
 		if (name().find("TreasureBox") != std::string::npos)
 			m_ItemType = ItemType::Chest;
-		else if (name().find("Search") != std::string::npos || name().find("JunkChest") != std::string::npos)
+		else if (name().find("Search") != std::string::npos || name().find("JunkChest") != std::string::npos || name().find("SumeruCrudeChest") != std::string::npos)
 			m_ItemType = ItemType::Investigate;
 		else if (name().find("BookPage") != std::string::npos)
 			m_ItemType = ItemType::BookPage;
@@ -164,33 +164,33 @@ namespace cheat::game
 			switch (chestRarity())
 			{
 			case ChestRarity::Common:
-				return "CR1";
+				return u8"普通";
 			case ChestRarity::Exquisite:
-				return "CR2";
+				return u8"精致";
 			case ChestRarity::Precious:
-				return "CR3";
+				return u8"珍贵";
 			case ChestRarity::Luxurious:
-				return "CR4";
+				return u8"华丽";
 			case ChestRarity::Remarkable:
-				return "CR5";
+				return u8"奇馈";
 			case ChestRarity::Unknown:
 			default:
-				return "UNK";
+				return u8"未知";
 			}
 		}
 		case ItemType::Investigate:
-			return "INV";
+			return u8"调查";
 		case ItemType::BookPage:
-			return "BPG";
+			return u8"书页";
 		case ItemType::BGM:
-			return "BGM";
+			return u8"BGM";
 		case ItemType::QuestInteract:
-			return "QUE";
+			return u8"任务互动";
 		case ItemType::Flora:
-			return "FLO";
+			return u8"花";
 		case ItemType::None:
 		default:
-			return "UNK";
+			return u8"未知";
 		}
 	}
 

@@ -15,7 +15,7 @@ namespace cheat::feature
 
     const FeatureGUIInfo& FPSUnlock::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "FPSUnlock", "Visuals", false };
+        static const FeatureGUIInfo info{ u8"fps解锁", u8"模组和视觉类", false };
         return info;
     }
 
@@ -32,7 +32,7 @@ namespace cheat::feature
 
     void FPSUnlock::DrawStatus()
     {
-        ImGui::Text("FPSUnlock [%d]", f_Fps.value());
+        ImGui::Text(u8"fps解锁 [%d]", f_Fps.value());
     }
 
     FPSUnlock& FPSUnlock::GetInstance()

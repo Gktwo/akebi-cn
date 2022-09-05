@@ -10,7 +10,7 @@ namespace cheat::feature
 {
 
 	MapTeleport::MapTeleport() : Feature(),
-		NF(f_Enabled, "Map teleport", "MapTeleport", false),
+		NF(f_Enabled, u8"大地图传送", "MapTeleport", false),
 		NF(f_DetectHeight, "Auto height detect", "MapTeleport", true),
 		NF(f_DefaultHeight, "Default teleport height", "MapTeleport", 300.0f),
 		NF(f_Key, "Teleport key", "MapTeleport", Hotkey('T'))
@@ -33,32 +33,32 @@ namespace cheat::feature
 
 	const FeatureGUIInfo& MapTeleport::GetGUIInfo() const
 	{
-		static const FeatureGUIInfo info{ "Map Teleport", "Teleport", true };
+		static const FeatureGUIInfo info{ u8"大地图传送", u8"传送类", true };
 		return info;
 	}
 
 	void MapTeleport::DrawMain()
 	{
-		ConfigWidget("Enabled",
+		ConfigWidget(u8"大地图传送",
 			f_Enabled,
-			"Enable teleport-to-mark functionality.\n" \
-			"Usage: \n" \
-			"\t1. Open map.\n" \
-			"\t2. Hold [Teleport Key] and click with the LMB anywhere in the map.\n" \
-			"\tDone. You have been teleported to selected location.\n" \
-			"Teleport might glitch if teleporting to an extremely high location. \n" \
-			"Adjust Override Height accordingly to help avoid."
+			u8"启用远程传输标记功能。\n" \
+			u8"用法： \n" \
+			u8"\t1.打开地图。\n" \
+			u8"\t2.按住[传送键]并用LMB在地图中的任何位置单击。\n" \
+			u8"\t完成。您已被传送到选定位置。\n" \
+			u8"如果传送到极高的位置，传送可能会出现故障。 \n" \
+			u8"相应地调整超驰高度以帮助避免。"
 		);
 
 		if (!f_Enabled)
 			ImGui::BeginDisabled();
 
-		ConfigWidget("Override Height (m)", f_DefaultHeight, 1.0F, 200.0F, 800.0F,
-			"If teleport cannot get ground height of target location,\nit will teleport you to the height specified here.\n" \
-			"It is recommended to have this value to be at least as high as a mountain.\nOtherwise, you may fall through the ground.");
+		ConfigWidget(u8"高度 (m)", f_DefaultHeight, 1.0F, 200.0F, 800.0F,
+			u8"如果传送无法获得目标位置的地面高度，\n它会将您传送到此处指定的高度。\n" \
+			u8"建议该值至少与山一样高。\n否则，你可能会从地上摔下来。");
 
-		ConfigWidget("Teleport Key", f_Key, true,
-			"Key to hold down before clicking on target location.");
+		ConfigWidget(u8"热键", f_Key, true,
+			u8"在单击目标位置之前按住。");
 
 		if (!f_Enabled)
 			ImGui::EndDisabled();

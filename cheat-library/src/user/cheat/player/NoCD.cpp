@@ -33,26 +33,26 @@ namespace cheat::feature
 
     const FeatureGUIInfo& NoCD::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Cooldown Effects", "Player", true };
+        static const FeatureGUIInfo info{ u8"技能冷却", u8"玩家类", true };
         return info;
     }
 
     void NoCD::DrawMain()
     {
 
-		ConfigWidget("Max Burst Energy", f_UtimateMaxEnergy,
-			"Removes energy requirement for elemental bursts.\n" \
-			"(Energy bubble may appear incomplete but still usable.)");
+		ConfigWidget(u8"q无需充能", f_UtimateMaxEnergy,
+			u8"消除元素爆发的能量需求.\n" \
+			u8"(能源可能看起来不满，但仍然可用技能.)");
 
 		ConfigWidget("## AbilityReduce", f_AbilityReduce); ImGui::SameLine();
-		ConfigWidget("Reduce Skill/Burst Cooldown", f_TimerReduce, 1.f, 1.f, 6.0f,
-			"Reduce cooldowns of elemental skills and bursts.\n"\
-			"1.0 - no CD, 2.0 and higher - increases the timer value.");
+		ConfigWidget(u8"减少技能冷却", f_TimerReduce, 1.f, 1.f, 6.0f,
+			u8"消除元素爆发的能量需求.\n" \
+			u8"(能源可能看起来不满，但仍然可用技能.)");
 
-    	ConfigWidget(f_Sprint, "Removes delay in-between sprints.");
+		ConfigWidget(u8"取消攻击后摇", f_Sprint, u8"取消攻击后摇.");
 
-    	ConfigWidget("Instant Bow Charge", f_InstantBow, "Disable cooldown of bow charge.\n" \
-			"Known issues with Fischl.");
+		ConfigWidget(u8"弓箭立即蓄力", f_InstantBow, u8"蓄力不用时间.\n" \
+			u8"皇女可能无效.");
 
     	if (f_InstantBow) {
 			ImGui::Text("If Instant Bow Charge doesn't work:");
@@ -86,10 +86,10 @@ namespace cheat::feature
 
     void NoCD::DrawStatus() 
     {
-		  ImGui::Text("Cooldown\n[%s%s%s%s%s]",
-			f_AbilityReduce ? fmt::format("Reduce x{:.1f}", f_TimerReduce.value()).c_str() : "",
+		ImGui::Text(u8"技能冷却\n[%s%s%s%s%s]",
+			f_AbilityReduce ? fmt::format(u8"减少 x{:.1f}", f_TimerReduce.value()).c_str() : "",
 			f_AbilityReduce && (f_InstantBow || f_Sprint) ? "|" : "",
-			f_InstantBow ? "Bow" : "",
+			f_InstantBow ? u8"弓箭" : "",
 			f_InstantBow && f_Sprint ? "|" : "",
 			f_Sprint ? "Sprint" : "");
     }

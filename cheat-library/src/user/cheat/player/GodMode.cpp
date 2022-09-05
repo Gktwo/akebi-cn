@@ -7,23 +7,23 @@
 namespace cheat::feature
 {
     GodMode::GodMode() : Feature(),
-        NFEX(f_Enabled, "God mode", "m_GodMode", "Player", false, false)
+        NFEX(f_Enabled, u8"ÎÞµÐÄ£Ê½", "m_GodMode", "Player", false, false)
     {
-        HookManager::install(app::VCHumanoidMove_NotifyLandVelocity, VCHumanoidMove_NotifyLandVelocity_Hook);
-        HookManager::install(app::Miscs_CheckTargetAttackable, Miscs_CheckTargetAttackable_Hook);
+		HookManager::install(app::VCHumanoidMove_NotifyLandVelocity, VCHumanoidMove_NotifyLandVelocity_Hook);
+		HookManager::install(app::Miscs_CheckTargetAttackable, Miscs_CheckTargetAttackable_Hook);
         //HookManager::install(app::MoleMole_LCBaseCombat_FireBeingHitEvent, LCBaseCombat_FireBeingHitEvent_Hook);
         HookManager::install(app::MoleMole_ActorAbilityPlugin_HanlderModifierThinkTimerUp, MoleMole_ActorAbilityPlugin_HanlderModifierThinkTimerUp_Hook);
     }
 
     const FeatureGUIInfo& GodMode::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "", "Player", false };
+        static const FeatureGUIInfo info{ "", u8"Íæ¼ÒÀà", false };
         return info;
     }
 
     void GodMode::DrawMain()
     {
-        ConfigWidget("God Mode", f_Enabled, "Enables god mode, i.e. no incoming damage including environmental damage.\n");
+        ConfigWidget(u8"ÃâÒßÉËº¦£¨Èí¼þÃâ·Ñ¿ªÔ´µ¹¹·ÃÜÂéÂéÊ¯À¯£©", f_Enabled, u8"Ãâ·ÑÈí¼þ£¬ÇëÎðÉÏµ±ÊÜÆ­");
     }
 
     bool GodMode::NeedStatusDraw() const
@@ -33,7 +33,7 @@ namespace cheat::feature
 
     void GodMode::DrawStatus()
     {
-        ImGui::Text("God Mode");
+        ImGui::Text(u8"ÃâÒßÉËº¦");
     }
 
     GodMode& GodMode::GetInstance()
@@ -60,15 +60,15 @@ namespace cheat::feature
     void GodMode::VCHumanoidMove_NotifyLandVelocity_Hook(app::VCHumanoidMove* __this, app::Vector3 velocity, float reachMaxDownVelocityTime, MethodInfo* method)
     {
         auto& gm = GodMode::GetInstance();
-        if (gm.f_Enabled && -velocity.y > 13)
-        {
-            float randAdd = (float)(std::rand() % 1000) / 1000;
-            velocity.y = -8 - randAdd;
-            reachMaxDownVelocityTime = 0;
-        }
-        // LOG_DEBUG("%s, %f", il2cppi_to_string(velocity).c_str(), reachMaxDownVelocityTime);
-        CALL_ORIGIN(VCHumanoidMove_NotifyLandVelocity_Hook, __this, velocity, reachMaxDownVelocityTime, method);
-    }
+		if (gm.f_Enabled && -velocity.y > 13)
+		{
+			float randAdd = (float)(std::rand() % 1000) / 1000;
+			velocity.y = -8 - randAdd;
+			reachMaxDownVelocityTime = 0;
+		}
+		// LOG_DEBUG("%s, %f", il2cppi_to_string(velocity).c_str(), reachMaxDownVelocityTime);
+		CALL_ORIGIN(VCHumanoidMove_NotifyLandVelocity_Hook, __this, velocity, reachMaxDownVelocityTime, method);
+	}
 
     // Analog function for disable attack damage (Thanks to Taiga74164)
     //void GodMode::LCBaseCombat_FireBeingHitEvent_Hook(app::LCBaseCombat* __this, uint32_t attackeeRuntimeID, app::AttackResult* attackResult, MethodInfo* method)
@@ -90,8 +90,8 @@ namespace cheat::feature
         return CALL_ORIGIN(MoleMole_ActorAbilityPlugin_HanlderModifierThinkTimerUp_Hook, __this, delay, arg, method);
     }
 
-    bool GodMode::NeedBlockHanlerModifierThinkTimeUp(app::Object* arg)
-    {
+	bool GodMode::NeedBlockHanlerModifierThinkTimeUp(app::Object* arg)
+	{
         if (!f_Enabled)
             return false;
 
@@ -99,24 +99,24 @@ namespace cheat::feature
         if (actorModifier == nullptr)
             return false;
 
-        static std::vector<std::string> modifierBlacklist
-        {
-            "BlackMud",
-            "SERVER_ClimateAbility",
-            "ElectricWater",
-            "SeiraiThunder",
-            "UNIQUE_Monster_",
-            "Monster_Shougun",
+		static std::vector<std::string> modifierBlacklist
+		{
+			"BlackMud",
+			"SERVER_ClimateAbility",
+			"ElectricWater",
+			"SeiraiThunder",
+			"UNIQUE_Monster_",
+			"Monster_Shougun",
             "UNIQUE_Life_Point_Search",
             "UNIQUE_DynamicAbility_DeathZone_LoseHp"
-        };
-
+		};
+        
         std::string modifierName = il2cppi_to_string(actorModifier->fields._config->fields._modifierName);
         //LOG_DEBUG("modifierName = %s", modifierName.c_str());
-        for (auto& forbiddenModifierName : modifierBlacklist)
-            if (modifierName.find(forbiddenModifierName) != std::string::npos)
-                return true;
+		for (auto& forbiddenModifierName : modifierBlacklist)
+			if (modifierName.find(forbiddenModifierName) != std::string::npos)
+				return true;
 
         return false;
-    }
+	}
 }

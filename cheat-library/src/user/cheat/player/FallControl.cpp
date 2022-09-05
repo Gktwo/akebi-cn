@@ -18,14 +18,14 @@ namespace cheat::feature
 
     const FeatureGUIInfo& cheat::feature::FallControl::GetGUIInfo() const
     {
-        static const FeatureGUIInfo info{ "Fall-Control", "Player", true };
+        static const FeatureGUIInfo info{ u8"坠落控制", u8"玩家类", true };
         return info;
     }
 
     void cheat::feature::FallControl::DrawMain()
     {
-        ConfigWidget("Enabled", f_Enabled, "Enables fall control");
-        ConfigWidget("Speed", f_Speed, 1.0f, 0.0f, 100.0f, "Movement speed when using fall control");
+        ConfigWidget(u8"开关", f_Enabled, "Enables fall control");
+        ConfigWidget(u8"速度", f_Speed, 1.0f, 0.0f, 100.0f, "Movement speed when using fall control");
     }
 
     bool cheat::feature::FallControl::NeedStatusDraw() const
@@ -35,7 +35,7 @@ namespace cheat::feature
 
     void cheat::feature::FallControl::DrawStatus()
     {
-        ImGui::Text("Fall Control [%.1f]", f_Speed.value());
+        ImGui::Text(u8"坠落控制 [%.1f]", f_Speed.value());
     }
 
     FallControl& cheat::feature::FallControl::GetInstance()
