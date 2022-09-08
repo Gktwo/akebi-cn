@@ -14,10 +14,6 @@ namespace cheat::feature
 
     void About::DrawMain()
     {
-        // Advertisement. To change/delete contact with Callow#1429
-        ImGui::TextColored(ImColor(199, 16, 162, 255), u8"幻塔付费作弊: ");
-        TextURL("Acai ToF", "http://acai-tof.shop", true, false);
-
         ImGui::TextColored(ImColor(199, 16, 162, 255), u8"中文更新: ");
         TextURL(u8"中文qq群", "https://jq.qq.com/?_wv=1027&k=JNXeTQFV", true, false);
 
@@ -39,12 +35,8 @@ namespace cheat::feature
 		ImGui::SameLine();
 		ImGui::TextColored(ImColor(0, 102, 255, 255), "Taiga");
 
-        ImGui::Text(u8"功能开发人员和Acai创始人:");
-		ImGui::SameLine();
-		ImGui::TextColored(ImColor(0, 102, 255, 255), "RyujinZX");
-
 		ImGui::Text(u8"主要贡献者:");
-		ImGui::TextColored(ImColor(0, 102, 255, 255), "WitchGod, m0nkrel, Shichiha, harlanx, andiabrudan, hellomykami");
+		ImGui::TextColored(ImColor(0, 102, 255, 255), "RyujinZX, WitchGod, m0nkrel, Shichiha, harlanx, andiabrudan, hellomykami");
 
 		ImGui::Text(u8"全部贡献者名单:");
 		TextURL("Github link", "https://github.com/Akebi-Group/Akebi-GC/graphs/contributors", true, false);

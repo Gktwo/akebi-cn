@@ -14,9 +14,6 @@
 
 ---
 
-### The ToF cheat by Akebi founder: [Acai ToF](http://acai-tof.shop)
-
-
 <h1 align="center">Getting Started</h1>
 
 ## Building from source
@@ -77,6 +74,7 @@ As well as setting up **`cheat-library`** as startup project.
 #### World
 - Auto Seelie
 - Open Team Immediately
+- GameSpeed
 - Dumb Enemies
 - Freeze Enemies
 - Auto Destroy: Ores/Shields/Doodads/Plants
