@@ -4166,6 +4166,7 @@ namespace app {
     };
 
     // Entity fields
+    // Might change again on 3.1 rel
     struct __declspec(align(8)) BaseEntity__Fields {
         struct Dictionary_2_System_UInt32_AIPerceptionInfo_* _aiPerceptionDic;
         struct Config_ConfigEntity* jsonConfig;
@@ -4188,7 +4189,6 @@ namespace app {
         struct ComponentManager* _logicComponentManager;
         struct ComponentManager* _visualComponentManager;
         bool _isInited;
-        bool HBADEFFNHHA;
         struct Action_1_EvtEntityTimeScaleChange_* _onLevelTimeScaleChange;
         struct Action* _syncAnimatorSpeed;
         struct Action* _onTimeScaleChangedByAbility;
@@ -4197,13 +4197,11 @@ namespace app {
         struct TokenManager* _tokenMgr;
         VisionType__Enum _NLFDIGCIFIA_k__BackingField;
         bool _MMIHONCELFL_k__BackingField;
-        LGLACLJGPIN_OJDAJHLOKFP__Enum BBAPPCBMJGE;
-        bool _createDuringReconnectingSceneInitFinish_k__BackingField;
-        bool _isCleared;
-        bool _checkRemoveifCached_k__BackingField;
-        bool _hasAddedInitialComponents;
-        float OCMDCLDBJLP;
-        bool _isEntityReady;
+        bool PLEPGEFAIND;
+        bool _GDKDNDAGBFB_k__BackingField;
+        bool PBKECDHGBIN;
+        float OACIBKKCGCO;
+        bool HBECPLJFPOI;
         struct Action_1_BaseEntity_* onComponentInitPostCallback;
         struct Action_1_BaseEntity_* onEntityReadyPreCallback;
         struct Action_1_BaseEntity_* onEntityReadyBeforePostCallback;
@@ -4222,7 +4220,6 @@ namespace app {
         struct Action_1_BaseEntity_* onSetAliveFalseCallback;
         bool _isActive;
         struct Action_1_BaseEntity_* preAnimatorInitUpdateCallback;
-        struct Action* PHEKMGALKEI;
         bool _needSetActiveOnEntityReady;
         bool _setActiveOnEntityReady;
         struct Action_2_BaseEntity_Boolean_* onSetActiveCallback;
@@ -4343,6 +4340,7 @@ namespace app {
         struct RuntimeAnimatorController* _remoteRuntimeAnimatorController;
         uint32_t _authorityRuntimeAnimatorHandler;
         uint32_t _remoteRuntimeAnimatorHandler;
+        bool CNFCMHJGBFI;
         struct Dictionary_2_System_Int32_System_Boolean_* _boolPersistentParams;
         struct Dictionary_2_System_Int32_System_Int32_* _intPersistentParams;
         struct Dictionary_2_System_Int32_System_Single_* _floatPersistentParams;
