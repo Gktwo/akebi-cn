@@ -344,7 +344,7 @@ namespace cheat::feature
 	{
 		const auto sceneID = game::GetCurrentMapSceneID();
 		if (m_ScenesData.count(sceneID) == 0)
-			ImGui::Text(u8"抱歉. 不支持当前场景.");
+			ImGui::Text("Sorry. Current scene is not supported.");
 
 		ImGui::BeginGroupPanel("Ascension Materials Filter");
 		{
@@ -353,7 +353,7 @@ namespace cheat::feature
 		}
 		ImGui::EndGroupPanel();
 
-		ImGui::InputText(u8"搜索", &m_SearchText); ImGui::SameLine();
+		ImGui::InputText("Search", &m_SearchText); ImGui::SameLine();
 		HelpMarker(
 			u8"此页面后面有项目筛选器.\n"
 			u8"激活的项目将显示在迷你/全局地图上。（显然）\n"

@@ -23,6 +23,7 @@ namespace cheat::feature
 		NF(f_PickupFilter_Animals,	 u8"动物过滤器", u8"自动拾取", true),
 		NF(f_PickupFilter_DropItems, u8"掉落物过滤器", u8"自动拾取", true),
 		NF(f_PickupFilter_Resources, u8"资源过滤器", u8"自动拾取", true),
+		NF(f_PickupFilter_Oculus, u8"神瞳过滤器",				u8"自动拾取", true),
 		NF(f_Chest,			 u8"宝箱", u8"自动拾取", false),
 		NF(f_Leyline,		 u8"地脉", u8"自动拾取", false),
 		NF(f_Investigate,	 u8"调查点", u8"自动拾取", false),
@@ -31,7 +32,7 @@ namespace cheat::feature
 		NF(f_DelayTime,		 u8"延迟时间 (in ms)", u8"自动拾取", 200),
 		NF(f_UseDelayTimeFluctuation, u8"使用模拟手动", u8"自动拾取", false),
 		NF(f_DelayTimeFluctuation,		 u8"模拟延迟 +(in ms)", u8"自动拾取", 200),
-        NF(f_CustomRange,    u8"拾取范围", u8"自动拾取", 5.0f),
+        NF(f_CustomRange,    u8"拾取范围",                    u8"自动拾取", 5.0f),
 		toBeLootedItems(), nextLootTime(0)
     {
 		// Auto loot
@@ -124,6 +125,7 @@ namespace cheat::feature
 			ConfigWidget(u8"动物", f_PickupFilter_Animals, u8"鱼、蜥蜴、青蛙、飞行动物."); ImGui::SameLine();
 			ConfigWidget(u8"掉落物", f_PickupFilter_DropItems, u8"材料、矿物、人工制品."); ImGui::SameLine();
 			ConfigWidget(u8"资源", f_PickupFilter_Resources, u8"除了动物和掉落物品（植物、书籍等）以外的所有物品).");
+			ConfigWidget(u8"神瞳", f_PickupFilter_Oculus, u8"神瞳过滤器");
 	    }
     	ImGui::EndGroupPanel();
     }
@@ -248,20 +250,23 @@ namespace cheat::feature
 
 	void AutoLoot::OnCheckIsInPosition(bool& result, app::BaseEntity* entity)
 	{
+		// TODO: Maybe add a list of filter for all GatherObject instead of just using entityType in general.
+		auto& manager = game::EntityManager::instance();
+
 		if (f_AutoPickup || f_UseCustomRange) {
 			float pickupRange = f_UseCustomRange ? f_CustomRange : g_default_range;
 			if (f_PickupFilter)
 			{
 				if (!f_PickupFilter_Animals && entity->fields.entityType == app::EntityType__Enum_1::EnvAnimal ||
 					!f_PickupFilter_DropItems && entity->fields.entityType == app::EntityType__Enum_1::DropItem ||
-					!f_PickupFilter_Resources && entity->fields.entityType == app::EntityType__Enum_1::GatherObject)
+					!f_PickupFilter_Resources && entity->fields.entityType == app::EntityType__Enum_1::GatherObject ||
+					!f_PickupFilter_Oculus && game::filters::combined::Oculies.IsValid(manager.entity(entity->fields._runtimeID_k__BackingField)))
 				{
 					result = false;
 					return;
 				}
 			}
 			
-			auto& manager = game::EntityManager::instance();
 			result = manager.avatar()->distance(entity) < pickupRange;
 		}
 	}

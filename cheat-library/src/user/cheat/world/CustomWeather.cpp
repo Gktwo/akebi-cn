@@ -23,7 +23,7 @@ namespace cheat::feature
     CustomWeather::CustomWeather() : Feature(),
         NF(f_Enabled, u8"自定义天气", "World", false),
         NF(f_Lightning, u8"高亮敌人", "World", false),
-        NF(f_WeatherType, "WeatherType", "CustomWeather", CustomWeather::WeatherType::ClearSky)
+        NF(f_WeatherType, u8"天气类型", "CustomWeather", CustomWeather::WeatherType::ClearSky)
     {
         events::GameUpdateEvent += MY_METHOD_HANDLER(CustomWeather::OnGameUpdate);
     }
