@@ -174,7 +174,7 @@ DO_APP_FUNC(0x009412E0, void* /*app::EnviroSky*/, EnviroSky_get_Instance, (Metho
 DO_APP_FUNC(0x05A80E30, float, Camera_get_fieldOfView, (Camera* __this, MethodInfo* method));
 DO_APP_FUNC(0x05A812A0, void, Camera_set_fieldOfView, (Camera* __this, float value, MethodInfo* method));
 DO_APP_FUNC(0x05A80680, void, Camera_CopyFrom, (Camera* __this, Camera* other, MethodInfo* method));
-
+DO_APP_FUNC(0x05B6C670, Transform*, Transform_FindChild, (Transform* __this, String* name, MethodInfo* method));
 // Game Object, Component, Transform Utility
 DO_APP_FUNC(0x05B13190, GameObject*, GameObject_Find, (String* name, MethodInfo* method));
 DO_APP_FUNC(0x05B131A0, Component_1*, GameObject_GetComponentByName, (GameObject* __this, String* type, MethodInfo* method));
@@ -365,6 +365,12 @@ DO_APP_FUNC(0x05B57260, float, Canvas_get_scaleFactor, (/*Canvas**/void* __this,
 
 DO_APP_FUNC(0x012414F0, void, LevelTimeManager_SetInternalTimeOfDay, (/*LevelTimeManager**/void* __this, float inHours, bool force, bool refreshEnviroTime, MethodInfo* method));
 
+
+// Open team immediately
+// F3 0F 10 83 ?? ?? ?? ?? 0F 29 74 24 30 F3 0F 10 B3 ?? ?? ?? ?? 
+DO_APP_FUNC(0x01387C20, bool, MoleMole_InLevelMainPageContext_DoTeamCountDown_c_Iterator0__MoveNext, (InLevelMainPageContext_DoTeamCountDown_Iterator* __this, MethodInfo* method));
+DO_APP_FUNC(0x00A1CE40, void, MoleMole_InLevelPlayerProfilePageContext_SetupView, (/*MoleMole_InLevelPlayerProfilePageContext*/void* __this, MethodInfo* method));
+DO_APP_FUNC(0x00A15420, void, MoleMole_InLevelPlayerProfilePageContext_ClearView, (/*MoleMole_InLevelPlayerProfilePageContext*/void* __this, MethodInfo* method));
 
 // Singletons
 DO_APP_FUNC(0x06260E00, void*, Singleton_GetInstance, (MethodInfo* method)); // Singleton_1_System_Object__2_get_Instance
