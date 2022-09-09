@@ -145,7 +145,9 @@ bool IsStaticCheckSumValid()
 
 		if (!scanner.IsValidModuleHash(moduleName, checksumData))
 		{
-			LOG_WARNING("Seems like assembly checksum don't match with version %s. It's normal only if you using Chinese version of genshin impact.", version.c_str());
+			LOG_WARNING("Seems like assembly checksum doesn't match with version %s. It's normal only if you're using a patched UserAssembly", version.c_str());
+			LOG_WARNING("If the game crashes, make sure you have the correct version of Akebi for beta.");
+			system("pause");
 			return false;
 		}
 

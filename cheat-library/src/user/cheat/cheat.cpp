@@ -101,7 +101,7 @@ namespace cheat
 			FEAT_INST(DumbEnemies),
 			FEAT_INST(FreezeEnemies),
 			FEAT_INST(ElementalSight),
-			FEAT_INST(KillAura),
+			//FEAT_INST(KillAura),
 			FEAT_INST(AutoChallenge),
 			FEAT_INST(MobVacuum),
 			FEAT_INST(FakeTime),
