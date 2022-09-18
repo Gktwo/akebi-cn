@@ -12,6 +12,8 @@ namespace cheat::feature
 		config::Field<std::string> f_Animation;
 		config::Field<Hotkey> f_ApplyKey;
 		config::Field<Hotkey> f_ResetKey;
+		config::Field<int> f_Delay;
+		config::Field<bool> f_Debug;
 
 		const FeatureGUIInfo& GetGUIInfo() const override;
 		void DrawMain() override;

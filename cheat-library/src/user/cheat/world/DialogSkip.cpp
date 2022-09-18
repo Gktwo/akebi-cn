@@ -1,4 +1,4 @@
-    #include "pch-il2cpp.h"
+#include "pch-il2cpp.h"
 #include "DialogSkip.h"
 
 #include <helpers.h>
@@ -12,6 +12,7 @@ namespace cheat::feature
 
     DialogSkip::DialogSkip() : Feature(),
         NF(f_Enabled, "Auto talk", "AutoTalk", false),
+        NF(f_ToggleHotkey, "Toggle Hotkey", "AutoTalk", Hotkey()),
         NF(f_AutoSelectDialog, "Auto select dialog", "AutoTalk", true),
         NF(f_ExcludeImportant, "Exclude Katheryne/Tubby/Wagner", "AutoTalk", true),
         NF(f_FastDialog, "Fast dialog", "AutoTalk", false),
@@ -32,7 +33,11 @@ namespace cheat::feature
     void DialogSkip::DrawMain()
     {
         ConfigWidget(u8"开/关", f_Enabled, u8"自动继续对话框.");
-        ConfigWidget(u8"自动选择选项", f_AutoSelectDialog, u8"自动选择对话框选项.");
+        if (f_Enabled)
+        { 
+            ConfigWidget(u8"切换热键", f_ToggleHotkey, true, u8"如果绑定到键，则将行为更改为按下切换。\n默认行为为“无”（始终打开）.");
+        }
+        ConfigWidget(u8"自动选择对话框", f_AutoSelectDialog, u8"自动选择对话框选项.");
         if (f_AutoSelectDialog)
         {
             ImGui::Indent();
@@ -71,13 +76,23 @@ namespace cheat::feature
         return instance;
     }
 
+    static void ResetGamespeed()
+    {
+        float gameSpeed = app::Time_get_timeScale(nullptr);
+        if (gameSpeed > 1.0f)
+            app::Time_set_timeScale(1.0f, nullptr);
+    }
+
     // Raised when dialog view updating
     // We call free click, if auto talk enabled, that means we just emulate user click
     // When appear dialog choose we create notify with dialog select first item.
     void DialogSkip::OnCutScenePageUpdate(app::InLevelCutScenePageContext* context)
     {
-        if (!f_Enabled)
+        if (!f_Enabled || !f_ToggleHotkey.value().IsPressed())
+        {
+            ResetGamespeed();
             return;
+        }
 
         auto talkDialog = context->fields._talkDialog;
         if (talkDialog == nullptr)
@@ -139,9 +154,7 @@ namespace cheat::feature
     // Should be a better way to store the pre-dialog speed using Time_get_timeScale.
     static void InLevelCutScenePageContext_ClearView_Hook(app::InLevelCutScenePageContext* __this, MethodInfo* method)
     {
-        float gameSpeed = app::Time_get_timeScale(nullptr);
-        if (gameSpeed > 1.0f)
-            app::Time_set_timeScale(1.0f, nullptr);
+        ResetGamespeed();
         CALL_ORIGIN(InLevelCutScenePageContext_ClearView_Hook, __this, method);
     }
 

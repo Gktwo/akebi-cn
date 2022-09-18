@@ -141,6 +141,7 @@ DO_APP_FUNC(0x01CA4600, void, MoleMole_FishingModule_onFishChosenNotify, (void* 
 // Visuals
 DO_APP_FUNC(0x02F620D0, void, MoleMole_SCameraModuleInitialize_SetWarningLocateRatio, (SCameraModuleInitialize* __this, double deltaTime, CameraShareData* data, MethodInfo* method));
 DO_APP_FUNC(0x0260A880, void, MoleMole_VCBaseSetDitherValue_set_ManagerDitherAlphaValue, (MoleMole_VCBaseSetDitherValue* __this, float value, MethodInfo* method));
+DO_APP_FUNC(0x014CE450, void, MoleMole_PlayerModule_EntityAppear, (MoleMole_PlayerModule* __this, Proto_SceneEntityInfo* entity, VisionType__Enum type, uint32_t infoParam, MethodInfo* method));
 
 // Chest Indicator | RyujinZX#6666
 DO_APP_FUNC(0x0361FBA0, bool, MoleMole_LCIndicatorPlugin_DoCheck, (LCIndicatorPlugin* __this, MethodInfo* method));
@@ -301,6 +302,7 @@ DO_APP_FUNC(0x0143BB60, void, MoleMole_LCAbilityElement_ReduceModifierDurability
 DO_APP_FUNC(0x0218C0F0, BaseEntity*, MoleMole_GadgetEntity_GetOwnerEntity, (GadgetEntity* __this, MethodInfo* method));
 
 DO_APP_FUNC(0x02738030, bool, MoleMole_UIManager_HasEnableMapCamera, (MoleMole_UIManager* __this, MethodInfo* method));
+DO_APP_FUNC(0x0272B950, void, MoleMole_UIManager_EnableInput, (MoleMole_UIManager* __this, bool playerInput, bool clearCurInputState, bool ignoreTouch, MethodInfo* method));
 
 DO_APP_FUNC(0x010ED480, void, MonoMiniMap_Update, (MonoMiniMap* __this, MethodInfo* method));
 DO_APP_FUNC(0x02DA4900, MonoMiniMap*, MonoInLevelMainPage_get_miniMap, (void* __this, MethodInfo* method));
@@ -348,6 +350,7 @@ DO_APP_FUNC(0x05BD9A10, void, Animator_Play, (Animator* __this, String* stateNam
 DO_APP_FUNC(0x05BD9B90, void, Animator_Rebind, (Animator* __this, MethodInfo* method));
 DO_APP_FUNC(0x05BDA0C0, float, Animator_get_speed, (Animator* __this, MethodInfo* method));
 DO_APP_FUNC(0x05BDA1F0, void, Animator_set_speed, (Animator* __this, float value, MethodInfo* method));
+DO_APP_FUNC(0x04E513E0, String*, Extension_GetCurrentStateName, (Animator* animator, int32_t layer, AnimatorController* animCont, MethodInfo* method));
 
 DO_APP_FUNC(0x05C5B050, bool, Behaviour_get_isActiveAndEnabled, (Behaviour* __this, MethodInfo* method));
 

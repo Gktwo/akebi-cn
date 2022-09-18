@@ -14,6 +14,12 @@ namespace cheat::feature
 		app::AnimatorStateInfo processStateInfo, app::MoleMole_VCAnimatorEvent_MoleMole_VCAnimatorEvent_TriggerMode__Enum mode, MethodInfo* method);
 	static void LCBaseCombat_FireBeingHitEvent_Hook(app::LCBaseCombat* __this, uint32_t attackeeRuntimeID, app::AttackResult* attackResult, MethodInfo* method);
 
+	static int32_t attackTags[] = {
+		1638193991, // Normal and Charged
+		1498431743, // Plunge
+		-584054938, 0, // Skill, Burst and Charged Bow Release
+	};
+
 	RapidFire::RapidFire() : Feature(),
 		NF(f_Enabled, u8"攻击作弊", u8"攻击作弊", false),
 		NF(f_MultiHit, u8"重复攻击", u8"攻击作弊", false),
@@ -24,7 +30,12 @@ namespace cheat::feature
 		NF(f_maxMultiplier, u8"最大乘数", u8"攻击作弊", 3),
 		NF(f_MultiTarget, u8"多目标", u8"攻击作弊", false),
 		NF(f_MultiTargetRadius, u8"多目标半径", u8"攻击作弊", 20.0f),
-		NF(f_MultiAnimation, u8"多重动画", u8"攻击作弊", false)
+		NF(f_MultiAnimation, u8"多重动画", u8"攻击作弊", false),
+		NF(f_AnimationMultiplier, u8"动画倍增", u8"攻击作弊", 100),
+		NF(f_AnimationState, u8"动画状态", u8"攻击作弊", 0.5f),
+		NF(f_AttackSpeed, u8"进攻速度", u8"攻击作弊", false),
+		NF(f_SpeedMultiplier, u8"速度倍增器", u8"攻击作弊", 1.5f),
+		animationCounter(1)
 	{
 		// HookManager::install(app::MoleMole_LCBaseCombat_DoHitEntity, LCBaseCombat_DoHitEntity_Hook); -- Looks like FireBeingHitEvent is superior to this.
 		HookManager::install(app::MoleMole_VCAnimatorEvent_HandleProcessItem, VCAnimatorEvent_HandleProcessItem_Hook);
@@ -85,29 +96,40 @@ namespace cheat::feature
 
 		ConfigWidget(u8"多倍技能", f_MultiAnimation, u8"启用多动画攻击.\n" \
 			u8"请记住，角色的音频也会被重复.");
+		ConfigWidget(u8"动画倍增", f_AnimationMultiplier, 1, 1, 150, u8"配置更新动画状态的次数.\n" \
+			u8"结果可能随动画状态而变化");
+		ConfigWidget(u8"动画状态", f_AnimationState, 0.01f, 0.f, 2.f, u8"要回放的动画状态.\n"\
+			u8"结果可以与动画倍增一起变化");
+		ConfigWidget(u8"攻击速度", f_AttackSpeed, u8"启用快速动画攻击.\n");
+		ConfigWidget(u8"速度倍数", f_SpeedMultiplier, 0.1f, 1.0f, 5.0f, u8"攻击速度倍增.");
 	}
 
 	bool RapidFire::NeedStatusDraw() const
 	{
-		return f_Enabled && (f_MultiHit || f_MultiTarget || f_MultiAnimation);
+		return (f_Enabled && (f_MultiHit || f_MultiTarget)) || f_MultiAnimation || f_AttackSpeed;
 	}
 
 	void RapidFire::DrawStatus()
 	{
-		if (f_MultiHit)
-		{
-			if (f_Randomize)
-				ImGui::Text(u8"多倍攻击 随机%d|%d]", f_minMultiplier.value(), f_maxMultiplier.value());
-			else if (f_OnePunch)
-				ImGui::Text(u8"多倍攻击[一拳模式]");
-			else
-				ImGui::Text(u8"多倍攻击 [%d]", f_Multiplier.value());
+		if (f_Enabled) {
+			ImGui::Text(u8"攻击作弊:");
+			if (f_MultiHit)
+			{
+				if (f_Randomize)
+					ImGui::Text(u8"多倍攻击 随机[%d|%d]", f_minMultiplier.value(), f_maxMultiplier.value());
+				else if (f_OnePunch)
+					ImGui::Text(u8"多倍攻击[一拳模式]");
+				else
+					ImGui::Text(u8"多倍攻击 [%d]", f_Multiplier.value());
+			}
+			if (f_MultiTarget)
+				ImGui::Text(u8"范围伤害 [%.01fm]", f_MultiTargetRadius.value());
 		}
-		if (f_MultiTarget)
-			ImGui::Text(u8"我的[%.01fm]大刀", f_MultiTargetRadius.value());
 
 		if (f_MultiAnimation)
-			ImGui::Text(u8"多倍技能");
+			ImGui::Text(u8"多倍技能 [%d|%0.2f]", f_AnimationMultiplier.value(), f_AnimationState.value());
+		if(f_AttackSpeed)
+			ImGui::Text(u8"攻击速度 [%0.1f]", f_SpeedMultiplier.value());
 	}
 
 	RapidFire& RapidFire::GetInstance()
@@ -115,7 +137,6 @@ namespace cheat::feature
 		static RapidFire instance;
 		return instance;
 	}
-
 
 	int RapidFire::CalcCountToKill(float attackDamage, uint32_t targetID)
 	{
@@ -203,6 +224,7 @@ namespace cheat::feature
 			return false;
 
 		auto& manager = game::EntityManager::instance();
+		auto patterID = manager.avatar()->combat()->monitor;
 		auto avatarID = manager.avatar()->raw()->fields._configID_k__BackingField;
 		auto attackerID = attacker.raw()->fields._configID_k__BackingField;
 		// LOG_DEBUG("configID = %d", attackerID);
@@ -329,11 +351,38 @@ namespace cheat::feature
 	{
 		auto attacker = game::Entity(__this->fields._._._entity);
 		RapidFire& rapidFire = RapidFire::GetInstance();
+		bool isAttackAnimation = std::any_of(std::begin(attackTags), std::end(attackTags),
+			[&](uint32_t tag) { return processStateInfo.m_Tag == tag; });
+		bool isAttacking = IsAttackByAvatar(attacker) && isAttackAnimation;
 
-		if (rapidFire.f_MultiAnimation && IsAttackByAvatar(attacker))
-			processItem->fields.lastTime = 0;
+		if (rapidFire.f_MultiAnimation && isAttacking)
+		{
+			// Set counter back to 1 when any new attack animation is invoked
+			if (processStateInfo.m_NormalizedTime <= 0.01f)
+				rapidFire.animationCounter = 1;
+
+			if (rapidFire.animationCounter <= rapidFire.f_AnimationMultiplier)
+			{
+				// Can be configured up to 1.0 but 0.1 to 0.9 you can barely notice the difference
+				// So 0 - 0.2 is enough.
+				processItem->fields.lastTime = (rapidFire.f_AnimationState / 10);
+				rapidFire.animationCounter++;
+			}
+		}
+
+		static bool isFastSpeed = false;
+		if (rapidFire.f_AttackSpeed && isAttacking)
+		{
+			if (!isinf(processStateInfo.m_Length))
+				app::Animator_set_speed(attacker.animator(), rapidFire.f_SpeedMultiplier, nullptr);
+			isFastSpeed = true;
+		}
+		else if (IsAttackByAvatar(attacker) && isFastSpeed) {
+			//LOG_DEBUG("Speed Reverted");
+			app::Animator_set_speed(attacker.animator(), processStateInfo.m_SpeedMultiplier, nullptr);
+			isFastSpeed = false;
+		}
 
 		CALL_ORIGIN(VCAnimatorEvent_HandleProcessItem_Hook, __this, processItem, processStateInfo, mode, method);
 	}
 }
-

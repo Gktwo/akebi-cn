@@ -307,22 +307,24 @@ namespace cheat::feature
 		}
 		ImGui::InputTextMultiline(u8"JSON输入", &JSONBuffer_, ImVec2(0, 50), ImGuiInputTextFlags_AllowTabInput);
 
-		ConfigWidget(u8"传送下一个", f_Next, true, "Press to teleport next of selected.");
-		ConfigWidget(u8"传送上一个", f_Previous, true, "Press to teleport previous of selected.");
+		ConfigWidget(u8"传送下一个", f_Next, true, u8"按下以传送选定的下一个.");
+		ConfigWidget(u8"传送上一个", f_Previous, true, u8"按下以传送选定的上一个.");
 		ConfigWidget(u8"开/关", f_Enabled,
-					 "Enable teleport-through-list functionality.\n"
-					 "Usage:\n"
-					 "1. Put Checkmark to the teleports you want to teleport using hotkey\n"
-					 "2. Single click the teleport (with checkmark) to select where you want to start\n"
-					 "3. You can now press Next or Previous Hotkey to Teleport through the Checklist\n"
-					 "Initially it will teleport the player to the selection made\n"
-					 "Note: Double click or click the arrow to open teleport details");
-		ConfigWidget(u8"启用插值", f_Interpolate, "Enable interpolation between teleports when using keybinds."); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
+					 u8"启用通过列表传送功能.\n"
+					 u8"用法:\n"
+					 u8"1. 使用热键在要传送的传送点上打勾\n"
+					 u8"2. 单击传送（带复选标记）以选择要开始的位置\n"
+					 u8"3. 您现在可以按“下一步”或“上一步”热键传送检查表\n"
+					 u8"最初它会将玩家传送到所做的选择\n"
+					 u8"注意：双击或单击箭头打开传送详细信息");
+		ConfigWidget(u8"启用插值", f_Interpolate, u8"使用键绑定时启用远程传送之间的插值."); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
+		ImGui::SetNextItemWidth(300.0f);
 		ConfigWidget(u8"插补速度", f_Speed, 0.1f, 0.1f, 99.0f,
-					 "Interpolation speed.\n recommended setting below or equal to 0.1.");
-		ConfigWidget(u8"自动传送", f_Auto, "Enable automatic forward teleporation between teleports"); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
-		ConfigWidget(u8"延迟 (s)", f_DelayTime, 1, 0, 60, "Delay (in s) between teleport.\n"
-			"Note: This is not fully tested detection-wise.\nNot recommended with low values.");
+					 u8"插值速度。\n建议设置低于或等于0.1。");
+		ConfigWidget(u8"自动传送", f_Auto, "启用远程传送之间的自动正向远程传送"); ImGui::SameLine(); ImGui::SetNextItemWidth(300.0f);
+		ImGui::SetNextItemWidth(300.0f);
+		ConfigWidget(u8"延迟 (s)", f_DelayTime, 1, 0, 60, u8"不同传送之间的延迟.\n"
+			u8"注：这不是完全测试的检测方式。\n不建议使用低值.");
 
 		if (ImGui::Button(u8"删除选中"))
 		{
@@ -448,7 +450,7 @@ namespace cheat::feature
 					}
 					ImGui::TableNextColumn();
 
-					ImGui::PushStyleColor(ImGuiCol_Text, selected ? IM_COL32(40, 90, 175, 255) : ImGui::ColorConvertFloat4ToU32(ImGui::GetStyle().Colors[ImGuiCol_Text]));
+					ImGui::PushStyleColor(ImGuiCol_Text, selected ? ImGui::GetColorU32(ImGuiCol_CheckMark) : ImGui::GetColorU32(ImGuiCol_Text));
 					ImGui::Text("%s", name.c_str());
 					ImGui::PopStyleColor();
 					if (ImGui::IsItemHovered())
