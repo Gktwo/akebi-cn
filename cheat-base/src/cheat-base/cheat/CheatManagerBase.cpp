@@ -21,7 +21,7 @@ namespace cheat
 		events::WndProcEvent += MY_METHOD_HANDLER(CheatManagerBase::OnWndProc);
 	}
 
-	CheatManagerBase::CheatManagerBase():
+	CheatManagerBase::CheatManagerBase() :
 		NF(m_SelectedSection, "", "General", 0),
 		m_IsBlockingInput(true),
 		m_IsPrevCursorActive(false)
@@ -47,7 +47,7 @@ namespace cheat
 
 		ImGui::SetNextWindowSize(ImVec2(600, 300), ImGuiCond_FirstUseEver);
 
-		if (!ImGui::Begin(u8"Akebi-GC 3.0.0 cn v.0918 汉化@gktwo 免费软件，请勿倒卖 q群:746634670"))
+		if (!ImGui::Begin(u8"Akebi-GC 3.4.0 cn @gktwo 免费软件，请勿倒卖 q群:746634670"))
 
 		{
 			ImGui::End();
@@ -144,8 +144,8 @@ namespace cheat
 		{
 			std::unordered_set<std::string> profileNameSet = { config::GetProfiles().begin(), config::GetProfiles().end() };
 			size_t index = 0;
-			std::string name {};
-			do 
+			std::string name{};
+			do
 			{
 				index++;
 				std::string newName = fmt::format(u8"配置文件 #{}", index);
@@ -413,7 +413,7 @@ namespace cheat
 		ImGui::RenderNotifications();
 	}
 
-	
+
 	void CheatManagerBase::OnRender()
 	{
 		auto& settings = feature::Settings::GetInstance();
